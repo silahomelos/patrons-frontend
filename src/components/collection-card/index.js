@@ -1,8 +1,8 @@
-import NewButton from '@components/buttons/newbutton';
-import Link from 'next/link';
-import React from 'react';
-import CollectionInfoCard from './collection-info-card';
-import styles from './styles.module.scss';
+import NewButton from '@components/buttons/newbutton'
+import Link from 'next/link'
+import React from 'react'
+import CollectionInfoCard from './collection-info-card'
+import styles from './styles.module.scss'
 
 const CollectionCard = ({ collection }) => {
   const collectionNames = [
@@ -24,7 +24,7 @@ const CollectionCard = ({ collection }) => {
     'Fashion Hackathon',
     'Meta Spree',
     'Whimsical Stitches',
-  ];
+  ]
 
   return (
     <>
@@ -51,7 +51,7 @@ const CollectionCard = ({ collection }) => {
         <CollectionInfoCard collection={collection} />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default CollectionCard;
+export default CollectionCard

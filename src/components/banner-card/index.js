@@ -1,7 +1,7 @@
-import LazyLoad from 'react-lazyload';
-import React from 'react';
-import { reviseUrl } from '@utils/helpers';
-import styles from './styles.module.scss';
+import LazyLoad from 'react-lazyload'
+import React from 'react'
+import { reviseUrl } from '@utils/helpers'
+import styles from './styles.module.scss'
 
 const ImageCard = ({ data, showDesigner = false, imgUrl = null, blue = true }) => {
   return (
@@ -27,7 +27,7 @@ const ImageCard = ({ data, showDesigner = false, imgUrl = null, blue = true }) =
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default ImageCard;
+export default ImageCard

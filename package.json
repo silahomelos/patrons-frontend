@@ -47,8 +47,6 @@
     "graphql": "^15.4.0",
     "graphql-request": "^3.3.0",
     "graphql-subscriptions-client": "^0.15.0",
-    "highcharts": "^8.2.2",
-    "highcharts-react-official": "^3.0.0",
     "imgix-core-js": "^2.3.2",
     "immutable": "^4.0.0-rc.12",
     "json-immutable": "^0.4.0",
@@ -73,7 +71,6 @@
     "react-immutable-proptypes": "^2.2.0",
     "react-lazyload": "^3.2.0",
     "react-loading-overlay": "^1.0.1",
-    "react-particles-js": "^3.5.3",
     "react-redux": "^7.2.0",
     "react-step-progress-bar": "^1.0.3",
     "react-timeago": "^5.2.0",
@@ -89,7 +86,6 @@
     "sass": "^1.26.3",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.1",
-    "tsparticles": "^1.32.0",
     "web3": "^1.4.0"
   },
   "devDependencies": {

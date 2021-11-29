@@ -1,9 +1,9 @@
-import React from 'react';
-import classnames from 'classnames';
-import styles from './styles.module.scss';
+import React from 'react'
+import classnames from 'classnames'
+import styles from './styles.module.scss'
 
 const NewButton = ({ onClick, text, className, disable = false, backgroundType = 0 }) => {
-  const classes = classnames(styles.button, className);
+  const classes = classnames(styles.button, className)
   return (
     <>
       <button type="button" className={classes} onClick={onClick} disabled={disable}>
@@ -11,7 +11,7 @@ const NewButton = ({ onClick, text, className, disable = false, backgroundType =
         <span> {text} </span>
       </button>
     </>
-  );
-};
+  )
+}
 
-export default NewButton;
+export default NewButton

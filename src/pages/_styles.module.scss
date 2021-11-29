@@ -13,42 +13,96 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     padding: 0rem 2.5rem;
     padding-top: 10rem;
     padding-bottom: 7.5rem;
 
     @include md-width {
+      flex-direction: row;
       padding: 0rem 7.5rem;
       padding-top: 10rem;
       padding-bottom: 7.5rem;
     }
 
+    .leftWrapper {
+      width: 100%;
 
-    .title {
-      font-family: Orbitron;
-      font-style: normal;
-      font-weight: 900;
-      font-size: 30px;
-      line-height: 125%;
-
-      color: #FFFFFF;
-    }
-
-    p {
-      font-family: Orbitron;
-      font-weight: bold;
-      font-size: 18px;
-      line-height: 100%;
-    }
-
-    @include sm-width {
       .title {
-        font-size: 6.7vw;
+        font-family: Orbitron;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 40px;
+        line-height: 125%;
+
+        color: #FFFFFF;
+        margin-bottom: 1rem;
       }
 
       p {
-        font-size: 4.1vw;
+        font-family: Gilroy;
+        font-size: 18px;
+        line-height: 200%;
+        a {
+          color: white;
+          text-decoration: underline;
+        }
       }
+
+      @include md-width {
+        width: 50%;
+        margin-right: 2rem;
+        .title {
+          font-size: 40px;
+        }
+      }
+
+      @include xxl-width {
+        .title {
+          font-size: 4.2vw;
+        }
+
+        p {
+          font-size: 1.3vw;
+        }
+      }
+
+      
+    }
+
+    .actionsWrapper {
+      margin-top: 2rem;
+
+      @include sm-width {
+        margin-top: 0;
+      }
+    }
+
+    .heroSectionLink {
+      color: white;
+      font-family: Poppins;
+      font-style: normal;
+      font-weight: bold;
+      font-size: 27px;
+      line-height: 40px;
+      color: #ffffff;
+      text-align: left;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+
+      @include md-width {
+        margin-top: 0;
+      }
+
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+
+    .filtersWrapper {
+      padding-top: 3rem;
     }
   }
 

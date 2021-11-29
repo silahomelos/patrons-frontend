@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import cn from 'classnames';
-import LoadingOverlay from 'react-loading-overlay';
-import styles from './styles.module.scss';
+import React from 'react'
+import PropTypes from 'prop-types'
+import cn from 'classnames'
+import LoadingOverlay from 'react-loading-overlay'
+import styles from './styles.module.scss'
 
 const Loader = ({ className, size, active = false }) => {
   return (
@@ -17,17 +17,17 @@ const Loader = ({ className, size, active = false }) => {
     //   />
     // </div>
     <LoadingOverlay active={active} spinner />
-  );
-};
+  )
+}
 
 Loader.propTypes = {
   className: PropTypes.string,
   size: PropTypes.oneOf(['default', 'large']),
-};
+}
 
 Loader.defaultProps = {
   className: '',
   size: 'default',
-};
+}
 
-export default Loader;
+export default Loader

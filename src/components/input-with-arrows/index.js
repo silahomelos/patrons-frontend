@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import cn from 'classnames';
-import { getSumFloatNumber, getSubtractFloatNumber } from '@helpers/price.helpers';
-import styles from './styles.module.scss';
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import cn from 'classnames'
+import { getSumFloatNumber, getSubtractFloatNumber } from '@helpers/price.helpers'
+import styles from './styles.module.scss'
 
 const InputWithArrows = ({
   className, value, currency, iconUrl, onChange, minBidIncrement,
 }) => {
-  const [inputValue, setInputValue] = useState(value);
+  const [inputValue, setInputValue] = useState(value)
 
   const handleClickUp = () => {
-    setInputValue(getSumFloatNumber(inputValue, minBidIncrement));
-    onChange(getSumFloatNumber(inputValue, minBidIncrement));
-  };
+    setInputValue(getSumFloatNumber(inputValue, minBidIncrement))
+    onChange(getSumFloatNumber(inputValue, minBidIncrement))
+  }
 
   const handleClickDown = () => {
     if (inputValue > minBidIncrement) {
-      setInputValue(getSubtractFloatNumber(inputValue, minBidIncrement));
-      onChange(getSumFloatNumber(inputValue, minBidIncrement));
+      setInputValue(getSubtractFloatNumber(inputValue, minBidIncrement))
+      onChange(getSumFloatNumber(inputValue, minBidIncrement))
     } else {
-      setInputValue(0);
+      setInputValue(0)
     }
-  };
+  }
 
   return (
     <>
@@ -30,8 +30,8 @@ const InputWithArrows = ({
           type="number"
           value={inputValue}
           onChange={(e) => {
-            setInputValue(e.target.value);
-            onChange(e.target.value);
+            setInputValue(e.target.value)
+            onChange(e.target.value)
           }}
           className={styles.input}
         />
@@ -46,8 +46,8 @@ const InputWithArrows = ({
         <p className={styles.prefixRight}>{currency}</p>
       </div>
     </>
-  );
-};
+  )
+}
 
 
 InputWithArrows.propTypes = {
@@ -57,13 +57,13 @@ InputWithArrows.propTypes = {
   iconUrl: PropTypes.string,
   minBidIncrement: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-};
+}
 
 InputWithArrows.defaultProps = {
   className: '',
   value: '',
   currency: 'MONA',
   iconUrl: './images/icons/arrow-bottom.svg',
-};
+}
 
-export default InputWithArrows;
+export default InputWithArrows

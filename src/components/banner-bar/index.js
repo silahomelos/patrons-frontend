@@ -1,10 +1,10 @@
-import React from 'react';
-import classnames from 'classnames';
-import styles from './styles.module.scss';
+import React from 'react'
+import classnames from 'classnames'
+import styles from './styles.module.scss'
 
 const BannerBar = ({ className, type }) => {
-  const classes = classnames(styles.wrapper, className);
-  const classes2 = classnames(styles.wrapper2, className);
+  const classes = classnames(styles.wrapper, className)
+  const classes2 = classnames(styles.wrapper2, className)
   return (
     <>
     {type == 1 &&
@@ -52,7 +52,7 @@ const BannerBar = ({ className, type }) => {
     </div>
     }
     </>
-  );
-};
+  )
+}
 
-export default BannerBar;
+export default BannerBar

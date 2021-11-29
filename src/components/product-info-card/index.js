@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
-import InfoCard from '@components/info-card';
-import ImageCard from '@components/image-card';
-import PriceCard from '@components/price-card';
-import NewButton from '@components/buttons/newbutton';
-import styles from './styles.module.scss';
-import { useSelector } from 'react-redux';
-import { getRarityId } from '@utils/helpers';
-import { getExchangeRateETH, getMonaPerEth } from '@selectors/global.selectors';
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
+import InfoCard from '@components/info-card'
+import ImageCard from '@components/image-card'
+import PriceCard from '@components/price-card'
+import NewButton from '@components/buttons/newbutton'
+import styles from './styles.module.scss'
+import { useSelector } from 'react-redux'
+import { getRarityId } from '@utils/helpers'
+import { getExchangeRateETH, getMonaPerEth } from '@selectors/global.selectors'
+import { useRouter } from 'next/router'
 
 const ProductInfoCard = ({
   product,
@@ -18,19 +18,19 @@ const ProductInfoCard = ({
   isAuction = false,
   sold,
 }) => {
-  const router = useRouter();
-  const monaPerEth = useSelector(getMonaPerEth);
-  const exchangeRate = useSelector(getExchangeRateETH);
-  const [time, setTime] = useState('00:00:00');
+  const router = useRouter()
+  const monaPerEth = useSelector(getMonaPerEth)
+  const exchangeRate = useSelector(getExchangeRateETH)
+  const [time, setTime] = useState('00:00:00')
 
   useEffect(() => {
     if (product?.endTime && product.rarity === 'Exclusive') {
-      getTimeFormat();
+      getTimeFormat()
       setInterval(() => {
-        getTimeFormat();
-      }, 60000);
+        getTimeFormat()
+      }, 60000)
     }
-  }, [product]);
+  }, [product])
 
   const getPrice = () => {
     return (
@@ -41,21 +41,21 @@ const ProductInfoCard = ({
         `}
         </span>
       </>
-    );
-  };
+    )
+  }
 
   const getTimeFormat = () => {
-    const timeStamp = Date.now();
+    const timeStamp = Date.now()
     if (timeStamp > product.endTime * 1000) {
-      return;
+      return
     } else {
-      const offset = product.endTime * 1000 - timeStamp;
-      const days = parseInt(offset / 86400000);
-      const hours = parseInt((offset % 86400000) / 3600000);
-      const minutes = parseInt((offset % 3600000) / 60000);
-      setTime(`${`00${days}`.slice(-2)}:${`00${hours}`.slice(-2)}:${`00${minutes}`.slice(-2)}`);
+      const offset = product.endTime * 1000 - timeStamp
+      const days = parseInt(offset / 86400000)
+      const hours = parseInt((offset % 86400000) / 3600000)
+      const minutes = parseInt((offset % 3600000) / 60000)
+      setTime(`${`00${days}`.slice(-2)}:${`00${hours}`.slice(-2)}:${`00${minutes}`.slice(-2)}`)
     }
-  };
+  }
 
   const getTime = () => {
     return <span>{time}</span>
@@ -113,7 +113,7 @@ const ProductInfoCard = ({
         </InfoCard>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ProductInfoCard;
+export default ProductInfoCard

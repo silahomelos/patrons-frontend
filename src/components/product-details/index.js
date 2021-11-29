@@ -1,6 +1,6 @@
-import Container from '@components/container';
-import React from 'react';
-import styles from './styles.module.scss';
+import Container from '@components/container'
+import React from 'react'
+import styles from './styles.module.scss'
 
 const ProductDetails = () => {
   return (
@@ -93,7 +93,7 @@ const ProductDetails = () => {
         <img className={styles.footer} src="/images/metaverse/product_detail_footer.png" />
       </section>
     </>
-  );
-};
+  )
+}
 
-export default ProductDetails;
+export default ProductDetails

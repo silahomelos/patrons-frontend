@@ -1,7 +1,7 @@
-import React, { memo } from 'react';
-import PropTypes from 'prop-types';
-import cn from 'classnames';
-import styles from './styles.module.scss';
+import React, { memo } from 'react'
+import PropTypes from 'prop-types'
+import cn from 'classnames'
+import styles from './styles.module.scss'
 
 const Button = ({ className, background, onClick, children, isDisabled }) => (
   <button
@@ -19,7 +19,7 @@ const Button = ({ className, background, onClick, children, isDisabled }) => (
   >
     {children}
   </button>
-);
+)
 
 Button.propTypes = {
   className: PropTypes.string,
@@ -27,7 +27,7 @@ Button.propTypes = {
   onClick: PropTypes.func,
   isDisabled: PropTypes.bool,
   children: PropTypes.any,
-};
+}
 
 Button.defaultProps = {
   className: '',
@@ -35,6 +35,6 @@ Button.defaultProps = {
   onClick: () => {},
   isDisabled: false,
   children: null,
-};
+}
 
-export default memo(Button);
+export default memo(Button)

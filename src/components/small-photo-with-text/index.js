@@ -1,9 +1,9 @@
-import React, { memo } from 'react';
-import PropTypes from 'prop-types';
-import Link from 'next/link';
-import cn from 'classnames';
-import { DESIGNERS } from '@constants/router-constants';
-import styles from './styles.module.scss';
+import React, { memo } from 'react'
+import PropTypes from 'prop-types'
+import Link from 'next/link'
+import cn from 'classnames'
+import { DESIGNERS } from '@constants/router-constants'
+import styles from './styles.module.scss'
 
 const SmallPhotoWithText = ({
   id,
@@ -79,8 +79,8 @@ const SmallPhotoWithText = ({
       )}
       {children}
     </div>
-  );
-};
+  )
+}
 
 SmallPhotoWithText.propTypes = {
   className: PropTypes.string,
@@ -92,7 +92,7 @@ SmallPhotoWithText.propTypes = {
   addressText: PropTypes.string,
   photoIsLink: PropTypes.bool,
   children: PropTypes.any,
-};
+}
 
 SmallPhotoWithText.defaultProps = {
   className: '',
@@ -104,6 +104,6 @@ SmallPhotoWithText.defaultProps = {
   addressText: '',
   photoIsLink: false,
   children: null,
-};
+}
 
-export default memo(SmallPhotoWithText);
+export default memo(SmallPhotoWithText)
