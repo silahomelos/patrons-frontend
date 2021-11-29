@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './styles.module.scss';
+import React from 'react'
+import styles from './styles.module.scss'
 
 const DescriptionCard = ({ data }) => {
   return (
@@ -9,7 +9,7 @@ const DescriptionCard = ({ data }) => {
         <div className={styles.description}>{data?.garment.description}</div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DescriptionCard;
+export default DescriptionCard

@@ -1,6 +1,6 @@
-import React from 'react';
-import styles from './styles.module.scss';
+import React from 'react'
+import styles from './styles.module.scss'
 
-const Container = ({ children }) => <div className={styles.container}> {children} </div>;
+const Container = ({ children }) => <div className={styles.container}> {children} </div>
 
-export default Container;
+export default Container

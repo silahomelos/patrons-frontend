@@ -1,6 +1,6 @@
-import React from 'react';
-import Particles from 'react-particles-js';
-import styles from './styles.module.scss';
+import React from 'react'
+import Particles from 'react-particles-js'
+import styles from './styles.module.scss'
 
 const ParticlesWrapper = () => {
   return (
@@ -119,7 +119,7 @@ const ParticlesWrapper = () => {
         height={`100vh`}
       />
     </div>
-  );
-};
+  )
+}
 
-export default ParticlesWrapper;
+export default ParticlesWrapper

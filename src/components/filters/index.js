@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import styles from './styles.module.scss';
+import React, { useState } from 'react'
+import styles from './styles.module.scss'
 
 const Filters = ({ filter, filterChange, sortByChange }) => {
   const [showFilters, setShowFilters] = useState(false)
@@ -81,7 +81,7 @@ const Filters = ({ filter, filterChange, sortByChange }) => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Filters;
+export default Filters

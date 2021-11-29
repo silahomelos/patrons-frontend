@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useRouter } from 'next/router';
-import Head from 'next/head';
-import styles from './styles.module.scss';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
+import Head from 'next/head'
+import styles from './styles.module.scss'
 
-import ImageCard from '@components/image-card';
-import InfoCard from '@components/info-card';
-import Container from '@components/container';
-import UserList from '@components/user-list';
-import BannerBar from '@components/banner-bar';
-import PriceCard from '@components/price-card';
-import ProductPageLoader from '@components/product-page-loader';
+import ImageCard from '@components/image-card'
+import InfoCard from '@components/info-card'
+import Container from '@components/container'
+import UserList from '@components/user-list'
+import BannerBar from '@components/banner-bar'
+import PriceCard from '@components/price-card'
+import ProductPageLoader from '@components/product-page-loader'
 
 import {
   getDigitalaxMarketplaceV2Offer,
@@ -19,79 +19,59 @@ import {
   getGarmentV2ByCollectionId,
   getDigitalaxNFTStakersByGarments,
   getGuildWhitelistedNFTStakersByGarments,
-} from '@services/api/apiService';
+} from '@services/api/apiService'
 
-import digitalaxApi from '@services/api/espa/api.service';
+import digitalaxApi from '@services/api/espa/api.service'
 
-import { getChainId, getExchangeRateETH, getMonaPerEth } from '@selectors/global.selectors';
-import { getAccount } from '@selectors/user.selectors';
-import { getUser } from '@helpers/user.helpers';
-import { getRarity, reviseUrl } from '@utils/helpers';
-import config from '@utils/config';
+import { getChainId, getExchangeRateETH, getMonaPerEth } from '@selectors/global.selectors'
+import { getAccount } from '@selectors/user.selectors'
+import { getUser } from '@helpers/user.helpers'
+import { getAllResultsFromQuery } from '@helpers/thegraph.helpers'
+import { getRarity, reviseUrl } from '@utils/helpers'
+import config from '@utils/config'
 import {
   openBespokeModal,
   openBidHistoryModal,
   openPurchaseHistoryModal,
   openCurrentWearersModal,
-} from '@actions/modals.actions';
+} from '@actions/modals.actions'
 
-import globalActions from '@actions/global.actions';
+import globalActions from '@actions/global.actions'
 
-import secondDesignerData from 'src/data/second-designers.json';
-import { getCollectionGroupById } from '@services/api/apiService';
+import secondDesignerData from 'src/data/second-designers.json'
+import { getCollectionGroupById } from '@services/api/apiService'
 
-const POLYGON_CHAINID = 0x89;
+const POLYGON_CHAINID = 0x89
 
-const getAllResultsFromQuery = async (query, resultKey, chainId, owner) => {
-  let lastID = '';
-  let isContinue = true;
-  const fetchCountPerOnce = 1000;
-
-  const resultArray = [];
-  while (isContinue) {
-    const result = await query(chainId, owner, fetchCountPerOnce, lastID);
-    if (!result[resultKey] || result[resultKey].length <= 0) isContinue = false;
-    else {
-      resultArray.push(...result[resultKey]);
-      if (result[resultKey].length < fetchCountPerOnce) {
-        isContinue = false;
-      } else {
-        lastID = result[resultKey][fetchCountPerOnce - 1]['id'];
-      }
-    }
-  }
-
-  return resultArray;
-};
 
 const fetchTokenUri = async (tokenUri) => {
   return fetch(tokenUri)
     .then((res) => res.json())
     .then((res) => {
-      return res;
-    });
-};
+      return res
+    })
+}
 
 const Product = ({ pageTitle }) => {
-  const router = useRouter();
-  const dispatch = useDispatch();
-  const { id, rarity, isAuction } = router.query;
-  const chainId = useSelector(getChainId);
-  const [product, setProduct] = useState({});
-  const [offer, setOffer] = useState({});
-  const [tokenIds, setTokenIds] = useState([]);
-  const [days, setDays] = useState('00');
-  const [hours, setHours] = useState('00');
-  const [minutes, setMinutes] = useState('00');
-  const [secondDesigners, setSecondDesigners] = useState([]);
-  const monaPerEth = useSelector(getMonaPerEth);
-  const exchangeRate = useSelector(getExchangeRateETH);
-  const [loveCount, setLoveCount] = useState(0);
-  const [viewCount, setViewCount] = useState(0);
-  const [owners, setOwners] = useState([]);
-  const [sourceType, setSourceType] = useState([]);
-  const [lookIds, setLookIds] = useState([]);
-  const [lookInspo, setLookInspo] = useState([]);
+  const router = useRouter()
+  const dispatch = useDispatch()
+  const { id, rarity, isAuction } = router.query
+  const chainId = useSelector(getChainId)
+  const [product, setProduct] = useState({})
+  const [offer, setOffer] = useState({})
+  const [tokenIds, setTokenIds] = useState([])
+  const [days, setDays] = useState('00')
+  const [hours, setHours] = useState('00')
+  const [minutes, setMinutes] = useState('00')
+  const [secondDesigners, setSecondDesigners] = useState([])
+  const monaPerEth = useSelector(getMonaPerEth)
+  const exchangeRate = useSelector(getExchangeRateETH)
+  const [loveCount, setLoveCount] = useState(0)
+  const [viewCount, setViewCount] = useState(0)
+  const [owners, setOwners] = useState([])
+  const [sourceType, setSourceType] = useState([])
+  const [lookIds, setLookIds] = useState([])
+  const [lookInspo, setLookInspo] = useState([])
 
   const [isFetchedProduct, setIsFetchedProduct] = useState(false)
   const [isFetchedViewCount, setIsFetchedViewCount] = useState(false)
@@ -103,93 +83,93 @@ const Product = ({ pageTitle }) => {
     'IN-GAME': 'You can take this fashion in-game',
     'PHYSICAL COUNTERPART': 'This fashion includes the physical counterpart',
     'FBX SOURCE FILE': 'type of source file included',
-  };
+  }
 
-  const account = useSelector(getAccount);
-  const user = getUser();
-  const secretKey = user ? user.randomString : null;
+  const account = useSelector(getAccount)
+  const user = getUser()
+  const secretKey = user ? user.randomString : null
 
   const getOwners = async (garments, itemSold, users) => {
-    if (!garments) return [];
-    const soldGarments = garments.slice(0, itemSold).map((garment) => garment.id);
+    if (!garments) return []
+    const soldGarments = garments.slice(0, itemSold).map((garment) => garment.id)
     // get digitalax NFTs on Mainnet
     const digitalaxAllNFTStakersByGarments = await getAllResultsFromQuery(
       getDigitalaxNFTStakersByGarments,
       'digitalaxNFTStakers',
       POLYGON_CHAINID,
       soldGarments,
-    );
+    )
 
     const guildAllNFTStakersByGarments = await getAllResultsFromQuery(
       getGuildWhitelistedNFTStakersByGarments,
       'guildWhitelistedNFTStakers',
       POLYGON_CHAINID,
       soldGarments.map((item) => config.DTX_ADDRESSES['matic'].toLowerCase() + '-' + item),
-    );
+    )
 
-    const digitalaxStakedGarments = {};
+    const digitalaxStakedGarments = {}
     digitalaxAllNFTStakersByGarments
       .filter((item) => item.garments && item.garments.length > 0)
       .map((staker) => {
         staker.garments.forEach((garment) => {
-          digitalaxStakedGarments[garment.id] = staker.id;
-        });
-      });
+          digitalaxStakedGarments[garment.id] = staker.id
+        })
+      })
 
     guildAllNFTStakersByGarments
       .filter((item) => item.garments && item.garments.length > 0)
       .map((staker) => {
         staker.garments.forEach((garment) => {
-          digitalaxStakedGarments[garment.id.split('-')[1]] = staker.id;
-        });
-      });
+          digitalaxStakedGarments[garment.id.split('-')[1]] = staker.id
+        })
+      })
 
     const owners = garments.slice(0, itemSold).map((garment) => {
-      const owner = garment.owner.toLowerCase();
+      const owner = garment.owner.toLowerCase()
       return digitalaxStakedGarments && digitalaxStakedGarments[garment.id]
         ? digitalaxStakedGarments[garment.id]
-        : owner;
-    });
+        : owner
+    })
     const arranged = owners.filter((item, pos) => {
-      return owners.indexOf(item) == pos;
-    });
+      return owners.indexOf(item) == pos
+    })
     return arranged.map((garment) => {
-      const user = users.find((item) => item.wallet && item.wallet.toLowerCase() == garment) || {};
+      const user = users.find((item) => item.wallet && item.wallet.toLowerCase() == garment) || {}
       return {
         ...user,
-      };
-    });
-  };
+      }
+    })
+  }
 
   useEffect(() => {
     const fetchGarmentV2ByID = async () => {
-      const users = await digitalaxApi.getAllUsersName();
-      const { digitalaxCollectionGroup } = await getCollectionGroupById(chainId, 15);
-      const ids = [];
-      digitalaxCollectionGroup.auctions.forEach((auction) => ids.push(auction.id));
-      digitalaxCollectionGroup.collections.forEach((collection) => ids.push(collection.id));
-      setLookIds(ids);
-      dispatch(globalActions.setAllUsers(users));
+      const users = await digitalaxApi.getAllUsersName()
+      const { digitalaxCollectionGroup } = await getCollectionGroupById(chainId, 15)
+      const ids = []
+      digitalaxCollectionGroup.auctions.forEach((auction) => ids.push(auction.id))
+      digitalaxCollectionGroup.collections.forEach((collection) => ids.push(collection.id))
+      setLookIds(ids)
+      dispatch(globalActions.setAllUsers(users))
 
       if (!parseInt(isAuction)) {
-        const children = [];
+        const children = []
 
-        const { digitalaxGarmentV2Collection } = await getGarmentV2ByCollectionId(chainId, id);
+        const { digitalaxGarmentV2Collection } = await getGarmentV2ByCollectionId(chainId, id)
         if (digitalaxGarmentV2Collection.id) {
           const { digitalaxMarketplaceV2Offers } = await getDigitalaxMarketplaceV2Offer(
             chainId,
             digitalaxGarmentV2Collection.id,
-          );
-          const additionalSources = [];
+          )
+          const additionalSources = []
 
           if (digitalaxGarmentV2Collection.garments[0].tokenUri) {
-            const info = await fetchTokenUri(digitalaxGarmentV2Collection.garments[0].tokenUri);
+            const info = await fetchTokenUri(digitalaxGarmentV2Collection.garments[0].tokenUri)
             for (let i = 1; i <= 4; i += 1) {
               if (info[`image_${i}_url`]) {
                 additionalSources.push({
                   url: info[`image_${i}_url`],
                   type: 'image',
-                });
+                })
               }
             }
             for (let i = 1; i <= 4; i += 1) {
@@ -197,19 +177,19 @@ const Product = ({ pageTitle }) => {
                 additionalSources.push({
                   url: info[`animation_${i}_url`],
                   type: 'animation',
-                });
+                })
               }
             }
           }
 
           if (digitalaxGarmentV2Collection.garments[0].children.length) {
             digitalaxGarmentV2Collection.garments[0].children.forEach(async (child) => {
-              const info = await fetchTokenUri(child.tokenUri);
+              const info = await fetchTokenUri(child.tokenUri)
               children.push({
                 ...info,
                 id: child.id.split('-')[1],
-              });
-            });
+              })
+            })
           }
 
           setOwners(
@@ -218,12 +198,12 @@ const Product = ({ pageTitle }) => {
               digitalaxMarketplaceV2Offers[0].amountSold,
               users,
             ),
-          );
+          )
           setTokenIds(
             digitalaxMarketplaceV2Offers[0].garmentCollection?.garments?.map(
               (garment) => garment.id,
             ),
-          );
+          )
           setOffer({
             id: digitalaxMarketplaceV2Offers[0].id,
             primarySalePrice: digitalaxMarketplaceV2Offers[0].primarySalePrice,
@@ -231,7 +211,7 @@ const Product = ({ pageTitle }) => {
             endTime: digitalaxMarketplaceV2Offers[0].endTime,
             amountSold: digitalaxMarketplaceV2Offers[0].amountSold,
             totalAmount: digitalaxMarketplaceV2Offers[0].garmentCollection?.garments?.length,
-          });
+          })
           setProduct({
             id: digitalaxGarmentV2Collection.id,
             garment: digitalaxGarmentV2Collection.garments[0],
@@ -239,36 +219,36 @@ const Product = ({ pageTitle }) => {
             additionalSources,
             designer: digitalaxGarmentV2Collection.designer,
             developer: digitalaxGarmentV2Collection.developer,
-          });
+          })
         }
       } else {
         if (parseInt(id) > 4) {
-          const { digitalaxGarmentV2Auction } = await getGarmentV2ByAuctionId(chainId, id);
+          const { digitalaxGarmentV2Auction } = await getGarmentV2ByAuctionId(chainId, id)
           const ownersList =
             digitalaxGarmentV2Auction && digitalaxGarmentV2Auction.resulted
               ? await getOwners([digitalaxGarmentV2Auction?.garment], 1, users)
-              : [];
-          setOwners(ownersList);
-          setTokenIds([digitalaxGarmentV2Auction.garment.id]);
-          setProduct(digitalaxGarmentV2Auction);
+              : []
+          setOwners(ownersList)
+          setTokenIds([digitalaxGarmentV2Auction.garment.id])
+          setProduct(digitalaxGarmentV2Auction)
         } else {
-          const { digitalaxGarmentAuction } = await getGarmentByAuctionId(chainId, id);
-          setTokenIds([digitalaxGarmentAuction.garment.id]);
-          setProduct(digitalaxGarmentAuction);
+          const { digitalaxGarmentAuction } = await getGarmentByAuctionId(chainId, id)
+          setTokenIds([digitalaxGarmentAuction.garment.id])
+          setProduct(digitalaxGarmentAuction)
         }
       }
 
-      setIsFetchedProduct(true);
-    };
-    // };
-    fetchGarmentV2ByID();
+      setIsFetchedProduct(true)
+    }
+    // }
+    fetchGarmentV2ByID()
 
     const secondDesigner = secondDesignerData.find((item) => {
-      return item.id == id && item.rarity == rarity && item.isAuction == isAuction;
-    });
+      return item.id == id && item.rarity == rarity && item.isAuction == isAuction
+    })
 
     if (secondDesigner && secondDesigner.designer && secondDesigner.designer.length > 0) {
-      const secondDesignersRes = [];
+      const secondDesignersRes = []
       secondDesigner.designer.map((designerItem) => {
         fetch(designerItem)
           .then((response) => response.json())
@@ -277,56 +257,56 @@ const Product = ({ pageTitle }) => {
               name: designerData['Designer ID'],
               description: designerData['description'],
               image: designerData['image_url'],
-            });
-            setSecondDesigners(secondDesignersRes);
-            setIsFetchedSecondDesigners(true);
-          });
-      });
+            })
+            setSecondDesigners(secondDesignersRes)
+            setIsFetchedSecondDesigners(true)
+          })
+      })
     } else {
-      setSecondDesigners([]);
-      setIsFetchedSecondDesigners(true);
+      setSecondDesigners([])
+      setIsFetchedSecondDesigners(true)
     }
 
     const fetchViews = async () => {
-      const viewData = await digitalaxApi.getViews('product', id);
-      setLoveCount(viewData && viewData[0] && viewData[0].loves ? viewData[0].loves.length : 0);
-      setViewCount(viewData && viewData[0] && viewData[0].viewCount ? viewData[0].viewCount : 0);
-      setIsFetchedViewCount(true);
-    };
+      const viewData = await digitalaxApi.getViews('product', id)
+      setLoveCount(viewData && viewData[0] && viewData[0].loves ? viewData[0].loves.length : 0)
+      setViewCount(viewData && viewData[0] && viewData[0].viewCount ? viewData[0].viewCount : 0)
+      setIsFetchedViewCount(true)
+    }
 
     const addViewCount = async () => {
-      const data = await digitalaxApi.addView('product', id);
+      const data = await digitalaxApi.addView('product', id)
       if (data) {
-        setViewCount(data.viewCount);
+        setViewCount(data.viewCount)
       }
-    };
+    }
 
-    fetchViews();
-    addViewCount();
-  }, []);
+    fetchViews()
+    addViewCount()
+  }, [])
 
   useEffect(() => {
     if (product?.endTime) {
-      getTimeFormat();
+      getTimeFormat()
       setInterval(() => {
-        getTimeFormat();
-      }, 60000);
+        getTimeFormat()
+      }, 60000)
     }
     if (product?.garment?.name) {
       const fetchSourceType = async () => {
-        const data = await digitalaxApi.getSourceType(product.garment.name);
-        if (data?.sourceType) setSourceType(data.sourceType);
-        // if (isLookHakathon() && data?.LOOKNFTInspo) setLookInspo(data?.LOOKNFTInspo.split(','));
-      };
+        const data = await digitalaxApi.getSourceType(product.garment.name)
+        if (data?.sourceType) setSourceType(data.sourceType)
+        // if (isLookHakathon() && data?.LOOKNFTInspo) setLookInspo(data?.LOOKNFTInspo.split(','))
+      }
 
-      fetchSourceType();
+      fetchSourceType()
     }
-  }, [product]);
+  }, [product])
 
   const getPrice = () => {
-    if (parseInt(isAuction) !== 1) return offer?.primarySalePrice;
-    else return product.topBid;
-  };
+    if (parseInt(isAuction) !== 1) return offer?.primarySalePrice
+    else return product.topBid
+  }
 
   const onHistory = () => {
     if (parseInt(isAuction) === 1) {
@@ -334,46 +314,46 @@ const Product = ({ pageTitle }) => {
         openBidHistoryModal({
           tokenIds,
         }),
-      );
+      )
     } else {
       dispatch(
         openPurchaseHistoryModal({
           tokenIds,
           v1: id.includes('v1'),
         }),
-      );
+      )
     }
-  };
+  }
 
   const onBespokeBtn = () => {
-    dispatch(openBespokeModal());
-  };
+    dispatch(openBespokeModal())
+  }
 
   const getTimeFormat = () => {
-    const timeStamp = Date.now();
+    const timeStamp = Date.now()
     if (timeStamp > product.endTime * 1000) {
-      return '00:00:00';
+      return '00:00:00'
     } else {
-      const offset = product.endTime * 1000 - timeStamp;
-      const days = parseInt(offset / 86400000);
-      const hours = parseInt((offset % 86400000) / 3600000);
-      const minutes = parseInt((offset % 3600000) / 60000);
-      setDays(`00${days}`.slice(-2));
-      setHours(`00${hours}`.slice(-2));
-      setMinutes(`00${minutes}`.slice(-2));
+      const offset = product.endTime * 1000 - timeStamp
+      const days = parseInt(offset / 86400000)
+      const hours = parseInt((offset % 86400000) / 3600000)
+      const minutes = parseInt((offset % 3600000) / 60000)
+      setDays(`00${days}`.slice(-2))
+      setHours(`00${hours}`.slice(-2))
+      setMinutes(`00${minutes}`.slice(-2))
     }
-  };
+  }
 
   const addLove = async () => {
-    const data = await digitalaxApi.addLove(account, secretKey, 'product', id);
+    const data = await digitalaxApi.addLove(account, secretKey, 'product', id)
     if (data && data['success']) {
-      setLoveCount(loveCount + 1);
+      setLoveCount(loveCount + 1)
     }
-  };
+  }
 
   const onClickLove = () => {
-    addLove();
-  };
+    addLove()
+  }
 
   const onClickSeeAllWearers = () => {
     dispatch(
@@ -382,8 +362,8 @@ const Product = ({ pageTitle }) => {
         v1: id.includes('v1'),
         type: parseInt(isAuction),
       }),
-    );
-  };
+    )
+  }
 
   const getPriceElement = () => {
     return (
@@ -400,10 +380,6 @@ const Product = ({ pageTitle }) => {
       </>
     )
   }
-
-  // const isLookHakathon = () => {
-  //   return lookIds.includes(id);
-  // };
 
   if (!isFetchedProduct || !isFetchedSecondDesigners || !isFetchedViewCount) {
     return (
@@ -488,7 +464,7 @@ const Product = ({ pageTitle }) => {
                                 </video>
                               ) : null}
                             </a>
-                          );
+                          )
                         })}
                       </div>
                     </>
@@ -747,21 +723,21 @@ const Product = ({ pageTitle }) => {
                       </div>
                     </Container>
                   </section>
-                );
+                )
               })}
           </>
         ) : null}
       </div>
     </>
-  );
-};
+  )
+}
 
 export async function getServerSideProps(context) {
   return {
     props: {
       pageTitle: 'Hello',
     }, // will be passed to the page component as props
-  };
+  }
 }
 
-export default Product;
+export default Product

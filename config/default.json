@@ -13,7 +13,8 @@
     "rinkeby": "https://api.thegraph.com/subgraphs/name/digitalax/digitalaxropsten",
     "mumbai": "https://api.thegraph.com/subgraphs/name/digitalax/digitalaxmumbai",
     "matic": "https://api.thegraph.com/subgraphs/name/digitalax/digitalaxmatic",
-    "goerli": "https://api.thegraph.com/subgraphs/name/digitalax/digitalaxgoerli"
+    "goerli": "https://api.thegraph.com/subgraphs/name/digitalax/digitalaxgoerli",
+    "dlta": "https://api.thegraph.com/subgraphs/name/digitalax/the-dlta"
   },
   "DEFAULT_NETWORK": "matic",
   "DEFAULT_WEB3_URL": "https://mainnet.infura.io/v3/6e9690131f584ee0a8b445ebb4740f8b",
@@ -74,8 +75,8 @@
   "DTX_ADDRESSES": {
     "mainnet": "0x0B509F4b044F713A91bB50535914f7ad160532fe",
     "rinkeby": "0x13379fe0e6992180ed0ac5174a02479896f9c510",
-    "goerli": "0xc9c3704a65fE2D4f1F94A02480b25DbFA5764332",// v0 (same as mainnet)
-    "mumbai": "0x1Bc6D640710759Be37E5DCD1b23B322250353751", // v2 new one
+    "goerli": "0xc9c3704a65fE2D4f1F94A02480b25DbFA5764332",
+    "mumbai": "0x1Bc6D640710759Be37E5DCD1b23B322250353751",
     "matic": "0x7B2a989c4D1AD1B79a84CE2EB79dA5D8d9C2b7a7"
   },
   "DIGI_MATERIALS_V2": {
@@ -86,8 +87,8 @@
     "mainnet": "",
     "rinkeby": "",
     "goerli": "",
-    "mumbai": "0x4CB61C672ff26c187394a9aA59360FbB6F23e83f", // this is test token for v1
-    "matic": "0x728Af879c3212cEf7a51D7fC296b5e9b7c14dbf6" // This is the bad token that is live
+    "mumbai": "0x4CB61C672ff26c187394a9aA59360FbB6F23e83f",
+    "matic": "0x728Af879c3212cEf7a51D7fC296b5e9b7c14dbf6"
   },
   "UPGRADER_ADDRESSES": {
     "mainnet": "",

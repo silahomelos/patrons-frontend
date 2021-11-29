@@ -1,1 +1,1 @@
-export const getModalParams = (state) => state.modals.get('params');
+export const getModalParams = (state) => state.modals.get('params')

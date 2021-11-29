@@ -1,4 +1,4 @@
-import BaseActions from '@actions/base-actions';
+import BaseActions from '@actions/base-actions'
 import reducer from '../reducers/history.reducer';
 import {COMMON_RARITY, SEMI_RARE_RARITY} from "@constants/global.constants"
 

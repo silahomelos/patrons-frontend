@@ -1,11 +1,11 @@
-import { AVAILABLE_NETWORKS } from '@constants/networks.constants';
-import config from '@utils/config';
+import { AVAILABLE_NETWORKS } from '@constants/networks.constants'
+import config from '@utils/config'
 
 export const getEnabledNetworks = () =>
-  AVAILABLE_NETWORKS.filter((network) => config.NETWORKS.includes(network.alias));
+  AVAILABLE_NETWORKS.filter((network) => config.NETWORKS.includes(network.alias))
 
 export const getEnabledNetworkByChainId = (chainId) =>
-  getEnabledNetworks().find((network) => Number(network.hex) === Number(chainId));
+  getEnabledNetworks().find((network) => Number(network.hex) === Number(chainId))
 export const requestSwitchNetwork = () => {
   window.ethereum
     .request({
@@ -20,106 +20,110 @@ export const requestSwitchNetwork = () => {
       ],
     })
     .then((res) => {
-      console.log(res);
+      console.log(res)
     })
     .catch((err) => {
-      console.log(err);
-    });
-};
+      console.log(err)
+    })
+}
+
+export const getDltaGraphAPIURL = () => {
+  return config.API_URLS['dlta']
+}
 
 export const getAPIUrlByChainId = (chainId) => {
   if (chainId === 0x1) {
     return config.API_URLS['mainnet']
   }
-  return config.API_URLS['matic'];
-};
+  return config.API_URLS['matic']
+}
 
 export const getExplorerUrlByChainId = (chainId) => {
-  const network = getEnabledNetworkByChainId(chainId);
-  return config.EXPLORER_URLS[network?.alias];
-};
+  const network = getEnabledNetworkByChainId(chainId)
+  return config.EXPLORER_URLS[network?.alias]
+}
 
 export const getDefaultNetworkChainId = () => {
-  const network = AVAILABLE_NETWORKS.find((net) => net.alias === config.DEFAULT_NETWORK);
+  const network = AVAILABLE_NETWORKS.find((net) => net.alias === config.DEFAULT_NETWORK)
 
   if (!network) {
-    throw new Error('Invalid DEFAULT_NETWORK: getDefaultNetworkChainId');
+    throw new Error('Invalid DEFAULT_NETWORK: getDefaultNetworkChainId')
   }
 
-  return network.hex;
-};
+  return network.hex
+}
 
 export const getWSUrlByChainId = (chainId) => {
-  const url = getAPIUrlByChainId(chainId);
+  const url = getAPIUrlByChainId(chainId)
 
   if (!url) {
-    throw new Error('Invalid chainId: getWSUrlByChainId');
+    throw new Error('Invalid chainId: getWSUrlByChainId')
   }
 
-  return url.replace('http', 'ws');
-};
+  return url.replace('http', 'ws')
+}
 export const getRewardContractAddressByChainId = (chainId) => {
-  const network = getEnabledNetworkByChainId(chainId);
+  const network = getEnabledNetworkByChainId(chainId)
 
-  return config.REWARD_CONTRACT_ADDRESSES[network?.alias];
-};
+  return config.REWARD_CONTRACT_ADDRESSES[network?.alias]
+}
 
 export const getMonaContractAddressByChainId = (chainId) => {
-  const network = getEnabledNetworkByChainId(chainId);
+  const network = getEnabledNetworkByChainId(chainId)
 
-  return config.MONA_TOKEN_ADDRESSES[network?.alias];
-};
+  return config.MONA_TOKEN_ADDRESSES[network?.alias]
+}
 
 export const getUSDTAddressByChainId = (chainId) => {
-  const network = getEnabledNetworkByChainId(chainId);
+  const network = getEnabledNetworkByChainId(chainId)
 
-  return config.USDT_ADDRESS[network?.alias];
-};
+  return config.USDT_ADDRESS[network?.alias]
+}
 
 export const getDTXAddressByChainId = (chainId) => {
-  const network = getEnabledNetworkByChainId(chainId);
+  const network = getEnabledNetworkByChainId(chainId)
 
-  return config.DTX_ADDRESSES[network?.alias];
-};
+  return config.DTX_ADDRESSES[network?.alias]
+}
 
 export const getDTXV1AddressByChainId = (chainId) => {
-  const network = getEnabledNetworkByChainId(chainId);
+  const network = getEnabledNetworkByChainId(chainId)
 
-  return config.DTXV1_ADDRESSES[network?.alias];
-};
+  return config.DTXV1_ADDRESSES[network?.alias]
+}
 
 export const getDigiMaterialV2AddressByChainId = (chainId) => {
-  const network = getEnabledNetworkByChainId(chainId);
+  const network = getEnabledNetworkByChainId(chainId)
 
-  return config.DIGI_MATERIALS_V2[network?.alias];
-};
+  return config.DIGI_MATERIALS_V2[network?.alias]
+}
 
 export const getDigiRootTunnelAddressByChainId = (chainId) => {
-  const network = getEnabledNetworkByChainId(chainId);
+  const network = getEnabledNetworkByChainId(chainId)
 
-  return config.ROOT_TUNNEL_ADDRESS[network?.alias];
-};
+  return config.ROOT_TUNNEL_ADDRESS[network?.alias]
+}
 
 export const getUpgraderAddressByChainId = (chainId) => {
-  const network = getEnabledNetworkByChainId(chainId);
+  const network = getEnabledNetworkByChainId(chainId)
 
-  return config.UPGRADER_ADDRESSES[network?.alias];
-};
+  return config.UPGRADER_ADDRESSES[network?.alias]
+}
 
 export const getMarketplaceContractAddressByChainId = (chainId) => {
-  const network = getEnabledNetworkByChainId(chainId);
+  const network = getEnabledNetworkByChainId(chainId)
 
-  return config.DIGITAL_MARKETPLACE_ADDRESSES[network?.alias];
-};
+  return config.DIGITAL_MARKETPLACE_ADDRESSES[network?.alias]
+}
 
 export const getRootTunnelAddressV2ByChainId = (chainId) => {
-  const network = getEnabledNetworkByChainId(chainId);
+  const network = getEnabledNetworkByChainId(chainId)
 
-  return config.ROOT_TUNNEL_V2_ADDRESS[network?.alias];
-};
+  return config.ROOT_TUNNEL_V2_ADDRESS[network?.alias]
+}
 
 export const getChildTunnelAddressV2ByChainId = (chainId) => {
-  const network = getEnabledNetworkByChainId(chainId);
+  const network = getEnabledNetworkByChainId(chainId)
 
-  return config.CHILD_TUNNEL_V2_ADDRESS[network.alias];
-};
+  return config.CHILD_TUNNEL_V2_ADDRESS[network.alias]
+}

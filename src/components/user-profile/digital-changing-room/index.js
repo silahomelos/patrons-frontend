@@ -27,6 +27,8 @@ import {
 } from '@services/api/apiService'
 
 import { generateLookImage, getRarityId } from '@utils/helpers'
+import { getAllResultsFromQuery } from '@helpers/thegraph.helpers'
+
 import config from '@utils/config'
 
 import {
@@ -63,34 +65,6 @@ const DigitalChangingRoom = props => {
   const [currentCategory, setCurrentCategory] = useState(0)
   const [ownedNFTs, setOwnedNFTs] = useState([])
   const showPerPage = 10
-
-  const getAllResultsFromQuery = async (query, resultKey, chainId, owner) => {
-    let lastID = ''
-    let isContinue = true
-    const fetchCountPerOnce = 1000
-
-    const resultArray = []
-    try {
-      while (isContinue) {
-        const result = await query(chainId, owner, fetchCountPerOnce, lastID)
-        if (!result[resultKey] || result[resultKey].length <= 0) isContinue = false
-        else {
-          resultArray.push(...result[resultKey])
-          if (result[resultKey].length < fetchCountPerOnce) {
-            isContinue = false
-          } else {
-            lastID = result[resultKey][fetchCountPerOnce - 1]['id']
-          }
-        }
-      }
-    } catch (e) {
-      
-    }
-
-    
-    
-    return resultArray
-  }
   
   useEffect(() => {
     const getAllNFTs = async () => {

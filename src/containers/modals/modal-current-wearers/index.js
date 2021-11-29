@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { createPortal } from 'react-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import styles from './styles.module.scss';
+import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
+import { createPortal } from 'react-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import styles from './styles.module.scss'
 
-import Modal from '@components/modal';
-import Loader from '@components/loader';
+import Modal from '@components/modal'
+import Loader from '@components/loader'
 import {
   closeCurrentWearersModal,
-} from '@actions/modals.actions';
-import { getModalParams } from '@selectors/modal.selectors';
-import { getChainId, getAllUsers } from '@selectors/global.selectors';
+} from '@actions/modals.actions'
+import { getModalParams } from '@selectors/modal.selectors'
+import { getChainId, getAllUsers } from '@selectors/global.selectors'
 import {
   getDigitalaxGarmentPurchaseHistories,
   getDigitalaxGarmentV2PurchaseHistories,
@@ -19,46 +19,24 @@ import {
   getDigitalaxGarmentV2s,
   getDigitalaxNFTStakersByGarments,
   getGuildWhitelistedNFTStakersByGarments
-} from '@services/api/apiService';
-import digitalaxApi from '@services/api/espa/api.service'
+} from '@services/api/apiService'
 import config from '@utils/config'
+import { getAllResultsFromQuery } from '@helpers/thegraph.helpers'
 const POLYGON_CHAINID = 0x89
 
-const getAllResultsFromQuery = async (query, resultKey, chainId, owner) => {
-  let lastID = ''
-  let isContinue = true
-  const fetchCountPerOnce = 1000
-
-  const resultArray = []
-  while (isContinue) {
-    const result = await query(chainId, owner, fetchCountPerOnce, lastID)
-    if (!result[resultKey] || result[resultKey].length <= 0) isContinue = false
-    else {
-      resultArray.push(...result[resultKey])
-      if (result[resultKey].length < fetchCountPerOnce) {
-        isContinue = false
-      } else {
-        lastID = result[resultKey][fetchCountPerOnce - 1]['id']
-      }
-    }
-  }
-  
-  return resultArray
-}
-
 const ModalCurrentWearers = ({ className, title }) => {
-  const dispatch = useDispatch();
-  const { tokenIds, v1, type } = useSelector(getModalParams);
-  const chainId = useSelector(getChainId);
-  // const [history, setHistory] = useState([]);
-  const [wearers, setWearers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch()
+  const { tokenIds, v1, type } = useSelector(getModalParams)
+  const chainId = useSelector(getChainId)
+  // const [history, setHistory] = useState([])
+  const [wearers, setWearers] = useState([])
+  const [loading, setLoading] = useState(true)
 
   const handleClose = () => {
     dispatch(closeCurrentWearersModal())
-  };
+  }
 
-  const allUsers = useSelector(getAllUsers).toJS();
+  const allUsers = useSelector(getAllUsers).toJS()
 
   useEffect(() => {
     if (tokenIds.length) {
@@ -69,24 +47,24 @@ const ModalCurrentWearers = ({ className, title }) => {
         if (type === 1) {
           if (parseInt(tokenIds[0]) <= 4) {
             const { digitalaxGarmentAuctionHistories } =
-              await getDigitalaxGarmentPurchaseHistories(chainId, tokenIds[0]);
+              await getDigitalaxGarmentPurchaseHistories(chainId, tokenIds[0])
             soldItems = digitalaxGarmentAuctionHistories.map(item => item.token.id)
             historyItems = digitalaxGarmentAuctionHistories
           } else {
             const { digitalaxGarmentV2AuctionHistories } =
-              await getDigitalaxGarmentV2PurchaseHistories(chainId, tokenIds[0]);
+              await getDigitalaxGarmentV2PurchaseHistories(chainId, tokenIds[0])
             soldItems = digitalaxGarmentV2AuctionHistories.map(item => item.token.id)
             historyItems = digitalaxGarmentV2AuctionHistories
           }
-          setLoading(false);
+          setLoading(false)
         } else {
           if (!v1) {
             const { digitalaxMarketplaceV2PurchaseHistories } =
-              await getDigitalaxMarketplaceV2PurchaseHistories(chainId, tokenIds);
+              await getDigitalaxMarketplaceV2PurchaseHistories(chainId, tokenIds)
             soldItems = digitalaxMarketplaceV2PurchaseHistories.map(item => item.id)
             historyItems = digitalaxMarketplaceV2PurchaseHistories
           } else {
-            const { digitalaxMarketplacePurchaseHistories } = await getDigitalaxMarketplacePurchaseHistories(chainId, tokenIds);
+            const { digitalaxMarketplacePurchaseHistories } = await getDigitalaxMarketplacePurchaseHistories(chainId, tokenIds)
             soldItems = digitalaxMarketplacePurchaseHistories.map(item => item.id)
             historyItems = digitalaxMarketplacePurchaseHistories
           }
@@ -151,20 +129,20 @@ const ModalCurrentWearers = ({ className, title }) => {
             transactionHash: history ? history.transactionHash : null
           }
         }))
-        setLoading(false);        
-      };
+        setLoading(false)        
+      }
 
-      fetchHistories();
+      fetchHistories()
     }
-  }, []);
+  }, [])
 
   const sortByTime = (data) => {
     return data.sort((a, b) => {
-      if (parseInt(a.timestamp) == parseInt(b.timestamp)) return 0;
-      if (parseInt(a.timestamp) == 0) return 1;
-      if (parseInt(b.timestamp) == 0) return -1;
-      if (parseInt(a.timestamp) > parseInt(b.timestamp)) return 1;
-      return -1;
+      if (parseInt(a.timestamp) == parseInt(b.timestamp)) return 0
+      if (parseInt(a.timestamp) == 0) return 1
+      if (parseInt(b.timestamp) == 0) return -1
+      if (parseInt(a.timestamp) > parseInt(b.timestamp)) return 1
+      return -1
     })
   }
 
@@ -236,17 +214,17 @@ const ModalCurrentWearers = ({ className, title }) => {
         </>
       )}
     </>
-  );
-};
+  )
+}
 
 ModalCurrentWearers.propTypes = {
   className: PropTypes.string,
   title: PropTypes.string
-};
+}
 
 ModalCurrentWearers.defaultProps = {
   className: '',
   title: 'Current Wearers'
-};
+}
 
-export default ModalCurrentWearers;
+export default ModalCurrentWearers
