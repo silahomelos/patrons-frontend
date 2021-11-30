@@ -4,18 +4,18 @@ import {
   openPlaceBidModal,
   openPurchaseSuccessModal,
   openSwitchNetworkModal,
-} from '@actions/modals.actions';
-import NewButton from '@components/buttons/newbutton';
-import Link from 'next/link';
-import { getAccount } from '@selectors/user.selectors';
-import LazyLoad from 'react-lazyload';
-import { useRouter } from 'next/router';
-import React, { useState, useRef, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getRarityId, reviseUrl } from '@utils/helpers';
-import styles from './styles.module.scss';
-import { getChainId } from '@selectors/global.selectors';
-import Button from '@components/buttons/button';
+} from '@actions/modals.actions'
+import NewButton from '@components/buttons/gray-button'
+import Link from 'next/link'
+import { getAccount } from '@selectors/user.selectors'
+import LazyLoad from 'react-lazyload'
+import { useRouter } from 'next/router'
+import React, { useState, useRef, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getRarityId, reviseUrl } from '@utils/helpers'
+import styles from './styles.module.scss'
+import { getChainId } from '@selectors/global.selectors'
+import Button from '@components/buttons/button'
 
 const ImageCard = ({
   data,
@@ -31,33 +31,33 @@ const ImageCard = ({
   v1 = false,
   borderType = 'white'
 }) => {
-  const router = useRouter();
-  const account = useSelector(getAccount);
-  const chainId = useSelector(getChainId);
-  const { asPath } = router;
-  const dispatch = useDispatch();
-  const [zoomMedia, setZoomMedia] = useState(false);
-  const videoTagRef = useRef();
-  const [hasAudio, setHasAudio] = useState(false);
-  const [videoMuted, setVideoMuted] = useState(true);
-  const [mainImage, setMainImage] = useState('');
-  const [mainImageType, setMainImageType] = useState(0);
+  const router = useRouter()
+  const account = useSelector(getAccount)
+  const chainId = useSelector(getChainId)
+  const { asPath } = router
+  const dispatch = useDispatch()
+  const [zoomMedia, setZoomMedia] = useState(false)
+  const videoTagRef = useRef()
+  const [hasAudio, setHasAudio] = useState(false)
+  const [videoMuted, setVideoMuted] = useState(true)
+  const [mainImage, setMainImage] = useState('')
+  const [mainImageType, setMainImageType] = useState(0)
 
   function getAudio(video) {
     return (
       video.mozHasAudio ||
       Boolean(video.webkitAudioDecodedByteCount) ||
       Boolean(video.audioTracks && video.audioTracks.length)
-    );
+    )
   }
 
   useEffect(() => {
     setMainImage(
       data?.garment?.animation || data?.animation || data?.garment?.image || data?.image,
-    );
-    if (data?.garment?.animation || data?.animation) setMainImageType(1);
-    else if (data?.garment?.image || data?.image) setMainImageType(2);
-  }, [data]);
+    )
+    if (data?.garment?.animation || data?.animation) setMainImageType(1)
+    else if (data?.garment?.image || data?.image) setMainImageType(2)
+  }, [data])
 
   const onBuyNow = () => {
     if (!router.asPath.includes('product')) {
@@ -67,7 +67,7 @@ const ImageCard = ({
             isAuction ? 1 : 0
           }`,
         )
-        .then(() => window.scrollTo(0, 0));
+        .then(() => window.scrollTo(0, 0))
     } else {
       if (account) {
         if (chainId === '0x89') {
@@ -77,43 +77,43 @@ const ImageCard = ({
                 id: data.id,
                 priceEth: price,
               }),
-            );
+            )
           } else {
             dispatch(
               openPlaceBidModal({
                 id: data.id,
                 priceEth: price,
               }),
-            );
+            )
           }
         } else {
-          dispatch(openSwitchNetworkModal());
+          dispatch(openSwitchNetworkModal())
         }
       } else {
-        dispatch(openConnectMetamaskModal());
+        dispatch(openConnectMetamaskModal())
       }
     }
-  };
+  }
 
   const onClickZoomOut = () => {
-    setZoomMedia(true);
-  };
+    setZoomMedia(true)
+  }
 
   const onClickZoomIn = () => {
-    setZoomMedia(false);
-  };
+    setZoomMedia(false)
+  }
 
   const onClickMute = () => {
-    videoTagRef.current.pause();
-    setVideoMuted(!videoMuted);
-    videoTagRef.current.play();
-  };
+    videoTagRef.current.pause()
+    setVideoMuted(!videoMuted)
+    videoTagRef.current.play()
+  }
 
   useEffect(() => {
     if (mainImageType === 1 && videoTagRef.current) {
-      videoTagRef.current.load();
+      videoTagRef.current.load()
     }
-  }, [mainImageType, mainImage]);
+  }, [mainImageType, mainImage])
 
   const renderImage = () => {
     return (
@@ -138,15 +138,15 @@ const ImageCard = ({
                   ref={videoTagRef}
                   preload={'auto'}
                   onLoadedData={() => {
-                    if (!asPath.includes('product')) return;
+                    if (!asPath.includes('product')) return
                     // console.log('videoTagRef: ', videoTagRef.current)
-                    var video = videoTagRef.current;
+                    var video = videoTagRef.current
                     // console.log('video: ', video)
                     if (getAudio(video)) {
                       // console.log('video has audio')
-                      setHasAudio(true);
+                      setHasAudio(true)
                     } else {
-                      setHasAudio(false);
+                      setHasAudio(false)
                       // console.log(`video doesn't have audio`)
                     }
                   }}
@@ -161,8 +161,8 @@ const ImageCard = ({
               <Button
                 className={styles.muteButton}
                 onClick={(e) => {
-                  e.stopPropagation();
-                  onClickMute();
+                  e.stopPropagation()
+                  onClickMute()
                 }}
               >
                 {videoMuted ? (
@@ -215,11 +215,11 @@ const ImageCard = ({
                       src={reviseUrl(item.url)}
                       key={item.url}
                       onClick={() => {
-                        setMainImage(item.url);
-                        setMainImageType(2);
+                        setMainImage(item.url)
+                        setMainImageType(2)
                       }}
                     />
-                  );
+                  )
                 } else if (item.type === 'animation') {
                   return (
                     <video
@@ -228,20 +228,20 @@ const ImageCard = ({
                       loop
                       key={item.url}
                       onClick={() => {
-                        setMainImage(item.url);
-                        setMainImageType(1);
+                        setMainImage(item.url)
+                        setMainImageType(1)
                       }}
                     >
                       <source src={reviseUrl(item.url)} />
                     </video>
-                  );
+                  )
                 }
               })}
           </div>
         )}
       </div>
-    );
-  };
+    )
+  }
 
   return (
     <>
@@ -272,7 +272,7 @@ const ImageCard = ({
         )}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default ImageCard;
+export default ImageCard

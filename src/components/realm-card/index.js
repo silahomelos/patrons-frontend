@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import NewButton from '@components/buttons/newbutton'
+import GrayButton from '@components/buttons/gray-button'
 import Image from 'next/image'
 import styles from './styles.module.scss'
 
@@ -31,7 +31,7 @@ const RealmCard = ({
           href={`/realm/${linkName}`}
         >
           <a>
-            <NewButton text={'Patron Realm'} />
+            <GrayButton text={'Patron Realm'} />
           </a>
         </Link>
       </div>

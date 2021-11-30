@@ -1,5 +1,16 @@
+@import '../../assets/scss/helpers/grid.scss';
+
 .realmInfoCardwrapper {
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  @include lg-width {
+    width: fit-content;
+  }
+
   .title {
     font-family: Gilroy;
     font-style: normal;
@@ -7,7 +18,12 @@
     font-size: 36px;
     line-height: 44px;
     margin-bottom: 30px;
+    width: fit-content;
     color: #FFFFFF;
+
+    @include lg-width {
+      width: 100%;
+    }
   }
 
   .imageWrapper {
@@ -23,6 +39,9 @@
   }
 
   .buttonWrapper {
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
   }
 }

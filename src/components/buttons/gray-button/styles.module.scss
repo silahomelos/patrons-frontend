@@ -23,7 +23,6 @@
   }
 
   span {
-    text-transform: uppercase;
     font-style: italic;
     font-size: 1.5rem;
     font-weight: 600;
@@ -35,6 +34,7 @@
     top: 48%;
     z-index: 10;
     transform: translate(-50%, -50%);
+    width: 100%;
   }
 
   &[disabled] {

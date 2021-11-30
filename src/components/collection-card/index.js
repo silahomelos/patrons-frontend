@@ -1,4 +1,4 @@
-import NewButton from '@components/buttons/newbutton'
+import NewButton from '@components/buttons/gray-button'
 import Link from 'next/link'
 import React from 'react'
 import CollectionInfoCard from './collection-info-card'
