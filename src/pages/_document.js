@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-import React from 'react';
-import Document, { NextScript, Html, Main, Head } from 'next/document';
+import React from 'react'
+import Document, { NextScript, Html, Main, Head } from 'next/document'
 
 const scriptTxt = `
 (function () {
@@ -10,7 +10,7 @@ const scriptTxt = `
   base.href = ipfsMatch ? ipfsMatch[0] : '/';
   document.head.append(base); 
 })();
-`;
+`
 
 const gaScriptText = `
   window.dataLayer = window.dataLayer || [];
@@ -18,7 +18,7 @@ const gaScriptText = `
   gtag('js', new Date());
 
   gtag('config', 'UA-194369113-2');
-`;
+`
 
 class MyDocument extends Document {
   getPreloadFontsLinks() {
@@ -32,7 +32,7 @@ class MyDocument extends Document {
         type="font/woff2"
         crossOrigin=""
       />
-    ));
+    ))
   }
 
   render() {
@@ -172,8 +172,8 @@ class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    );
+    )
   }
 }
 
-export default MyDocument;
+export default MyDocument

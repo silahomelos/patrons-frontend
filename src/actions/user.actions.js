@@ -1,3 +1,6 @@
+import { toast } from 'react-toastify'
+import Router from 'next/router'
+
 import {
   closeConnectMetamaskModal,
   closeSignupModal,
@@ -12,14 +15,17 @@ import {
   STORAGE_WALLET,
 } from '@constants/storage.constants'
 import { WALLET_METAMASK, WALLET_ARKANE } from '@constants/global.constants'
+
 import userReducer from '@reducers/user.reducer'
 import { handleSignMessage, isMetamaskInstalled } from '@services/metamask.service'
 import { setWeb3Provider } from '@services/web3-provider.service'
-import { getUser, getAuthToken } from '@helpers/user.helpers'
-import BaseActions from './base-actions'
 import api from '@services/api/espa/api.service'
-import { toast } from 'react-toastify'
-import Router from 'next/router'
+
+import { getUser, getAuthToken } from '@helpers/user.helpers'
+
+import BaseActions from './base-actions'
+
+
 
 class UserActions extends BaseActions {
   handleArkaneWeb3Load() {

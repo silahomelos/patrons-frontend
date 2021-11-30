@@ -1,10 +1,10 @@
-import HeroBar from '@components/hero-bar';
-import { useRouter } from 'next/router';
-import React from 'react';
-import styles from './styles.module.scss';
+import HeroBar from '@components/hero-bar'
+import { useRouter } from 'next/router'
+import React from 'react'
+import styles from './styles.module.scss'
 
 const HeroSection = ({ children, logo, width = '80%', filter, setFilter, setSortBy, title, subTitle }) => {
-  const route = useRouter();
+  const route = useRouter()
 
   return (
     <>
@@ -23,7 +23,7 @@ const HeroSection = ({ children, logo, width = '80%', filter, setFilter, setSort
         <HeroBar filter={filter} setFilter={setFilter} setSortBy={setSortBy} />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default HeroSection;
+export default HeroSection

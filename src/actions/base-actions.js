@@ -8,7 +8,7 @@ export default class BaseActions {
   * @param reducer
   */
   constructor(reducer) {
-    this.reducer = reducer;
+    this.reducer = reducer
   }
 
   /**
@@ -19,7 +19,7 @@ export default class BaseActions {
   * @returns {function}
   */
   setValue(field, value, isFromJS = true) {
-    return this.callAction('set', { field, value, isFromJS });
+    return this.callAction('set', { field, value, isFromJS })
   }
 
   /**
@@ -28,7 +28,7 @@ export default class BaseActions {
   * @returns {Function}
   */
   setMultipleValue(payload) {
-    return this.callAction('setMultiple', payload);
+    return this.callAction('setMultiple', payload)
   }
 
   /**
@@ -38,7 +38,7 @@ export default class BaseActions {
    * @return {function(...[*]=)}
    */
   setIn(field, params) {
-    return this.callAction('setIn', { field, params });
+    return this.callAction('setIn', { field, params })
   }
 
   /**
@@ -46,7 +46,7 @@ export default class BaseActions {
   * @returns {Function}
   */
   clear() {
-    return this.callAction('clear');
+    return this.callAction('clear')
   }
 
   /**
@@ -55,7 +55,7 @@ export default class BaseActions {
   * @returns {Function}
   */
   clearByField(field) {
-    return this.callAction('clearByField', { field });
+    return this.callAction('clearByField', { field })
   }
 
   /**
@@ -64,7 +64,7 @@ export default class BaseActions {
   * @private
   */
   isExistReducer() {
-    return !!this.reducer || !!this.reducer.actions;
+    return !!this.reducer || !!this.reducer.actions
   }
 
   /**
@@ -74,7 +74,7 @@ export default class BaseActions {
   * @private
   */
   isExistAction(name) {
-    return !!this.reducer.actions[name];
+    return !!this.reducer.actions[name]
   }
 
   /**
@@ -86,14 +86,14 @@ export default class BaseActions {
   */
   callAction(action, payload = undefined) {
     if (!this.isExistReducer()) {
-      throw new Error('Reducer not found');
+      throw new Error('Reducer not found')
     }
     if (!this.isExistAction(action)) {
-      throw new Error(`Action "${action}" in reducer not found`);
+      throw new Error(`Action "${action}" in reducer not found`)
     }
     return (dispatch) => {
-      dispatch(this.reducer.actions[action](payload));
-    };
+      dispatch(this.reducer.actions[action](payload))
+    }
   }
 
 }

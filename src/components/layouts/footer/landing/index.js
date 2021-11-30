@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './styles.module.scss';
+import React from 'react'
+import styles from './styles.module.scss'
 
 const LandingFooter = () => {
   return (
@@ -131,7 +131,7 @@ const LandingFooter = () => {
         <a href='https://www.digitalax.xyz/careers'>WE ARE HIRING!</a>
       </div> */}
     </footer>
-  );
-};
+  )
+}
 
-export default LandingFooter;
+export default LandingFooter

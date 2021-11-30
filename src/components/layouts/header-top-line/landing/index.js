@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import styles from './styles.module.scss';
+import React, { useState, useMemo } from 'react'
+import styles from './styles.module.scss'
 
 const LandingHeader = props => {
   const { textColor } = props
@@ -57,4 +57,4 @@ const LandingHeader = props => {
   )
 }
 
-export default LandingHeader;
+export default LandingHeader

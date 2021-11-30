@@ -1,10 +1,10 @@
 /* eslint-disable react/no-array-index-key */
-import React, { memo } from 'react';
-import PropTypes from 'prop-types';
+import React, { memo } from 'react'
+import PropTypes from 'prop-types'
 import {
   Youtube, Twitter, Medium, Telegram, Instagram, Github, Discord,
-} from '@constants/icons-constants';
-import styles from './styles.module.scss';
+} from '@constants/icons-constants'
+import styles from './styles.module.scss'
 
 const SOCIAL_MEDIA = [
   {
@@ -35,21 +35,21 @@ const SOCIAL_MEDIA = [
     item: <Discord />,
     href: 'https://discord.com/invite/DKbSqRGtKv',
   },
-];
+]
 
 const ListSocialNetworks = ({ list }) => (
   <ul>
     {list.map(({ item, href }, index) => <a className={styles.item} key={index} href={href} target="_blank" rel="noreferrer">{item}</a>)}
   </ul>
-);
+)
 
 ListSocialNetworks.propTypes = {
   list: PropTypes.array,
-};
+}
 
 ListSocialNetworks.defaultProps = {
   list: SOCIAL_MEDIA,
-};
+}
 
 
-export default memo(ListSocialNetworks);
+export default memo(ListSocialNetworks)

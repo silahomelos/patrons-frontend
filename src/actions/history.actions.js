@@ -1,5 +1,5 @@
 import BaseActions from '@actions/base-actions'
-import reducer from '../reducers/history.reducer';
+import reducer from '../reducers/history.reducer'
 import {COMMON_RARITY, SEMI_RARE_RARITY} from "@constants/global.constants"
 
 class HistoryActions extends BaseActions {
@@ -8,76 +8,76 @@ class HistoryActions extends BaseActions {
     return async (dispatch, getState) => {
 
       if (!digitalaxGarmentAuctionHistories.length) {
-        return;
+        return
       }
 
-      const state = getState();
+      const state = getState()
 
-      let historyByTokenId = state.history.get('historyByTokenId');
+      let historyByTokenId = state.history.get('historyByTokenId')
 
       digitalaxGarmentAuctionHistories.forEach((itemHistory) => {
-        const tokenId = itemHistory.token.id;
+        const tokenId = itemHistory.token.id
         if (!historyByTokenId.get(tokenId)) {
-          historyByTokenId = historyByTokenId.set(tokenId, []);
+          historyByTokenId = historyByTokenId.set(tokenId, [])
         }
-        const tokenArray = historyByTokenId.get(tokenId);
+        const tokenArray = historyByTokenId.get(tokenId)
 
         if (!tokenArray.find((item) => item.id === itemHistory.id)) {
-          historyByTokenId = historyByTokenId.set(tokenId, [...tokenArray, itemHistory]);
+          historyByTokenId = historyByTokenId.set(tokenId, [...tokenArray, itemHistory])
         }
 
-      });
+      })
 
-      dispatch(this.setValue('historyByTokenId', historyByTokenId));
+      dispatch(this.setValue('historyByTokenId', historyByTokenId))
 
-    };
+    }
   }
 
   updateMarketplaceHistories(digitalaxMarketplacePurchaseHistories) {
     return async (dispatch, getState) => {
 
       if (!digitalaxMarketplacePurchaseHistories.length) {
-        return;
+        return
       }
 
-      const state = getState();
+      const state = getState()
 
-      let commonHistoryByTokenId = state.history.get('commonHistoryByTokenId');
-      let semiRareHistoryByTokenId = state.history.get('semiRareHistoryByTokenId');
+      let commonHistoryByTokenId = state.history.get('commonHistoryByTokenId')
+      let semiRareHistoryByTokenId = state.history.get('semiRareHistoryByTokenId')
 
       digitalaxMarketplacePurchaseHistories.forEach((itemHistory) => {
-        const tokenId = itemHistory.garmentAuctionId;
-        const tx = itemHistory.transactionHash;
+        const tokenId = itemHistory.garmentAuctionId
+        const tx = itemHistory.transactionHash
 
         if (itemHistory.rarity === COMMON_RARITY) {
           if (!commonHistoryByTokenId.get(tokenId)) {
-            commonHistoryByTokenId = commonHistoryByTokenId.set(tokenId, []);
+            commonHistoryByTokenId = commonHistoryByTokenId.set(tokenId, [])
           }
-          const tokenArray = commonHistoryByTokenId.get(tokenId);
+          const tokenArray = commonHistoryByTokenId.get(tokenId)
 
           if (!tokenArray.find((item) => item.transactionHash === tx)) {
-            commonHistoryByTokenId = commonHistoryByTokenId.set(tokenId, [...tokenArray, itemHistory]);
+            commonHistoryByTokenId = commonHistoryByTokenId.set(tokenId, [...tokenArray, itemHistory])
           }
         }
 
         if (itemHistory.rarity === SEMI_RARE_RARITY) {
           if (!semiRareHistoryByTokenId.get(tokenId)) {
-            semiRareHistoryByTokenId = semiRareHistoryByTokenId.set(tokenId, []);
+            semiRareHistoryByTokenId = semiRareHistoryByTokenId.set(tokenId, [])
           }
-          const tokenArray1 = semiRareHistoryByTokenId.get(tokenId);
+          const tokenArray1 = semiRareHistoryByTokenId.get(tokenId)
 
           if (!tokenArray1.find((item) => item.transactionHash === tx)) {
-            semiRareHistoryByTokenId = semiRareHistoryByTokenId.set(tokenId, [...tokenArray1, itemHistory]);
+            semiRareHistoryByTokenId = semiRareHistoryByTokenId.set(tokenId, [...tokenArray1, itemHistory])
           }
         }
-      });
+      })
 
-      dispatch(this.setValue('commonHistoryByTokenId', commonHistoryByTokenId));
-      dispatch(this.setValue('semiRareHistoryByTokenId', semiRareHistoryByTokenId));
+      dispatch(this.setValue('commonHistoryByTokenId', commonHistoryByTokenId))
+      dispatch(this.setValue('semiRareHistoryByTokenId', semiRareHistoryByTokenId))
 
-    };
+    }
   }
 
 }
 
-export default new HistoryActions(reducer);
+export default new HistoryActions(reducer)

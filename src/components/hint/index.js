@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import styles from './styles.module.scss';
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import styles from './styles.module.scss'
 
 export default function Hint({ title, hintText }) {
-  const [hintTextShown, setHintTextShown] = useState(false);
+  const [hintTextShown, setHintTextShown] = useState(false)
   return (
     <div className={styles.hintWrapper}>
       <div className={styles.title}>{title}</div>
@@ -18,10 +18,10 @@ export default function Hint({ title, hintText }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 Hint.propTypes = {
   title: PropTypes.string,
   hintText: PropTypes.string,
-};
+}

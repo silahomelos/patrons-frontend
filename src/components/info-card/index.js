@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './styles.module.scss';
+import React from 'react'
+import styles from './styles.module.scss'
 
 const InfoCard = ({
   children,
@@ -29,7 +29,7 @@ const InfoCard = ({
         {children}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default InfoCard;
+export default InfoCard
