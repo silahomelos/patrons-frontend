@@ -3,6 +3,7 @@
 .realmPageWrapper {
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding-top: 10rem;
   background: #000000;
   color: #FFFFFF;
@@ -23,18 +24,101 @@
   }
 
   .designerName {
+    font-family: Orbitron;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 100%;
+    margin-top: 20px;
+    margin-bottom: 80px;
+    text-align: center;
 
+    @include sm-width {
+      font-size: 4.1vw;
+    }
+  }
+
+  .designerPhotoWrapper {
+    width: 35vw;
+    max-width: 580px;
+    min-width: 300px;
+    padding: 10px;
+    border-radius: 7.6%;
+
+    .imageContent {
+      width: 100%;
+    }    
   }
 
   .description {
+    font-family: Gilroy;
+    font-size: 12px;
+    line-height: 114%;
+    width: 80%;
+    margin-top: 20px;
+    border-top: 2px solid #FFFFFF;
+    padding: 20px;
+    padding-top: 50px;
+    
+    text-align: center;
 
+    @include sm-width {
+      font-size: 1.6vw;
+    }
   }
 
   .subTitle {
     font-family: Gilroy;
     font-style: normal;
     font-weight: 800;
-    font-size: 45px;
+    font-size: 25px;
     line-height: 55px;
+    text-align: center;
+
+    margin-top: 40px;
+    padding-bottom: 10px;
+    min-width: 300px;
+
+    @include sm-width {
+      font-size: 25px;
+      min-width: 23vw;
+    }
+
+    @include md-width {
+      font-size: 35px;
+      min-width: 23vw;
+    }
+
+    @include lg-width {
+      font-size: 35px;
+      min-width: 23vw;
+    }
+
+    border-bottom: 2px solid #FFFFFF;
+  }
+
+  .keyInsights {
+    margin-top: 40px;
+    margin-bottom: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .item {
+      display: flex;
+      flex-direction: row;
+      margin-right: 20px;
+
+      font-family: Gilroy;
+      font-style: normal;
+      font-size: 28px;
+      line-height: 34px;
+      text-align: center;
+
+      .itemName {
+        font-weight: 800;
+        margin-right: 5px;
+      }
+    }
   }
 }
