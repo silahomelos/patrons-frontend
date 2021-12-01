@@ -5,36 +5,10 @@ import Head from 'next/head'
 import Container from '@components/container'
 import RealmCard from '@components/realm-card'
 
+import realms from 'src/data/realms.json'
 import styles from './styles.module.scss'
 
 const LandingPage = () => {
-  const realms = [
-    {
-      name: 'ALTERRAGE',
-      image: '/images/realm-avatars/realm_aleterage.png',
-      borderColor: 'linear-gradient(136.5deg, #FF7A00 0%, #874100 48%, #AA7A00 102.4%)',
-      link: 'alterage'
-    },
-    {
-      name: 'Phoebe Heess',
-      image: '/images/realm-avatars/realm_phoebe.png',
-      borderColor: 'linear-gradient(136.5deg, #FFFFFF 0%, #949494 48%, #2B230F 102.4%)',
-      link: 'alterage'
-    },
-    {
-      name: 'Alana',
-      image: '/images/realm-avatars/realm_alana.png',
-      borderColor: 'linear-gradient(136.5deg, #EB00FF 0%, #4D0241 48%, #DA0069 102.4%)',
-      link: 'alterage'
-    },
-    {
-      name: 'T3CHN0M0RPH',
-      image: '/images/realm-avatars/realm_T3CHN0M0RPH.png',
-      borderColor: 'linear-gradient(136.5deg, #0500FF 0%, #322820 48%, #3C3AB7 102.4%)',
-      link: 'alterage'
-    }
-  ]
-  
   useEffect(() => {
     import('react-facebook-pixel')
       .then((x) => x.default)
@@ -103,7 +77,7 @@ const LandingPage = () => {
                     realmName={realm.name}
                     image={realm.image}
                     borderColor={realm.borderColor}
-                    linkName={realm.link}
+                    linkName={realm.name}
                   />
                 </>
               )

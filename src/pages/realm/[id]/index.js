@@ -1,13 +1,16 @@
 import React, { memo } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-// import Container from '@components/container'
+import realms from 'src/data/realms.json'
 import styles from './styles.module.scss'
 
 const RealmPage = () => {
   const router = useRouter()
   const { id } = router.query
+  const currentRealm = realms.find(realm => realm.name.toLowerCase() === id.toLowerCase())
+  console.log('realms: ', realms)
   console.log('id: ', id)
+  console.log('currentRealm: ', currentRealm)
   return (
     <div className={styles.realmPageWrapper}>
       
@@ -15,11 +18,13 @@ const RealmPage = () => {
         Designer Realm
       </div>
       <div className={styles.designerName}>
-        Designer Name
+        {
+          currentRealm.name
+        }
       </div>
       <div className={styles.designerPhotoWrapper}>
         <Image
-          src='/images/realm-avatars/realm_alana.png'
+          src={currentRealm.image}
           width={580}
           height={580}
         />
