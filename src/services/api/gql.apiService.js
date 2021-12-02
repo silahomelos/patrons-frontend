@@ -1,4 +1,4 @@
-import { gql } from 'graphql-request';
+import { gql } from 'graphql-request'
 
 export const COLLECTIONS = gql`
   query collections {
@@ -8,7 +8,7 @@ export const COLLECTIONS = gql`
       rarity
     }
   }
-`;
+`
 
 export const COLLECTIONSV2 = gql`
   query collectionsv2 {
@@ -19,11 +19,11 @@ export const COLLECTIONSV2 = gql`
       valueSold
     }
   }
-`;
+`
 
 export const COLLECTION_GROUPS = gql`
   query digitalaxCollectionGroups {
-    digitalaxCollectionGroups(first: 100, skip: 2) {
+    digitalaxCollectionGroups(first: 1000, skip: 2) {
       id
       auctions {
         id
@@ -76,7 +76,7 @@ export const COLLECTION_GROUPS = gql`
       }
     }
   }
-`;
+`
 
 export const DIGITALAX_GARMENT_COLLECTIONS = gql`
   query digitalaxGarmentCollections {
@@ -91,7 +91,7 @@ export const DIGITALAX_GARMENT_COLLECTIONS = gql`
       }
     }
   }
-`;
+`
 
 export const DIGITALAX_MARKETPLACE_OFFERS = gql`
   query digitalaxMarketplaceOffers {
@@ -107,7 +107,7 @@ export const DIGITALAX_MARKETPLACE_OFFERS = gql`
       }
     }
   }
-`;
+`
 
 export const COLLECTION_GROUP_BY_ID = gql`
   query digitalaxCollectionGroup($id: ID!) {
@@ -162,7 +162,7 @@ export const COLLECTION_GROUP_BY_ID = gql`
       }
     }
   }
-`;
+`
 
 export const GARMENTV2_BY_COLLECTION_ID = gql`
   query digitalaxGarmentV2Collection($id: ID!) {
@@ -195,7 +195,7 @@ export const GARMENTV2_BY_COLLECTION_ID = gql`
       }
     }
   }
-`;
+`
 
 export const GARMENTV2_BY_COLLECTION_IDS = gql`
   query digitalaxGarmentV2Collections($ids: [ID!]) {
@@ -208,7 +208,7 @@ export const GARMENTV2_BY_COLLECTION_IDS = gql`
       }
     }
   }
-`;
+`
 
 export const GARMENT_BY_COLLECTION_ID = gql`
   query digitalaxGarmentCollection($id: ID!) {
@@ -223,7 +223,7 @@ export const GARMENT_BY_COLLECTION_ID = gql`
       }
     }
   }
-`;
+`
 
 export const GARMENTV2_BY_AUCTION_ID = gql`
   query digitalaxGarmentV2Auction($id: ID!) {
@@ -256,7 +256,7 @@ export const GARMENTV2_BY_AUCTION_ID = gql`
       }
     }
   }
-`;
+`
 
 export const GARMENT_BY_AUCTION_ID = gql`
   query digitalaxGarmentAuction($id: ID!) {
@@ -275,7 +275,7 @@ export const GARMENT_BY_AUCTION_ID = gql`
       }
     }
   }
-`;
+`
 
 export const DIGITALAX_MARKETPLACE_V2_OFFER = gql`
   query digitalaxMarketplaceV2Offers($garmentCollection: String!) {
@@ -293,7 +293,7 @@ export const DIGITALAX_MARKETPLACE_V2_OFFER = gql`
       }
     }
   }
-`;
+`
 
 export const DIGITALAX_MARKETPLACE_OFFER = gql`
   query digitalaxMarketplaceOffers($garmentCollection: String!) {
@@ -310,7 +310,7 @@ export const DIGITALAX_MARKETPLACE_OFFER = gql`
       }
     }
   }
-`;
+`
 
 export const DIGITALAX_MARKETPLACE_V2_OFFERS = gql`
   query digitalaxMarketplaceV2Offers {
@@ -329,7 +329,7 @@ export const DIGITALAX_MARKETPLACE_V2_OFFERS = gql`
       }
     }
   }
-`;
+`
 
 export const DIGITALAX_MARKETPLACE_V2_PURCHASE_HISTORIES = gql`
   query digitalaxMarketplaceV2PurchaseHistories($ids: [ID!]) {
@@ -342,7 +342,7 @@ export const DIGITALAX_MARKETPLACE_V2_PURCHASE_HISTORIES = gql`
       value
     }
   }
-`;
+`
 
 export const DIGITALAX_MARKETPLACE_PURCHASE_HISTORIES = gql`
   query digitalaxMarketplacePurchaseHistories($ids: [ID!]) {
@@ -355,7 +355,7 @@ export const DIGITALAX_MARKETPLACE_PURCHASE_HISTORIES = gql`
       value
     }
   }
-`;
+`
 
 export const DIGITALAX_GARMENT_V2_PURCHASE_HISTORIES = gql`
   query digitalaxGarmentV2PurchaseHistories($id: ID) {
@@ -372,7 +372,7 @@ export const DIGITALAX_GARMENT_V2_PURCHASE_HISTORIES = gql`
       }
     }
   }
-`;
+`
 
 export const DIGITALAX_GARMENT_PURCHASE_HISTORIES = gql`
   query digitalaxGarmentPurchaseHistories($id: ID!) {
@@ -389,7 +389,7 @@ export const DIGITALAX_GARMENT_PURCHASE_HISTORIES = gql`
       }
     }
   }
-`;
+`
 
 export const DIGITALAX_GARMENT_NFT_V2_GLOBAL_STATS = gql`
   query digitalaxGarmentNFTV2GlobalStats {
@@ -398,7 +398,7 @@ export const DIGITALAX_GARMENT_NFT_V2_GLOBAL_STATS = gql`
       monaPerEth
     }
   }
-`;
+`
 
 export const DIGITALAX_GARMENT_AUCTIONS = gql`
   query digitalaxGarmentAuctions {
@@ -417,7 +417,7 @@ export const DIGITALAX_GARMENT_AUCTIONS = gql`
       endTime
     }
   }
-`;
+`
 
 export const DIGITALAX_GARMENT_V2S = gql`
   query digitalaxGarmentV2S($ids: [ID!]) {
@@ -426,8 +426,24 @@ export const DIGITALAX_GARMENT_V2S = gql`
       owner
     }
   }
-`;
+`
 
+export const DIGITALAX_MATERIAL_V2S = gql`
+  query digitalaxMaterialV2S($first: Int!, $lastID: ID!) {
+    digitalaxMaterialV2S(first: $first, where: { id_gt: $lastID }) {
+      id 
+      name 
+      image
+      tokenUri 
+      animation 
+      description 
+      attributes{ 
+        value 
+        type 
+      }
+    }
+  }
+`
 // For Profile Page
 
 // DIGITALAX GARMENTS (eth, polygon)
@@ -444,7 +460,7 @@ export const DIGITALAX_GARMENTS_BY_OWNER = gql`
       description
     }
   }
-`;
+`
 
 export const DIGITALAX_GARMENTS = gql`
   query digitalaxGarments($ids: [ID!], $first: Int!, $lastID: ID!) {
@@ -459,7 +475,7 @@ export const DIGITALAX_GARMENTS = gql`
       description
     }
   }
-`;
+`
 
 // (polygon only)
 export const DIGITALAX_GARMENT_V2S_BY_OWNER = gql`
@@ -475,7 +491,7 @@ export const DIGITALAX_GARMENT_V2S_BY_OWNER = gql`
       description
     }
   }
-`;
+`
 
 // (polygon digi bundle)
 export const DIGITALAX_SUBSCRIPTIONS_BY_OWNER = gql`
@@ -490,7 +506,7 @@ export const DIGITALAX_SUBSCRIPTIONS_BY_OWNER = gql`
       designer
     }
   }
-`;
+`
 
 // polygon digifizzy 1155
 export const DIGITALAX_SUBSCRIPTION_COLLECTORS_BY_OWNER = gql`
@@ -514,7 +530,7 @@ export const DIGITALAX_SUBSCRIPTION_COLLECTORS_BY_OWNER = gql`
       }
     }
   }
-`;
+`
 
 // staked fashion NFTs polygon
 export const DIGITALAX_NFT_STAKERS_BY_ADDRESS = gql`
@@ -533,7 +549,7 @@ export const DIGITALAX_NFT_STAKERS_BY_ADDRESS = gql`
       }
     }
   }
-`;
+`
 
 // staked fashion NFTs ethereum
 export const DIGITALAX_GARMENT_STAKED_TOKENS_BY_ADDRESS = gql`
@@ -543,7 +559,7 @@ export const DIGITALAX_GARMENT_STAKED_TOKENS_BY_ADDRESS = gql`
       staker
     }
   }
-`;
+`
 
 // genesis NFTs ethereum
 export const DIGITALAX_GENESIS_NFTS_BY_ADDRESS = gql`
@@ -558,7 +574,7 @@ export const DIGITALAX_GENESIS_NFTS_BY_ADDRESS = gql`
       tokenUri
     }
   }
-`;
+`
 
 // genesis NFTs by ids ethereum
 export const DIGITALAX_GENESIS_NFTS = gql`
@@ -573,7 +589,7 @@ export const DIGITALAX_GENESIS_NFTS = gql`
       tokenUri
     }
   }
-`;
+`
 
 // staked genesis NFTs ethereum
 export const DIGITALAX_GENESIS_STAKED_TOKENS_BY_ADDRESS = gql`
@@ -583,7 +599,7 @@ export const DIGITALAX_GENESIS_STAKED_TOKENS_BY_ADDRESS = gql`
       staker
     }
   }
-`;
+`
 
 // get collection id by garment id polygon
 export const DIGITALAX_GARMENT_V2_COLLECTION_BY_GARMENT_ID = gql`
@@ -594,7 +610,7 @@ export const DIGITALAX_GARMENT_V2_COLLECTION_BY_GARMENT_ID = gql`
       garmentAuctionID
     }
   }
-`;
+`
 
 // get pode tokens by owner
 export const PODE_NFT_V2S_BY_ADDRESS = gql`
@@ -607,7 +623,7 @@ export const PODE_NFT_V2S_BY_ADDRESS = gql`
       animation
     }
   }
-`;
+`
 
 // get staked pode tokens by staker
 export const PODE_NFT_V2_STAKERS_BY_ADDRESS = gql`
@@ -619,7 +635,7 @@ export const PODE_NFT_V2_STAKERS_BY_ADDRESS = gql`
       }
     }
   }
-`;
+`
 
 // polygon digitalax 1155
 export const DIGITALAX_COLLETOR_V2_BY_OWNER = gql`
@@ -643,7 +659,7 @@ export const DIGITALAX_COLLETOR_V2_BY_OWNER = gql`
       }
     }
   }
-`;
+`
 
 // gdn membership token polygon
 export const GDN_MEMBERSHIP_NFTS_BY_OWNER = gql`
@@ -658,7 +674,7 @@ export const GDN_MEMBERSHIP_NFTS_BY_OWNER = gql`
       tokenUri
     }
   }
-`;
+`
 
 // digitalax look (loot for fashion) nfts mainnet
 export const DIGITALAX_LOOK_NFTS_BY_OWNER = gql`
@@ -679,7 +695,7 @@ export const DIGITALAX_LOOK_NFTS_BY_OWNER = gql`
       tokenUri
     }
   }
-`;
+`
 
 export const DIGITALAX_GARMENT_V2_COLLECTIONS = gql`
   query digitalaxGarmentV2Collections($ids: [ID!], $first: Int!, $lastID: ID!) {
@@ -690,7 +706,7 @@ export const DIGITALAX_GARMENT_V2_COLLECTIONS = gql`
       }
     }
   }
-`;
+`
 
 export const DIGITALAX_GARMENT_V2_COLLECTIONS_BY_GARMENT_IDS = gql`
   query digitalaxGarmentV2Collections($garmentIDs: [ID!], $first: Int!, $lastID: ID!) {
@@ -708,7 +724,7 @@ export const DIGITALAX_GARMENT_V2_COLLECTIONS_BY_GARMENT_IDS = gql`
       }
     }
   }
-`;
+`
 
 export const DIGITALAX_LOOK_GOLDEN_TICKETS_BY_OWNER = gql`
   query digitalaxLookGoldenTickets($owner: ID!, $first: Int!, $lastID: ID!) {
@@ -722,7 +738,7 @@ export const DIGITALAX_LOOK_GOLDEN_TICKETS_BY_OWNER = gql`
       tokenUri
     }
   }
-`;
+`
 
 // staked nfts by id list on polygon
 export const DIGITALAX_NFT_STAKERS_BY_GARMENTS = gql`
@@ -741,7 +757,7 @@ export const DIGITALAX_NFT_STAKERS_BY_GARMENTS = gql`
       }
     }
   }
-`;
+`
 
 // whitelisted staked nfts on dlta by id list on polygon
 export const GUILD_WHITELISTED_NFT_STAKERS_BY_GARMENTS = gql`
@@ -759,7 +775,7 @@ export const GUILD_WHITELISTED_NFT_STAKERS_BY_GARMENTS = gql`
       }
     }
   }
-`;
+`
 
 // get staked pode tokens by staker
 export const GUILD_WHITELISTED_NFT_STAKERS_BY_STAKER = gql`
@@ -778,4 +794,4 @@ export const GUILD_WHITELISTED_NFT_STAKERS_BY_STAKER = gql`
       }
     }
   }
-`;
+`

@@ -1,6 +1,15 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
+import api from '@services/api/espa/api.service'
+import {
+  getDigitalaxMaterialV2s
+} from '@services/api/apiService'
+import { getAllResultsFromQueryWithoutOwner } from '@helpers/thegraph.helpers'
+
+import {
+  POLYGON_CHAINID
+} from '@constants/global.constants'
 import realms from 'src/data/realms.json'
 import styles from './styles.module.scss'
 
@@ -11,6 +20,94 @@ const RealmPage = () => {
   console.log('realms: ', realms)
   console.log('id: ', id)
   console.log('currentRealm: ', currentRealm)
+
+  const [currentDeisngerInfo, setCurrentDesignerInfo] = useState(null)
+  const [fgoCount, setFgoCount] = useState(0)
+
+  async function loadDesignerInfo() {   
+    let currentDesigner = null
+
+    // get current Designer Information from FaunaDB
+    const designers = await api.getDesignerById(currentRealm.designerId) || []
+
+    if (designers.length > 0) {
+      currentDesigner = designers[0]
+      setCurrentDesignerInfo(currentDesigner)
+
+    }
+
+    if (!currentDesigner) return
+
+    // get Blocked Materials from FaunaDB
+    const thumbnails = await api.getThumbnailsByDesigner(currentDesigner.designerId)
+
+    const blockedList = []
+    for (const thumbnail in thumbnails.data) {
+      const thumbItem = thumbnails.data[thumbnail]
+      if (thumbItem.blocked) {
+        blockedList.push(thumbItem.image_url)
+      }
+    }
+
+    // Get all materials from theGraph
+    const digitalaxMaterialV2S = await getAllResultsFromQueryWithoutOwner(
+      getDigitalaxMaterialV2s, 
+      'digitalaxMaterialV2S', 
+      POLYGON_CHAINID
+    )
+    console.log('materials: ', digitalaxMaterialV2S)
+    const materials = []
+    if (digitalaxMaterialV2S) {
+      for (const item of digitalaxMaterialV2S) {
+        if (item.attributes.length <= 0) continue
+        try {
+          const designerId = item['name']
+          if (!designerId || designerId === undefined || designerId === '' || !item['image']) continue
+
+          if (
+            currentDesigner['designerId'].toLowerCase() !== designerId.toLowerCase() &&
+            (!currentDesigner['newDesignerID'] ||
+            currentDesigner['newDesignerID'] === '' ||
+            currentDesigner['newDesignerID'].toLowerCase() !== designerId.toLowerCase())
+          )
+            continue
+
+          if (blockedList.findIndex((blockedItem) => blockedItem === item['image']) >= 0) continue
+          if (materials.findIndex((findItem) => findItem.image === item['image']) >= 0) continue
+          
+          materials.push({
+            image: item['image'],
+            name: item['name']
+          })
+        } catch (exception) {
+          console.log('exception: ', exception)
+        }
+      }
+    }
+    console.log('materials: ', materials)
+    setFgoCount(materials.length)
+    // const { digitalaxCollectionGroups } = await getCollectionGroups(POLYGON_CHAINID)
+    // console.log('digitalaxCollectionGroups: ', digitalaxCollectionGroups)
+
+    // digitalaxCollectionGroups.forEach((group, index) => {
+    //   const designerAuctions = group.auctions.filter(
+    //     auction => auction.designer.name.toLowerCase() === currentDesigner.designerId.toLowerCase()
+    //   )
+    //   console.log('designerAuctions: ', designerAuctions)
+      
+    //   const designerCollections = group.collections.filter(
+    //     collection => collection.designer.name.toLowerCase() === currentDesigner.designerId.toLowerCase()
+    //   )
+    //   console.log('designerCollections: ', designerCollections)
+    // })
+  }
+
+  useEffect(() => {
+    loadDesignerInfo()
+  }, [])
+
+  console.log('currentDeisngerInfo: ', currentDeisngerInfo)
+
   return (
     <div className={styles.realmPageWrapper}>
       
@@ -19,20 +116,20 @@ const RealmPage = () => {
       </div>
       <div className={styles.designerName}>
         {
-          currentRealm.name
+          currentRealm.designerId
         }
       </div>
       <div className={styles.designerPhotoWrapper}>
-        <Image
-          src={currentRealm.image}
-          width={580}
-          height={580}
-        />
+        {
+          currentDeisngerInfo && <Image
+            src={currentDeisngerInfo.image_url}
+            width={580}
+            height={580}
+          />
+        }
       </div>
       <div className={styles.description}>
-        Phoebe Heess is a hi-tech fashion lab working with innovative materials and wearables. Think James Bond’s Q, but for all black sportswear. You might have read about them developing the blackest t-shirt in the world. Or when they did a black shirt that doesn’t heat up under the sun. 
-        <br /><br />
-        Phoebe is a seasoned sportswear designer that has previously collaborated with startups, and also large corps like Adidas. Gabriel is the former Head of Digital at Vice, and has also worked for digital innovation business consultancies.
+        {currentDeisngerInfo?.realmDescription}
       </div>
       <div className={styles.subTitle}>
         Key Insights
@@ -52,7 +149,7 @@ const RealmPage = () => {
             FGO Count:
           </div>
           <div className={styles.itemValue}>
-            5
+          {fgoCount}
           </div>
         </div>
         <div className={styles.item}>
@@ -60,7 +157,7 @@ const RealmPage = () => {
             Fashion NFT Mints:
           </div>
           <div className={styles.itemValue}>
-            4
+          {currentDeisngerInfo?.fashionMints || 0}
           </div>
         </div>
         <div className={styles.item}>
@@ -68,7 +165,7 @@ const RealmPage = () => {
             Meta Source Contributions:
           </div>
           <div className={styles.itemValue}>
-            10
+          {currentDeisngerInfo?.metaSourceContribution || 0}
           </div>
         </div>
       </div>

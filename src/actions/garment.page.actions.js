@@ -3,7 +3,6 @@ import api from '@services/api/api.service'
 import reducer from '../reducers/garment.page.reducer'
 import garmentActions from './garment.actions'
 import historyActions from './history.actions'
-import designerActions from './designer.actions'
 
 class GarmentPageActions extends BaseActions {
 
@@ -19,7 +18,6 @@ class GarmentPageActions extends BaseActions {
     return async (dispatch) => {
       dispatch(historyActions.clear())
       dispatch(garmentActions.clear())
-      dispatch(designerActions.clear())
     }
   }
 

@@ -41,7 +41,7 @@
     width: 35vw;
     max-width: 580px;
     min-width: 300px;
-    padding: 10px;
+    overflow: hidden;
     border-radius: 7.6%;
 
     .imageContent {
@@ -54,10 +54,11 @@
     font-size: 12px;
     line-height: 114%;
     width: 80%;
-    margin-top: 20px;
+    margin-top: 40px;
     border-top: 2px solid #FFFFFF;
     padding: 20px;
     padding-top: 50px;
+    white-space: pre-wrap;
     
     text-align: center;
 

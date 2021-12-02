@@ -46,8 +46,11 @@ import {
   GDN_MEMBERSHIP_NFT
 } from '@constants/nft_categories'
 
-const MAINNET_CHAINID = 0x1
-const POLYGON_CHAINID = 0x89
+import {
+  MAINNET_CHAINID,
+  POLYGON_CHAINID
+} from '@constants/global.constants'
+
 
 const categories = [
   DIGITAL_CHANGING_ROOM,

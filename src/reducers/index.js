@@ -4,8 +4,6 @@ import global from './global.reducer'
 import history from './history.reducer'
 import collection from './collection.reducer'
 import garment from './garment.reducer'
-import designer from './designer.reducer'
-import designerPage from './designer.page.reducer'
 import garmentPage from './garment.page.reducer'
 import tokenURIInfo from './token.uri.info.reducer'
 
@@ -16,8 +14,6 @@ export default {
   collection: collection.reducer,
   history: history.reducer,
   garment: garment.reducer,
-  designer: designer.reducer,
-  designerPage: designerPage.reducer,
   garmentPage: garmentPage.reducer,
   tokenURIInfo: tokenURIInfo.reducer,
 }

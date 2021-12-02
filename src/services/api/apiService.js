@@ -22,6 +22,7 @@ import {
   GARMENTV2_BY_COLLECTION_IDS,
   GARMENT_BY_AUCTION_ID,
   GARMENT_BY_COLLECTION_ID,
+  DIGITALAX_MATERIAL_V2S,
   // For Profile Page
   DIGITALAX_GARMENTS_BY_OWNER,
   DIGITALAX_GARMENTS,
@@ -107,6 +108,9 @@ export const getGarmentByAuctionId = async (chainId, id) =>
 
 export  const getDigitalaxGarmentV2s = async (chainId, ids) =>
   apiRequest(chainId, DIGITALAX_GARMENT_V2S, { ids })
+
+export  const getDigitalaxMaterialV2s = async (chainId, first=1000, lastID='') =>
+  apiRequest(chainId, DIGITALAX_MATERIAL_V2S, { first, lastID  })
 
 // For Profile Page
 export  const getDigitalaxGarmentsByOwner = async (chainId, owner, first=1000, lastID='') =>

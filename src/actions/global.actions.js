@@ -2,8 +2,6 @@ import Web3 from 'web3'
 import BaseActions from '@actions/base-actions'
 import { toast } from 'react-toastify'
 import userActions from '@actions/user.actions'
-import designerActions from '@actions/designer.actions'
-import designerPageActions from '@actions/designer.page.actions'
 import garmentActions from '@actions/garment.actions'
 import garmentPageActions from '@actions/garment.page.actions'
 import historyActions from '@actions/history.actions'
@@ -78,8 +76,6 @@ class GlobalActions extends BaseActions {
         dispatch(historyActions.clear())
         dispatch(garmentActions.clear())
         dispatch(garmentPageActions.clear())
-        dispatch(designerPageActions.clear())
-        dispatch(designerActions.clear())
 
         dispatch(this.resetContratParams())
         dispatch(this.changeNetwork(chainId))

@@ -41,8 +41,9 @@ import globalActions from '@actions/global.actions'
 import secondDesignerData from 'src/data/second-designers.json'
 import { getCollectionGroupById } from '@services/api/apiService'
 
-const POLYGON_CHAINID = 0x89
-
+import {
+  POLYGON_CHAINID
+} from '@constants/global.constants'
 
 const fetchTokenUri = async (tokenUri) => {
   return fetch(tokenUri)

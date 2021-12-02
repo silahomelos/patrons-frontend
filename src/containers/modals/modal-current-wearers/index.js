@@ -22,7 +22,10 @@ import {
 } from '@services/api/apiService'
 import config from '@utils/config'
 import { getAllResultsFromQuery } from '@helpers/thegraph.helpers'
-const POLYGON_CHAINID = 0x89
+
+import {
+  POLYGON_CHAINID
+} from '@constants/global.constants'
 
 const ModalCurrentWearers = ({ className, title }) => {
   const dispatch = useDispatch()

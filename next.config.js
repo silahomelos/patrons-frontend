@@ -32,7 +32,7 @@ const withImages = require('next-images');
 
 module.exports = withImages({
   images: {
-    domains: ['digitalax.imgix.net', 'digitalax.mypinata.cloud'],
+    domains: ['digitalax.imgix.net', 'digitalax.mypinata.cloud', 'espa.s3.eu-central-1.amazonaws.com'],
   },
   publicRuntimeConfig: {
     BACKEND_API,
