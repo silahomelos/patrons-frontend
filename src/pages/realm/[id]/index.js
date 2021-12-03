@@ -1,6 +1,8 @@
 import React, { memo, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
+
+import PatronTierCard from '@components/patron-tier-card'
 import api from '@services/api/espa/api.service'
 import {
   getDigitalaxMaterialV2s
@@ -74,7 +76,7 @@ const RealmPage = () => {
 
           if (blockedList.findIndex((blockedItem) => blockedItem === item['image']) >= 0) continue
           if (materials.findIndex((findItem) => findItem.image === item['image']) >= 0) continue
-          
+
           materials.push({
             image: item['image'],
             name: item['name']
@@ -84,22 +86,7 @@ const RealmPage = () => {
         }
       }
     }
-    console.log('materials: ', materials)
     setFgoCount(materials.length)
-    // const { digitalaxCollectionGroups } = await getCollectionGroups(POLYGON_CHAINID)
-    // console.log('digitalaxCollectionGroups: ', digitalaxCollectionGroups)
-
-    // digitalaxCollectionGroups.forEach((group, index) => {
-    //   const designerAuctions = group.auctions.filter(
-    //     auction => auction.designer.name.toLowerCase() === currentDesigner.designerId.toLowerCase()
-    //   )
-    //   console.log('designerAuctions: ', designerAuctions)
-      
-    //   const designerCollections = group.collections.filter(
-    //     collection => collection.designer.name.toLowerCase() === currentDesigner.designerId.toLowerCase()
-    //   )
-    //   console.log('designerCollections: ', designerCollections)
-    // })
   }
 
   useEffect(() => {
@@ -172,6 +159,27 @@ const RealmPage = () => {
 
       <div className={styles.subTitle}>
         Patron NFT Tiers
+      </div>
+      
+      <div className={styles.patronCardsList}>
+        <PatronTierCard
+          realmName={'Phoebe Heess'}
+          tierName={'Mini Tier'}
+          description={[
+            'XX $PH ERC-20 Staking Allocation',
+            'XX $W3F Staking Allocation',
+            'XX NFT Content Drops',
+            'XX Event Access'
+          ]}
+        />
+        <PatronTierCard
+          realmName={'Phoebe Heess'}
+          tierName={'Mid Tier'}
+        />
+        <PatronTierCard
+          realmName={'Phoebe Heess'}
+          tierName={'Max Tier'}
+        />
       </div>
     </div>
   )

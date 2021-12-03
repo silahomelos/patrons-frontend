@@ -101,25 +101,57 @@
     margin-top: 40px;
     margin-bottom: 100px;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column;
+    width: 90%;
 
+    @include sm-width {
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
     .item {
       display: flex;
       flex-direction: row;
-      margin-right: 20px;
+      justify-content: space-between;
+
+      @include sm-width {
+        margin-right: 20px;
+        justify-content: flex-start
+      }
 
       font-family: Gilroy;
       font-style: normal;
-      font-size: 28px;
+      font-size: 20px;
       line-height: 34px;
       text-align: center;
+
+      @include sm-width {
+        font-size: 28px;
+      }
 
       .itemName {
         font-weight: 800;
         margin-right: 5px;
       }
+    }
+  }
+
+  .patronCardsList {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    // padding: 40px;
+    
+    margin-top: 40px;
+    flex-wrap: wrap;
+
+    @include sm-width {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 20px 5%;  
     }
   }
 }
