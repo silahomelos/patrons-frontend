@@ -1,4 +1,8 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+
+import { getExchangeRateETH } from '@selectors/global.selectors'
+
 import GrayButton from '@components/buttons/gray-button'
 import PriceCard from '@components/price-card'
 import styles from './styles.module.scss'
@@ -7,15 +11,18 @@ const PatronTierCard = props => {
   const {
     realmName,
     tierName,
+    price,
     description
   } = props
+
+  const exchangeRate = useSelector(getExchangeRateETH)
 
   const getPrice = () => {
     return (
       <>
-        {parseFloat(1).toFixed(2)} $ETH
+        {parseFloat(price).toFixed(2)} $ETH
         <span>
-          {` `}(${4500})
+          {` `}(${(parseFloat(price) * exchangeRate).toFixed(2)})
         </span>
       </>
     )

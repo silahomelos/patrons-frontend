@@ -444,6 +444,30 @@ export const DIGITALAX_MATERIAL_V2S = gql`
     }
   }
 `
+
+export const PATRON_COLLECTION_GROUPS = gql`
+  query patronCollectionGroups($first: Int!, $lastID: ID!) {
+    patronCollectionGroups(first: $first, where: { id_gt: $lastID }) {
+      id
+      collections {
+        id
+        designer {
+          id
+          name
+        }
+        garments (first: 1) {
+          id
+          designer
+          name
+          description
+          owner
+          tokenUri
+          primarySalePrice
+        }
+      }
+    }
+  }
+`
 // For Profile Page
 
 // DIGITALAX GARMENTS (eth, polygon)

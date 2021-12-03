@@ -5,7 +5,8 @@ import Image from 'next/image'
 import PatronTierCard from '@components/patron-tier-card'
 import digitalaxApi from '@services/api/digitalaxApi.service'
 import {
-  getDigitalaxMaterialV2s
+  getDigitalaxMaterialV2s,
+  getPatronCollectionGroups
 } from '@services/api/apiService'
 import {
   getGDNTokenAddress
@@ -21,6 +22,15 @@ import {
 import realms from 'src/data/realms.json'
 import styles from './styles.module.scss'
 
+const getTierName = (strName, designerId) => {
+  console.log(strName.split(designerId + ' '))
+  return strName.split(designerId + ' ')[1]
+}
+
+const getDescriptionList = strDescription => {
+  return JSON.parse(strDescription.replaceAll(`'`, `"`))
+}
+
 const RealmPage = () => {
   const router = useRouter()
   const { id } = router.query
@@ -32,6 +42,7 @@ const RealmPage = () => {
   const [currentDeisngerInfo, setCurrentDesignerInfo] = useState(null)
   const [fgoCount, setFgoCount] = useState(0)
   const [gdnBalance, setGDNBalance] = useState(0)
+  const [tierCollections, setTierCollections] = useState([])
   const [posClientParent, posClientChild] = useMaticPosClient()
 
   async function loadDesignerInfo() {   
@@ -95,6 +106,25 @@ const RealmPage = () => {
       }
     }
     setFgoCount(materials.length)
+
+    // Get all materials from theGraph
+    const patronCollectionGroups = await getAllResultsFromQueryWithoutOwner(
+      getPatronCollectionGroups, 
+      'patronCollectionGroups', 
+      POLYGON_CHAINID
+    )
+
+    const currentGroup = patronCollectionGroups.find(group => 
+      group.collections && group.collections.length > 0 &&
+      group.collections[0].garments && group.collections[0].garments.length > 0 &&
+      group.collections[0].garments[0].name.toLowerCase().includes(currentDesigner.designerId.toLowerCase())
+    )
+
+    if (currentGroup) {
+      setTierCollections(currentGroup.collections)
+    }
+
+    console.log('currentGroup: ', currentGroup)
   }
 
   useEffect(() => {
@@ -103,20 +133,13 @@ const RealmPage = () => {
 
   const loadGDNBalance = async () => {
     try {
-      console.log('posClientParent: ', posClientParent)
-      console.log('getGDNTokenAddress(): ', getGDNTokenAddress())
-      console.log('currentDeisngerInfo.wallet: ', currentDeisngerInfo.wallet)
       const maticBalance = await posClientParent.balanceOfERC20(
         currentDeisngerInfo.wallet,
         getGDNTokenAddress(),
         {
-          parent: false,
-        },
+          parent: false
+        }
       )
-      // const maticBalance = await posClientParent.erc20(getGDNTokenAddress()).getBalance(
-      //   currentDeisngerInfo.wallet
-      // )
-      console.log('maticBalance: ', maticBalance)
       setGDNBalance(maticBalance / 1e18)
     } catch (e) {
       console.log(e)
@@ -129,7 +152,6 @@ const RealmPage = () => {
     }
     
   }, [posClientParent, currentDeisngerInfo])
-
 
 
   console.log('currentDeisngerInfo: ', currentDeisngerInfo)
@@ -201,24 +223,20 @@ const RealmPage = () => {
       </div>
       
       <div className={styles.patronCardsList}>
-        <PatronTierCard
-          realmName={'Phoebe Heess'}
-          tierName={'Mini Tier'}
-          description={[
-            'XX $PH ERC-20 Staking Allocation',
-            'XX $W3F Staking Allocation',
-            'XX NFT Content Drops',
-            'XX Event Access'
-          ]}
-        />
-        <PatronTierCard
-          realmName={'Phoebe Heess'}
-          tierName={'Mid Tier'}
-        />
-        <PatronTierCard
-          realmName={'Phoebe Heess'}
-          tierName={'Max Tier'}
-        />
+        {
+          tierCollections.map(collection => {
+            const garment = collection.garments[0]
+            return (
+              <PatronTierCard
+                key={garment.id}
+                realmName={currentDeisngerInfo.designerId}
+                tierName={getTierName(garment.name, currentDeisngerInfo.designerId)}
+                price={garment.primarySalePrice}
+                description={getDescriptionList(garment.description)}
+              />      
+            )
+          })
+        }
       </div>
     </div>
   )
