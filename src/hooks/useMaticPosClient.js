@@ -1,20 +1,20 @@
-import { MaticPOSClient } from '@maticnetwork/maticjs';
-import { useSelector } from 'react-redux';
-import { getAccount } from '@selectors/user.selectors';
-import { useEffect, useState } from 'react';
-import Web3 from 'web3';
-import config from '@utils/config';
-import { useIsMainnet } from './useIsMainnet';
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import Web3 from 'web3'
+import { MaticPOSClient } from '@maticnetwork/maticjs'
+import { getAccount } from '@selectors/user.selectors'
+import config from '@utils/config'
+import { useIsMainnet } from './useIsMainnet'
 
 export default function useMaticPosClient() {
-  const account = useSelector(getAccount);
-  const isMainnet = useIsMainnet();
+  const account = useSelector(getAccount)
+  const isMainnet = useIsMainnet()
 
-  const [posClientParent, setPosClientParent] = useState();
-  const [posClientChild, setPosClientChild] = useState();
+  const [posClientParent, setPosClientParent] = useState()
+  const [posClientChild, setPosClientChild] = useState()
 
   useEffect(() => {
-    const web3 = new Web3(window.ethereum);
+    const web3 = new Web3(window.ethereum)
 
     if (account) {
       setPosClientParent(
@@ -26,7 +26,7 @@ export default function useMaticPosClient() {
           parentDefaultOptions: { from: account },
           maticDefaultOptions: { from: account },
         }),
-      );
+      )
 
       setPosClientChild(
         new MaticPOSClient({
@@ -37,9 +37,9 @@ export default function useMaticPosClient() {
           parentDefaultOptions: { from: account },
           maticDefaultOptions: { from: account },
         }),
-      );
+      )
     }
-  }, [account, isMainnet]);
+  }, [account, isMainnet])
 
-  return [posClientParent, posClientChild];
+  return [posClientParent, posClientChild]
 }

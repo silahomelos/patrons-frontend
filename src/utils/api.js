@@ -1,25 +1,26 @@
-import axios from 'axios';
-import qs from 'qs';
-import axiosRetry from 'axios-retry';
-import { getAuthToken } from '@helpers/user.helpers';
-import { STAGE_ESPA_BACKEND_URL } from '@constants/global.constants';
+import axios from 'axios'
+import qs from 'qs'
+import axiosRetry from 'axios-retry'
 
-import 'core-js/es/string';
-import 'core-js/es/number';
-import 'core-js/es/array';
+import 'core-js/es/string'
+import 'core-js/es/number'
+import 'core-js/es/array'
 
-require('es6-promise').polyfill();
-require('es6-object-assign').polyfill();
+import { getAuthToken } from '@helpers/user.helpers'
+import { STAGE_ESPA_BACKEND_URL } from '@constants/global.constants'
 
-const DEFAULT_OPTIONS = { withCredentials: true };
+require('es6-promise').polyfill()
+require('es6-object-assign').polyfill()
 
-axios.defaults.baseURL = STAGE_ESPA_BACKEND_URL;
-axios.defaults.headers.post['Content-Type'] = 'application/json';
+const DEFAULT_OPTIONS = { withCredentials: true }
+
+axios.defaults.baseURL = STAGE_ESPA_BACKEND_URL
+axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 axiosRetry(axios, {
   retries: 1,
   retryCondition: (error) => !error.response,
-});
+})
 
 /**
  * Execute all requests
@@ -41,17 +42,17 @@ function executeRequest(method, url, data, options = DEFAULT_OPTIONS, headers = 
     headers: {
       Authorization: getAuthToken(),
     },
-  };
+  }
 
   return new Promise((resolve, reject) => {
     axios(params)
       .then((response) => {
-        resolve(response.data);
+        resolve(response.data)
       })
       .catch((error) => {
-        reject(error);
-      });
-  });
+        reject(error)
+      })
+  })
 }
 
 /**
@@ -62,8 +63,8 @@ function executeRequest(method, url, data, options = DEFAULT_OPTIONS, headers = 
  * @returns {Promise<any>}
  */
 export function get(url, data, options) {
-  const query = qs.stringify(data, { encode: true, arrayFormat: 'brackets' });
-  return executeRequest('get', `${url}?${query || ''}`, null, options);
+  const query = qs.stringify(data, { encode: true, arrayFormat: 'brackets' })
+  return executeRequest('get', `${url}?${query || ''}`, null, options)
 }
 
 /**
@@ -75,7 +76,7 @@ export function get(url, data, options) {
  */
 export function post(url, data, options) {
   // if need upload file use this post
-  return executeRequest('post', `${url}`, data, options);
+  return executeRequest('post', `${url}`, data, options)
 }
 
 /**
@@ -86,7 +87,7 @@ export function post(url, data, options) {
  * @returns {Promise<any>}
  */
 export function patch(url, data, options) {
-  return executeRequest('patch', `${url}`, data, options);
+  return executeRequest('patch', `${url}`, data, options)
 }
 
 /**
@@ -97,7 +98,7 @@ export function patch(url, data, options) {
  * @returns {Promise<any>}
  */
 export function put(url, data, options) {
-  return executeRequest('put', `${url}`, data, options);
+  return executeRequest('put', `${url}`, data, options)
 }
 
 /**
@@ -108,5 +109,5 @@ export function put(url, data, options) {
  * @returns {Promise<any>}
  */
 export function del(url, data, options) {
-  return executeRequest('delete', `${url}`, data, options);
+  return executeRequest('delete', `${url}`, data, options)
 }

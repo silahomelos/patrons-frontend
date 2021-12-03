@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { getCollectionGroups, getDigitalaxGarmentCollections } from '@services/api/apiService';
-import styles from './styles.module.scss';
-import { useSelector } from 'react-redux';
-import { getChainId } from '@selectors/global.selectors';
-import CollectionList from '@components/collection-list';
-import HeroSection from '@components/hero-section';
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+
+import CollectionList from '@components/collection-list'
+import HeroSection from '@components/hero-section'
+
+import { getCollectionGroups } from '@services/api/apiService'
+
+import { getChainId } from '@selectors/global.selectors'
+
+import styles from './styles.module.scss'
 
 const LandingPage = () => {
-  const chainId = useSelector(getChainId);
-  const [collectionGroups, setCollectionGroups] = useState([]);
+  const chainId = useSelector(getChainId)
+  const [collectionGroups, setCollectionGroups] = useState([])
   const previewIds = {
     3: 49,
     4: 2,
@@ -17,32 +21,32 @@ const LandingPage = () => {
     7: 19,
     8: 4,
     10: 4,
-  };
+  }
 
   const getPreviewId = (id) => {
-    return previewIds[id] ? previewIds[id] : 0;
-  };
+    return previewIds[id] ? previewIds[id] : 0
+  }
 
   useEffect(() => {
     const fetchCollectionGroups = async () => {
-      const { digitalaxCollectionGroups } = await getCollectionGroups(chainId);
+      const { digitalaxCollectionGroups } = await getCollectionGroups(chainId)
 
-      const collections = [];
-      const auctions = [];
+      const collections = []
+      const auctions = []
 
       const sortedCollectionGroups = digitalaxCollectionGroups.sort((a, b) => {
-        if (parseInt(a.id) > parseInt(b.id)) return -1;
-        if (parseInt(a.id) === parseInt(b.id)) return 0;
-        return 1;
-      });
+        if (parseInt(a.id) > parseInt(b.id)) return -1
+        if (parseInt(a.id) === parseInt(b.id)) return 0
+        return 1
+      })
 
       sortedCollectionGroups.forEach((digitalaxCollectionGroup) => {
         const collectionPrice = digitalaxCollectionGroup.collections
           .filter((collection) => collection.id !== '0')
-          .reduce((a, b) => a + Number(b.valueSold), 0);
+          .reduce((a, b) => a + Number(b.valueSold), 0)
         const auctionPrice = digitalaxCollectionGroup.auctions
           .filter((auction) => auction.id !== '0')
-          .reduce((a, b) => a + Number(b.topBid), 0);
+          .reduce((a, b) => a + Number(b.topBid), 0)
         if (
           digitalaxCollectionGroup.collections.length > getPreviewId(digitalaxCollectionGroup.id) &&
           (digitalaxCollectionGroup.collections.length >= 2 ||
@@ -58,7 +62,7 @@ const LandingPage = () => {
             id: digitalaxCollectionGroup.id,
             sold: (collectionPrice + auctionPrice) / 1e18,
             isAuction: false,
-          });
+          })
         } else if (
           digitalaxCollectionGroup.auctions.length > getPreviewId(digitalaxCollectionGroup.id) &&
           (digitalaxCollectionGroup.auctions.length >= 2 ||
@@ -73,21 +77,21 @@ const LandingPage = () => {
             id: digitalaxCollectionGroup.id,
             sold: (collectionPrice + auctionPrice) / 1e18,
             isAuction: true,
-          });
+          })
         }
-      });
+      })
 
       setCollectionGroups(
         [...collections, ...auctions].sort((a, b) => {
-          if (parseInt(a.id) > parseInt(b.id)) return -1;
-          if (parseInt(a.id) < parseInt(b.id)) return 1;
-          return 0;
+          if (parseInt(a.id) > parseInt(b.id)) return -1
+          if (parseInt(a.id) < parseInt(b.id)) return 1
+          return 0
         }),
-      );
-    };
+      )
+    }
 
-    fetchCollectionGroups();
-  }, []);
+    fetchCollectionGroups()
+  }, [])
 
   return (
     <div className={styles.wrapper}>
@@ -102,7 +106,7 @@ const LandingPage = () => {
         </div>
       </section>
     </div>
-  );
-};
+  )
+}
 
-export default LandingPage;
+export default LandingPage

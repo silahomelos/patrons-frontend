@@ -1,23 +1,26 @@
-import Modal from '@components/modal';
-import React from 'react';
-import { createPortal } from 'react-dom';
-import { useDispatch } from 'react-redux';
-import Button from '@components/buttons/button';
-import styles from './styles.module.scss';
-import { closeSwitchNetworkModal } from '@actions/modals.actions';
-import { requestSwitchNetwork } from '@services/network.service';
+import React from 'react'
+import { createPortal } from 'react-dom'
+import { useDispatch } from 'react-redux'
+
+import Modal from '@components/modal'
+import Button from '@components/buttons/button'
+
+import { closeSwitchNetworkModal } from '@actions/modals.actions'
+import { requestSwitchNetwork } from '@services/network.service'
+
+import styles from './styles.module.scss'
 
 const SwitchNetworkModal = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const handleClose = () => {
-    dispatch(closeSwitchNetworkModal());
-  };
+    dispatch(closeSwitchNetworkModal())
+  }
 
   const handleClick = async () => {
-    const res = await requestSwitchNetwork();
-    dispatch(closeSwitchNetworkModal());
-  };
+    const res = await requestSwitchNetwork()
+    dispatch(closeSwitchNetworkModal())
+  }
 
   return (
     <>
@@ -53,4 +56,4 @@ const SwitchNetworkModal = () => {
   )
 }
 
-export default SwitchNetworkModal;
+export default SwitchNetworkModal

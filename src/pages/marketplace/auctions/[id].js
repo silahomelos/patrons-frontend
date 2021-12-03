@@ -1,41 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import styles from './index.module.scss';
-import Container from '@components/container';
-import { getCollectionGroupById, getDigitalaxMarketplaceV2Offers } from '@services/api/apiService';
-import { useSelector } from 'react-redux';
-import { getChainId } from '@selectors/global.selectors';
-import HeroSection from '@components/hero-section';
-import ProductInfoCard from '@components/product-info-card';
-import { filterProducts } from '@utils/helpers';
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useRouter } from 'next/router'
+
+import Container from '@components/container'
+import HeroSection from '@components/hero-section'
+import ProductInfoCard from '@components/product-info-card'
+
+import { getCollectionGroupById } from '@services/api/apiService'
+
+import { getChainId } from '@selectors/global.selectors'
+
+import { filterProducts } from '@utils/helpers'
+
+import styles from './index.module.scss'
 
 const Auctions = () => {
-  const route = useRouter();
-  const chainId = useSelector(getChainId);
-  const [auctions, setAuctions] = useState([]);
-  const [filter, setFilter] = useState('');
-  const [sortBy, setSortBy] = useState(null);
-  const { id } = route.query;
+  const route = useRouter()
+  const chainId = useSelector(getChainId)
+  const [auctions, setAuctions] = useState([])
+  const [filter, setFilter] = useState('')
+  const [sortBy, setSortBy] = useState(null)
+  const { id } = route.query
 
   useEffect(() => {
     const fetchCollectionGroup = async () => {
-      const { digitalaxCollectionGroup } = await getCollectionGroupById(chainId, id);
-      let aucs = [];
+      const { digitalaxCollectionGroup } = await getCollectionGroupById(chainId, id)
+      let aucs = []
       digitalaxCollectionGroup.auctions.forEach((auction) => {
         aucs.push({
           ...auction,
           auction: true,
-          rarity: 'Exclusive',
-        });
-      });
+          rarity: 'Exclusive'
+        })
+      })
 
-      setAuctions(aucs);
-    };
+      setAuctions(aucs)
+    }
 
-    fetchCollectionGroup();
-  }, []);
+    fetchCollectionGroup()
+  }, [])
 
-  const filteredProducts = filterProducts(auctions, filter, sortBy) || [];
+  const filteredProducts = filterProducts(auctions, filter, sortBy) || []
 
   return (
     <div className={styles.wrapper}>
@@ -51,7 +56,7 @@ const Auctions = () => {
       />
 
       {filteredProducts.map((auction, index) => {
-        if (index % 2 === 1) return <> </>;
+        if (index % 2 === 1) return <> </>
         return (
           <section className={styles.productsSection} key={auction.id}>
             <video autoPlay muted loop className={styles.backVideo}>
@@ -78,10 +83,10 @@ const Auctions = () => {
               </div>
             </Container>
           </section>
-        );
+        )
       })}
     </div>
-  );
-};
+  )
+}
 
-export default Auctions;
+export default Auctions

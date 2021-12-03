@@ -14,6 +14,7 @@ const DEFAULT_FIELDS = Map({
   monaPerEth: 0,
   monaMaticBalance: 0,
   monaEthBalance: 0,
+  gdnMaticBalance: 0,
   isLoading: false,
   dtxEthIds: List([]),
   dtxMaticIds: List([]),

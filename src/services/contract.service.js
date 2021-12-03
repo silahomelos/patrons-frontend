@@ -1,13 +1,13 @@
-import ERC721ABIv0 from '@constants/erc721_abi_V0.json';
-import ERC721ABIv1 from '@constants/erc721_abi_V1.json';
-import ERC721ABIv2 from '@constants/erc721_abi_V2.json';
-import childTunnelAbi from '@constants/child_tunnel_abi.json';
-import rootTunnelV2Abi from '@constants/root_tunnel_abi_v2.json';
-import { providers as EthersProviders } from 'ethers';
-import { create as createUniswapPair } from '@helpers/uniswap.helpers';
-import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json';
-import Web3 from 'web3';
-import config from '@utils/config';
+import ERC721ABIv0 from '@constants/erc721_abi_V0.json'
+import ERC721ABIv1 from '@constants/erc721_abi_V1.json'
+import ERC721ABIv2 from '@constants/erc721_abi_V2.json'
+import childTunnelAbi from '@constants/child_tunnel_abi.json'
+import rootTunnelV2Abi from '@constants/root_tunnel_abi_v2.json'
+import { providers as EthersProviders } from 'ethers'
+import { create as createUniswapPair } from '@helpers/uniswap.helpers'
+import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json'
+import Web3 from 'web3'
+import config from '@utils/config'
 import {
   getDigiMaterialV2AddressByChainId,
   getDigiRootTunnelAddressByChainId,
@@ -16,46 +16,13 @@ import {
   getUSDTAddressByChainId,
   getUpgraderAddressByChainId,
   getChildTunnelAddressV2ByChainId,
-  getRootTunnelAddressV2ByChainId,
-  getMarketplaceContractAddressByChainId,
-} from './network.service';
+  getRootTunnelAddressV2ByChainId
+} from './network.service'
 
-import DigiMaterialV2ABI from '../constants/digi_material_v2_abi.json';
-import DigiRootTunnelABI from '../constants/digi_root_tunnel_abi.json';
-import ERC20ABI from '../constants/erc20_abi.json';
-import UpgraderABI from '../constants/upgrader_abi.json';
-import MarketplaceV2ABI from '../constants/marketplace_v2_abi.json';
-import { toast } from 'react-toastify';
-
-export const getMarketplaceContract = async (chainId) => {
-  const address = getMarketplaceContractAddressByChainId(chainId);
-  const jsonInterface = [
-    {
-      inputs: [
-        { internalType: 'uint256', name: '_garmentCollectionId', type: 'uint256' },
-        { internalType: 'bool', name: '_payWithMona', type: 'bool' },
-      ],
-      name: 'buyOffer',
-      outputs: [],
-      stateMutability: 'payable',
-      type: 'function',
-    },
-    {
-      inputs: [],
-      name: 'lastOracleQuote',
-      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-      stateMutability: 'view',
-      type: 'function',
-    },
-  ];
-
-  const contract = await new window.web3.eth.Contract(
-    chainId === 1 || chainId === 4 ? jsonInterface : MarketplaceV2ABI,
-    address,
-  );
-
-  return contract;
-};
+import DigiMaterialV2ABI from '../constants/digi_material_v2_abi.json'
+import DigiRootTunnelABI from '../constants/digi_root_tunnel_abi.json'
+import ERC20ABI from '../constants/erc20_abi.json'
+import UpgraderABI from '../constants/upgrader_abi.json'
 
 export const getMonaTokenContract = async (ContractAddress) => {
   const jsonInterface = [
@@ -275,80 +242,80 @@ export const getMonaTokenContract = async (ContractAddress) => {
       stateMutability: 'nonpayable',
       type: 'function',
     },
-  ];
-  if (!window.web3?.eth) return null;
-  const contract = await new window.web3.eth.Contract(jsonInterface, ContractAddress);
+  ]
+  if (!window.web3?.eth) return null
+  const contract = await new window.web3.eth.Contract(jsonInterface, ContractAddress)
 
-  return contract;
-};
+  return contract
+}
 
 export const getDTXContract = (isMainnet) => {
-  const address = getDTXAddressByChainId(isMainnet ? '0x1' : '0x5');
-  if (!window.web3?.eth) return null;
-  const contract = new window.web3.eth.Contract(ERC721ABIv0, address);
+  const address = getDTXAddressByChainId(isMainnet ? '0x1' : '0x5')
+  if (!window.web3?.eth) return null
+  const contract = new window.web3.eth.Contract(ERC721ABIv0, address)
 
-  return contract;
-};
+  return contract
+}
 
 export const getDTXMaticContract = (isMainnet) => {
-  // const web3 = new Web3(isMainnet ? config.WEB3_URLS.MATIC : config.WEB3_URLS.MUMBAI);
-  const address = getDTXAddressByChainId(isMainnet ? '0x89' : '0x13881');
-  // const web3 = new Web3(config.WEB3_URLS.MUMBAI);
-  // const contract = new web3.eth.Contract(ERC721ABIv2, address);
-  if (!window.web3?.eth) return null;
-  const contract = new window.web3.eth.Contract(ERC721ABIv2, address);
+  // const web3 = new Web3(isMainnet ? config.WEB3_URLS.MATIC : config.WEB3_URLS.MUMBAI)
+  const address = getDTXAddressByChainId(isMainnet ? '0x89' : '0x13881')
+  // const web3 = new Web3(config.WEB3_URLS.MUMBAI)
+  // const contract = new web3.eth.Contract(ERC721ABIv2, address)
+  if (!window.web3?.eth) return null
+  const contract = new window.web3.eth.Contract(ERC721ABIv2, address)
 
-  return contract;
-};
+  return contract
+}
 
 export const getDigiMaterialV2Contract = (isMainnet) => {
   const provider = new Web3.providers.HttpProvider(
     isMainnet ? config.WEB3_URLS.MATIC : config.WEB3_URLS.MUMBAI,
-  );
-  const web3 = new Web3(provider);
-  const address = getDigiMaterialV2AddressByChainId(isMainnet ? '0x89' : '0x13881');
-  const contract = new web3.eth.Contract(DigiMaterialV2ABI, address);
+  )
+  const web3 = new Web3(provider)
+  const address = getDigiMaterialV2AddressByChainId(isMainnet ? '0x89' : '0x13881')
+  const contract = new web3.eth.Contract(DigiMaterialV2ABI, address)
 
-  return contract;
-};
+  return contract
+}
 
 export const getDitiRootTunnelContract = (isMainnet) => {
-  const address = getDigiRootTunnelAddressByChainId(isMainnet ? '0x1' : '0x5');
+  const address = getDigiRootTunnelAddressByChainId(isMainnet ? '0x1' : '0x5')
   if (window.web3) {
-    const contract = new window.web3.eth.Contract(DigiRootTunnelABI, address);
-    return contract;
+    const contract = new window.web3.eth.Contract(DigiRootTunnelABI, address)
+    return contract
   }
-};
+}
 
 export const getDTXMaticV1Contract = async (isMainnet) => {
   // const provider = new Web3.providers.HttpProvider(
   //   isMainnet ? config.WEB3_URLS.MATIC : config.WEB3_URLS.MUMBAI,
-  // );
-  // const web3 = new Web3(provider);
-  const address = getDTXV1AddressByChainId(isMainnet ? '0x89' : '0x13881');
-  const contract = new window.web3.eth.Contract(ERC721ABIv1, address);
+  // )
+  // const web3 = new Web3(provider)
+  const address = getDTXV1AddressByChainId(isMainnet ? '0x89' : '0x13881')
+  const contract = new window.web3.eth.Contract(ERC721ABIv1, address)
 
-  return contract;
-};
+  return contract
+}
 
 export const getUpgraderMaticContract = async (isMainnet) => {
   const provider = new Web3.providers.HttpProvider(
     isMainnet ? config.WEB3_URLS.MATIC : config.WEB3_URLS.MUMBAI,
-  );
-  const web3 = new Web3(window.ethereum);
-  const address = getUpgraderAddressByChainId(isMainnet ? '0x89' : '0x13881');
-  const contract = new web3.eth.Contract(UpgraderABI, address);
+  )
+  const web3 = new Web3(window.ethereum)
+  const address = getUpgraderAddressByChainId(isMainnet ? '0x89' : '0x13881')
+  const contract = new web3.eth.Contract(UpgraderABI, address)
 
-  return contract;
-};
+  return contract
+}
 
 export const getUSDTContract = async (chainId) => {
-  const web3 = new Web3(window.ethereum);
-  const address = await getUSDTAddressByChainId(chainId);
-  const contract = await new web3.eth.Contract(ERC20ABI, address);
+  const web3 = new Web3(window.ethereum)
+  const address = await getUSDTAddressByChainId(chainId)
+  const contract = await new web3.eth.Contract(ERC20ABI, address)
 
-  return contract;
-};
+  return contract
+}
 
 export const getContract = async (auctionContractAddress) => {
   const jsonInterface = [
@@ -795,12 +762,12 @@ export const getContract = async (auctionContractAddress) => {
       name: 'withdrawBid',
       inputs: [{ type: 'uint256', name: '_garmentTokenId', internalType: 'uint256' }],
     },
-  ];
+  ]
 
-  const contract = await new window.web3.eth.Contract(jsonInterface, auctionContractAddress);
+  const contract = await new window.web3.eth.Contract(jsonInterface, auctionContractAddress)
 
-  return contract;
-};
+  return contract
+}
 
 export const getRewardContract = async (contractAddress) => {
   const jsonInterface = [
@@ -821,37 +788,37 @@ export const getRewardContract = async (contractAddress) => {
       stateMutability: 'view',
       type: 'function',
     },
-  ];
+  ]
 
-  const contract = await new window.web3.eth.Contract(jsonInterface, contractAddress);
+  const contract = await new window.web3.eth.Contract(jsonInterface, contractAddress)
 
-  return contract;
-};
+  return contract
+}
 
 export const getQuickSwapRouterContract = async () => {
-  // const web3 = new Web3(isMetamaskInstalled() ? window.ethereum : config.DEFAULT_WEB3_URL);
+  // const web3 = new Web3(isMetamaskInstalled() ? window.ethereum : config.DEFAULT_WEB3_URL)
 
   const contract = await new window.web3.eth.Contract(
     IUniswapV2Router02ABI,
     config.QUICKSWAP_ROUTER,
-  );
+  )
 
-  return contract;
-};
+  return contract
+}
 
 export const getTokenPrice = async (contractAddress) => {
-  if (!contractAddress) return 0;
+  if (!contractAddress) return 0
 
   const provider = new EthersProviders.InfuraProvider(
     'homestead',
     '6e9690131f584ee0a8b445ebb4740f8b',
-  );
+  )
 
-  const monaToken = createUniswapPair(contractAddress, provider);
-  const price = await monaToken.getPrice();
+  const monaToken = createUniswapPair(contractAddress, provider)
+  const price = await monaToken.getPrice()
 
-  return price;
-};
+  return price
+}
 
 export const getTokenPriceMatic = async () =>
   new Promise(async (resolve) => {
@@ -864,30 +831,30 @@ export const getTokenPriceMatic = async () =>
           stateMutability: 'view',
           type: 'function',
         },
-      ];
-      const web3 = new Web3(new Web3.providers.HttpProvider('https://rpc-mainnet.matic.network/'));
+      ]
+      const web3 = new Web3(new Web3.providers.HttpProvider('https://rpc-mainnet.matic.network/'))
       const contract = await new web3.eth.Contract(
         jsonInterface,
         config.DIGITAL_MARKETPLACE_ADDRESSES.matic,
-      );
+      )
 
-      const value = await contract.methods.lastOracleQuote().call();
-      resolve(value);
+      const value = await contract.methods.lastOracleQuote().call()
+      resolve(value)
     } catch {
-      resolve(1);
+      resolve(1)
     }
-  });
+  })
 
 export const getChildTunnelContract = (chainId) => {
-  const address = getChildTunnelAddressV2ByChainId(chainId);
-  if (!window.web3?.eth) return null;
-  const contract = new window.web3.eth.Contract(childTunnelAbi, address);
-  return contract;
-};
+  const address = getChildTunnelAddressV2ByChainId(chainId)
+  if (!window.web3?.eth) return null
+  const contract = new window.web3.eth.Contract(childTunnelAbi, address)
+  return contract
+}
 
 export const getRootTunnelV2Contract = (chainId) => {
-  const address = getRootTunnelAddressV2ByChainId(chainId);
-  if (!window.web3?.eth) return null;
-  const contract = new window.web3.eth.Contract(rootTunnelV2Abi, address);
-  return contract;
-};
+  const address = getRootTunnelAddressV2ByChainId(chainId)
+  if (!window.web3?.eth) return null
+  const contract = new window.web3.eth.Contract(rootTunnelV2Abi, address)
+  return contract
+}

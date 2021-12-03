@@ -1,6 +1,7 @@
 import Web3 from 'web3'
-import BaseActions from '@actions/base-actions'
 import { toast } from 'react-toastify'
+
+import BaseActions from '@actions/base-actions'
 import userActions from '@actions/user.actions'
 import garmentActions from '@actions/garment.actions'
 import garmentPageActions from '@actions/garment.page.actions'
@@ -13,7 +14,6 @@ import {
   getAPIUrlByChainId,
   getWSUrlByChainId,
 } from '@services/network.service'
-import { getTokenPriceMatic, getMarketplaceContract } from '@services/contract.service'
 
 import api from '@services/api/api.service'
 import ws from '@services/api/ws.service'
@@ -150,9 +150,13 @@ class GlobalActions extends BaseActions {
   }
 
   setMonaEthBalance(value) {
-    return (dispatch) => {
+    return dispatch => 
       dispatch(this.setValue('monaEthBalance', value))
-    }
+  }
+
+  setGDNMaticBalance(value) {
+    return dispatch => 
+      dispatch(this.setValue('gdnMaticBalance', value))
   }
 
   setIsLoading(value) {

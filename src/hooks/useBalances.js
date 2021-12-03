@@ -1,24 +1,26 @@
-import { getAccount } from '@selectors/user.selectors';
-import { getUSDTContract } from '@services/contract.service';
-import { useCallback, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { utils as ethersUtils } from 'ethers';
-import usePollar from './usePollar';
-import { getChainId } from '@selectors/global.selectors';
+import { useCallback, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { utils as ethersUtils } from 'ethers'
+
+import { getAccount } from '@selectors/user.selectors'
+import { getChainId } from '@selectors/global.selectors'
+
+import { getUSDTContract } from '@services/contract.service'
+import usePollar from './usePollar'
 
 export const useUSDTBalance = () => {
-  const [balance, setBalance] = useState('0.0');
-  const account = useSelector(getAccount);
-  const chainId = useSelector(getChainId);
+  const [balance, setBalance] = useState('0.0')
+  const account = useSelector(getAccount)
+  const chainId = useSelector(getChainId)
 
   const fetchUSDTBalance = useCallback(async () => {
-    const usdtContract = await getUSDTContract(chainId);
-    const usdtBalance = await usdtContract.methods.balanceOf(account).call({ from: account });
+    const usdtContract = await getUSDTContract(chainId)
+    const usdtBalance = await usdtContract.methods.balanceOf(account).call({ from: account })
 
-    setBalance(ethersUtils.formatUnits(usdtBalance, 6));
-  }, [account, chainId]);
+    setBalance(ethersUtils.formatUnits(usdtBalance, 6))
+  }, [account, chainId])
 
-  usePollar(fetchUSDTBalance);
+  usePollar(fetchUSDTBalance)
 
-  return balance;
-};
+  return balance
+}

@@ -2,10 +2,10 @@ import { AVAILABLE_NETWORKS } from '@constants/networks.constants'
 import config from '@utils/config'
 
 export const getEnabledNetworks = () =>
-  AVAILABLE_NETWORKS.filter((network) => config.NETWORKS.includes(network.alias))
+  AVAILABLE_NETWORKS.filter(network => config.NETWORKS.includes(network.alias))
 
 export const getEnabledNetworkByChainId = (chainId) =>
-  getEnabledNetworks().find((network) => Number(network.hex) === Number(chainId))
+  getEnabledNetworks().find(network => Number(network.hex) === Number(chainId))
 export const requestSwitchNetwork = () => {
   window.ethereum
     .request({
@@ -15,9 +15,9 @@ export const requestSwitchNetwork = () => {
           chainId: '0x89',
           chainName: 'Matic Main Network',
           rpcUrls: ['https://matic-mainnet.chainstacklabs.com'],
-          blockExplorerUrls: ['https://explorer-mainnet.maticvigil.com'],
-        },
-      ],
+          blockExplorerUrls: ['https://explorer-mainnet.maticvigil.com']
+        }
+      ]
     })
     .then((res) => {
       console.log(res)
@@ -108,12 +108,6 @@ export const getUpgraderAddressByChainId = (chainId) => {
   const network = getEnabledNetworkByChainId(chainId)
 
   return config.UPGRADER_ADDRESSES[network?.alias]
-}
-
-export const getMarketplaceContractAddressByChainId = (chainId) => {
-  const network = getEnabledNetworkByChainId(chainId)
-
-  return config.DIGITAL_MARKETPLACE_ADDRESSES[network?.alias]
 }
 
 export const getRootTunnelAddressV2ByChainId = (chainId) => {
