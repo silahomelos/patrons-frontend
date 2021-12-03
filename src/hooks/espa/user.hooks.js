@@ -1,11 +1,11 @@
 import { useEffect, useState, useRef } from 'react'
-import api from '@services/api/espa/api.service'
+import digitalaxApi from '@services/api/digitalaxApi.service'
 
 export function useSignMessage(account) {
   const [signMsg, setSignMsg] = useState(null)
 
   useEffect(() => {
-    api.fetchAuthToken(account).then((msg) => setSignMsg(msg))
+    digitalaxApi.fetchAuthToken(account).then((msg) => setSignMsg(msg))
   }, [account])
 
   return signMsg
@@ -23,7 +23,7 @@ export function useUserNameAvailable(username) {
 
       timer.current = setTimeout(() => {
         if (username.length <= 10) {
-          api.checkUserName(username)
+          digitalaxApi.checkUserName(username)
             .then(isAvailable => setUserNameAvailable(isAvailable))
         }
       }, 1000)
@@ -37,7 +37,7 @@ export function useNFTs(account) {
   const [nfts, setNfts] = useState(null)
 
   useEffect(() => {
-    api
+    digitalaxApi
       .fetchNfts(account)
       .then((data) => {
         let items = []
@@ -45,12 +45,12 @@ export function useNFTs(account) {
           items = data.digitalaxCollectors[0].parentsOwned.map((item) => {
             return {
               ...item,
-              isEth: true,
+              isEth: true
             }
           })
         }
         for (let item of data.digitalaxGarments) {
-          if (!items.find((el) => el.id === item.id)) {
+          if (!items.find(el => el.id === item.id)) {
             items = [...items, { ...item, isStaked: true }]
           }
         }
@@ -59,7 +59,7 @@ export function useNFTs(account) {
         }
         setNfts(items)
       })
-      .catch((e) => setNfts([]))
+      .catch(e => setNfts([]))
   }, [account])
 
   return nfts
@@ -69,7 +69,7 @@ export function useProfile() {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    api.getProfile().then((data) => setUser(data))
+    digitalaxApi.getProfile().then(data => setUser(data))
   }, [])
 
   return user
@@ -79,7 +79,7 @@ export function useMyIP() {
   const [ip, setIp] = useState(null)
 
   useEffect(() => {
-    api.getMyIP().then((data) => setIp(data))
+    digitalaxApi.getMyIP().then(data => setIp(data))
   }, [])
 
   return ip

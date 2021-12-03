@@ -1,17 +1,20 @@
-import React from 'react';
-import { createPortal } from 'react-dom';
-import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
-import Button from '@components/buttons/button';
-import Modal from '@components/modal';
-import { closeBespokeModal } from '@actions/modals.actions';
-import styles from './styles.module.scss';
+import React from 'react'
+import { createPortal } from 'react-dom'
+import { useDispatch } from 'react-redux'
+import PropTypes from 'prop-types'
+
+import Button from '@components/buttons/button'
+import Modal from '@components/modal'
+
+import { closeBespokeModal } from '@actions/modals.actions'
+
+import styles from './styles.module.scss'
 
 const ModalBespoke = ({ className }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const handleClose = () => {
-    dispatch(closeBespokeModal());
-  };
+    dispatch(closeBespokeModal())
+  }
 
   return (
     <>
@@ -34,15 +37,15 @@ const ModalBespoke = ({ className }) => {
         document.body
       )}
     </>
-  );
-};
+  )
+}
 
 ModalBespoke.propTypes = {
-  className: PropTypes.string,
-};
+  className: PropTypes.string
+}
 
 ModalBespoke.defaultProps = {
-  className: styles.espamodal,
-};
+  className: styles.espamodal
+}
 
-export default ModalBespoke;
+export default ModalBespoke

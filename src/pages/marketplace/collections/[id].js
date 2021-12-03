@@ -7,7 +7,7 @@ import Container from '@components/container'
 import HeroSection from '@components/hero-section'
 import ProductInfoCard from '@components/product-info-card'
 import { getCollectionGroupById, getDigitalaxMarketplaceV2Offers } from '@services/api/apiService'
-import digitalaxApi from '@services/api/espa/api.service'
+import digitalaxApi from '@services/api/digitalaxApi.service'
 import { getChainId } from '@selectors/global.selectors'
 import { filterProducts } from '@utils/helpers'
 

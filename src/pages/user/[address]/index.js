@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 
 import { getChainId, getAllUsers } from '@selectors/global.selectors'
-import digitalaxApi from '@services/api/espa/api.service'
+import digitalaxApi from '@services/api/digitalaxApi.service'
 import { getAccount } from '@selectors/user.selectors'
 
 import { getUser } from '@helpers/user.helpers'

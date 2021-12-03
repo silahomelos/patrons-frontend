@@ -1,25 +1,29 @@
 import { toast } from 'react-toastify'
 import Router from 'next/router'
 
+import userReducer from '@reducers/user.reducer'
+
 import {
   closeConnectMetamaskModal,
   closeSignupModal,
   openNotInstalledMetamask,
-  openSignupModal,
+  openSignupModal
 } from '@actions/modals.actions'
+
 import globalActions from '@actions/global.actions'
+
 import {
   STORAGE_IS_LOGGED_IN,
   STORAGE_USER,
   STORAGE_TOKEN,
-  STORAGE_WALLET,
+  STORAGE_WALLET
 } from '@constants/storage.constants'
+
 import { WALLET_METAMASK, WALLET_ARKANE } from '@constants/global.constants'
 
-import userReducer from '@reducers/user.reducer'
 import { handleSignMessage, isMetamaskInstalled } from '@services/metamask.service'
 import { setWeb3Provider } from '@services/web3-provider.service'
-import api from '@services/api/espa/api.service'
+import digitalaxApi from '@services/api/digitalaxApi.service'
 
 import { getUser, getAuthToken } from '@helpers/user.helpers'
 
@@ -35,8 +39,8 @@ class UserActions extends BaseActions {
         const authResult = await Arkane.checkAuthenticated()
         const {
           auth: {
-            idTokenParsed: { email },
-          },
+            idTokenParsed: { email }
+          }
         } = authResult
         const wallets = await window.web3.eth.getAccounts()
         localStorage.setItem(STORAGE_IS_LOGGED_IN, 1)
@@ -67,7 +71,7 @@ class UserActions extends BaseActions {
 
         try {
           const [account] = await ethereum.request({
-            method: 'eth_requestAccounts',
+            method: 'eth_requestAccounts'
           })
 
           if (!account) {
@@ -93,7 +97,7 @@ class UserActions extends BaseActions {
     return async (dispatch) => {
       dispatch(this.setValue('isLoading', true))
       if (!signMsg) {
-        signMsg = await api.handleSignUp(account, userName, email, ip)
+        signMsg = await digitalaxApi.handleSignUp(account, userName, email, ip)
         if (!signMsg) {
           toast.error('Sign Up is failed')
           dispatch(this.setValue('isLoading', false))
@@ -113,7 +117,7 @@ class UserActions extends BaseActions {
   tryAuthentication(account, signMsg, signature) {
     return async (dispatch) => {
       try {
-        const data = await api.handleAuthentication(account, signMsg, signature)
+        const data = await digitalaxApi.handleAuthentication(account, signMsg, signature)
         if (data) {
           const { returnData, secret } = data
           dispatch(this.setValue('user', returnData))
@@ -153,7 +157,7 @@ class UserActions extends BaseActions {
   updateProfile(user) {
     return async (dispatch) => {
       try {
-        const data = await api.updateProfile(user)
+        const data = await digitalaxApi.updateProfile(user)
         dispatch(globalActions.setIsLoading(false))
         if (data) {
           dispatch(this.setValue('user', data))
@@ -181,9 +185,9 @@ class UserActions extends BaseActions {
     return async (dispatch) => {
       try {
         dispatch(this.setValue('isLoading', true))
-        let url = await api.getPresignedUrl()
+        let url = await digitalaxApi.getPresignedUrl()
         if (url) {
-          const result = await api.uploadImageToS3(url, file)
+          const result = await digitalaxApi.uploadImageToS3(url, file)
           if (result) {
             const user = getUser()
             const queryIndex = url.indexOf('?')

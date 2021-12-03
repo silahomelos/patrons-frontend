@@ -1,65 +1,67 @@
-import React, { useState } from 'react';
-import { createPortal } from 'react-dom';
-import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
-import Button from '@components/buttons/button';
-import Modal from '@components/modal';
-import Loader from '@components/loader';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { createPortal } from 'react-dom'
+import { toast } from 'react-toastify'
+import PropTypes from 'prop-types'
 
-import { closeSignupModal } from '@actions/modals.actions';
-import userActions from '@actions/user.actions';
+import Button from '@components/buttons/button'
+import Modal from '@components/modal'
+import Loader from '@components/loader'
 
-import { getAccount, getIsLoading } from '@selectors/user.selectors';
-import { getModalParams } from '@selectors/modal.selectors';
+import { closeSignupModal } from '@actions/modals.actions'
+import userActions from '@actions/user.actions'
 
-import styles from './styles.module.scss';
-import { useSignMessage, useUserNameAvailable, useMyIP } from '@hooks/espa/user.hooks';
+import { getAccount, getIsLoading } from '@selectors/user.selectors'
+import { getModalParams } from '@selectors/modal.selectors'
+
+import styles from './styles.module.scss'
+
+import { useSignMessage, useUserNameAvailable, useMyIP } from '@hooks/espa/user.hooks'
 
 const ModalSignUp = ({ className, title }) => {
-  const dispatch = useDispatch();
-  const params = useSelector(getModalParams);
+  const dispatch = useDispatch()
+  const params = useSelector(getModalParams)
 
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState(params?.email);
+  const [userName, setUserName] = useState('')
+  const [email, setEmail] = useState(params?.email)
 
-  const account = useSelector(getAccount);
-  const isLoading = useSelector(getIsLoading);
-  const signMsg = useSignMessage(account);
-  const isUserNameAvailable = useUserNameAvailable(userName);
-  let myIP = useMyIP();
+  const account = useSelector(getAccount)
+  const isLoading = useSelector(getIsLoading)
+  const signMsg = useSignMessage(account)
+  const isUserNameAvailable = useUserNameAvailable(userName)
+  let myIP = useMyIP()
 
   const handleClose = () => {
-    dispatch(closeSignupModal());
-  };
+    dispatch(closeSignupModal())
+  }
 
   const validateUserName = (username) => {
-    const regEx = /^[A-Za-z0-9]*$/;
-    return regEx.test(String(username));
-  };
+    const regEx = /^[A-Za-z0-9]*$/
+    return regEx.test(String(username))
+  }
 
   const validateEmail = (email) => {
     const regEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return regEx.test(String(email).toLowerCase());
-  };
+    return regEx.test(String(email).toLowerCase())
+  }
 
   const handleClick = () => {
     if (!signMsg) {
       if (!validateUserName(userName)) {
-        toast('User ID must contains letters and numbers only!');
-        return;
+        toast('User ID must contains letters and numbers only!')
+        return
       }
       if (!validateEmail(email)) {
-        toast('You have entered an invalid Email address!');
-        return;
+        toast('You have entered an invalid Email address!')
+        return
       }
     }
-    dispatch(userActions.tryToSignup(account, userName, email, signMsg, myIP));
-  };
+    dispatch(userActions.tryToSignup(account, userName, email, signMsg, myIP))
+  }
 
   const userNameChanged = (username) => {
-    setUserName(username);
-  };
+    setUserName(username)
+  }
 
   return (
     <>
@@ -120,17 +122,17 @@ const ModalSignUp = ({ className, title }) => {
         document.body
       )}
     </>
-  );
-};
+  )
+}
 
 ModalSignUp.propTypes = {
   className: PropTypes.string,
   title: PropTypes.string,
-};
+}
 
 ModalSignUp.defaultProps = {
   className: '',
   title: 'CREATE AN ACCOUNT',
-};
+}
 
-export default ModalSignUp;
+export default ModalSignUp

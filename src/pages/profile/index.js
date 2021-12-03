@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import digitalaxApi from '@services/api/espa/api.service'
+import digitalaxApi from '@services/api/digitalaxApi.service'
 
 import { getUser } from '@helpers/user.helpers'
 

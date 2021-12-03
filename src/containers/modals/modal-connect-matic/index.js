@@ -1,17 +1,20 @@
-import React from 'react';
-import { createPortal } from 'react-dom';
-import { useDispatch } from 'react-redux';
-import PropTypes from 'prop-types';
-import Button from '@components/buttons/button';
-import Modal from '@components/modal';
-import { closeConnectMaticModal } from '@actions/modals.actions';
-import styles from './styles.module.scss';
+import React from 'react'
+import { createPortal } from 'react-dom'
+import { useDispatch } from 'react-redux'
+import PropTypes from 'prop-types'
+
+import Button from '@components/buttons/button'
+import Modal from '@components/modal'
+
+import { closeConnectMaticModal } from '@actions/modals.actions'
+
+import styles from './styles.module.scss'
 
 const ModalConnectMatic = ({ className, title, buttonText }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const handleClose = () => {
-    dispatch(closeConnectMaticModal());
-  };
+    dispatch(closeConnectMaticModal())
+  }
 
   return (
     <>
@@ -32,20 +35,20 @@ const ModalConnectMatic = ({ className, title, buttonText }) => {
         document.body
       )}
     </>
-  );
-};
+  )
+}
 
 ModalConnectMatic.propTypes = {
   className: PropTypes.string,
   title: PropTypes.string,
   buttonText1: PropTypes.string,
-  buttonText2: PropTypes.string,
-};
+  buttonText2: PropTypes.string
+}
 
 ModalConnectMatic.defaultProps = {
   className: '',
   title: 'CONNECT TO MATIC!',
-  buttonText: 'ACCEPT THE QUEST',
-};
+  buttonText: 'ACCEPT THE QUEST'
+}
 
-export default ModalConnectMatic;
+export default ModalConnectMatic

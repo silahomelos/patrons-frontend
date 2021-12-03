@@ -21,7 +21,7 @@ import {
   getGuildWhitelistedNFTStakersByGarments,
 } from '@services/api/apiService'
 
-import digitalaxApi from '@services/api/espa/api.service'
+import digitalaxApi from '@services/api/digitalaxApi.service'
 
 import { getChainId, getExchangeRateETH, getMonaPerEth } from '@selectors/global.selectors'
 import { getAccount } from '@selectors/user.selectors'

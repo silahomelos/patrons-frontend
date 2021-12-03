@@ -2,7 +2,7 @@ import { STAGE_ESPA_BACKEND_URL } from '@constants/global.constants'
 import { get, post, put } from '@utils/api'
 import axios from 'axios'
 
-class EspaApiService {
+class DigitalaxApiService {
   constructor() {
     this.url = STAGE_ESPA_BACKEND_URL
   }
@@ -226,4 +226,4 @@ class EspaApiService {
   }
 }
 
-export default new EspaApiService()
+export default new DigitalaxApiService()
