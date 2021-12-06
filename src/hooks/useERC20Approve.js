@@ -88,7 +88,40 @@ export default function useERC20Approve(amount) {
   }
 
   const purchaseOffer = async () => {
+    // get Patron Marketplace Contract
+    // const contract = await getDripMarketplaceContract()
     
+    try {
+      console.log('this is before calling batchBuyoffer')
+      console.log({ collectionIds })
+      const listener = contract.methods
+        .batchBuyOffer(
+          collectionIds,
+          tokens[crypto].address,
+          orderNumber,
+          shippingPrice
+        )
+        .send({
+          from: account,
+          value: 0,
+        })
+  
+      const promise = new Promise((resolve, reject) => {
+        listener.on('error', (error) => reject(error))
+        listener.on('confirmation', (transactionHash) => resolve(transactionHash))
+      })
+  
+      return {
+        promise,
+        unsubscribe: () => {
+          listener.off('error')
+          listener.off('confirmation')
+        },
+      }
+    } catch (err) {
+      console.log(err)
+      throw err
+    }    
   }
 
   console.log('selectedCrypto: ', selectedCrypto)
