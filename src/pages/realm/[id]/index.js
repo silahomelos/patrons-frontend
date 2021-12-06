@@ -229,6 +229,7 @@ const RealmPage = () => {
             return (
               <PatronTierCard
                 key={garment.id}
+                collectionId={collection.id}
                 realmName={currentDeisngerInfo.designerId}
                 tierName={getTierName(garment.name, currentDeisngerInfo.designerId)}
                 price={garment.primarySalePrice}

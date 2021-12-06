@@ -1,7 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import cn from 'classnames';
-import styles from './styles.module.scss';
+import React from 'react'
+import PropTypes from 'prop-types'
+import cn from 'classnames'
+import { Cross } from '@components/icons'
+import styles from './styles.module.scss'
 
 const Modal = ({
   className, title, withCloseIcon, text, onClose, children, titleStyle,
@@ -16,7 +17,7 @@ const Modal = ({
               onClick={onClose}
               className={styles.closeIcon}
             >
-              x
+              <Cross className={styles.crossIcon} />
             </button>
           )}
         </div>
@@ -27,7 +28,7 @@ const Modal = ({
       {children}
     </div>
   </div>
-);
+)
 
 Modal.propTypes = {
   className: PropTypes.any,
@@ -37,7 +38,7 @@ Modal.propTypes = {
   onClose: PropTypes.func,
   children: PropTypes.any,
   titleStyle: PropTypes.any,
-};
+}
 
 Modal.defaultProps = {
   className: '',
@@ -47,6 +48,6 @@ Modal.defaultProps = {
   onClose: () => {},
   children: null,
   titleStyle: {},
-};
+}
 
-export default Modal;
+export default Modal

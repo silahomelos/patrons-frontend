@@ -63,7 +63,7 @@ ModalConnectWallet.propTypes = {
 
 ModalConnectWallet.defaultProps = {
   className: '',
-  title: 'Connect Wallet',
+  title: 'Connect Your Wallet',
 };
 
 export default ModalConnectWallet;

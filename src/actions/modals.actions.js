@@ -83,3 +83,7 @@ export const closeBespokeModal = () => (dispatch) => dispatch(closeModal('isShow
 
 export const openCurrentWearersModal = (params) => (dispatch) => dispatch(openModal('isShowModalCurrentWearers', 'hideScroll', params))
 export const closeCurrentWearersModal = () => (dispatch) => dispatch(closeModal('isShowModalCurrentWearers', 'addScroll'))
+
+export const openCryptoOptionsModal = (params) => (dispatch) => dispatch(openModal('isShowModalCryptoOptions', 'hideScroll', params))
+export const closeCryptoOptionsModal = () => (dispatch) => dispatch(closeModal('isShowModalCryptoOptions', 'addScroll'))
+

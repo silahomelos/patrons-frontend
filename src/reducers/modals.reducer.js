@@ -19,6 +19,7 @@ const DEFAULT_FIELDS = Map({
   isPurchaseSuccess: false,
   isShowModalBespoke: false,
   isShowModalCurrentWearers: false,
+  isShowModalCryptoOptions: false,
   params: null
 })
 

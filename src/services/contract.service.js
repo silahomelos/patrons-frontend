@@ -14,6 +14,7 @@ import {
   getDTXAddressByChainId,
   getDTXV1AddressByChainId,
   getUSDTAddressByChainId,
+  getWEthAddressByChainId,
   getUpgraderAddressByChainId,
   getChildTunnelAddressV2ByChainId,
   getRootTunnelAddressV2ByChainId
@@ -312,6 +313,14 @@ export const getUpgraderMaticContract = async (isMainnet) => {
 export const getUSDTContract = async (chainId) => {
   const web3 = new Web3(window.ethereum)
   const address = await getUSDTAddressByChainId(chainId)
+  const contract = await new web3.eth.Contract(ERC20ABI, address)
+
+  return contract
+}
+
+export const getWEthContract = async (chainId) => {
+  const web3 = new Web3(window.ethereum)
+  const address = await getWEthAddressByChainId(chainId)
   const contract = await new web3.eth.Contract(ERC20ABI, address)
 
   return contract

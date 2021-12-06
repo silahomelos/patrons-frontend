@@ -1,0 +1,55 @@
+.cryptoOptions {
+  background: #000000;
+  max-width: 500px;
+  .title {
+    text-align: center;
+    color: #FFFFFF;
+  }
+
+  .description {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .cryptoList {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px 20px;
+
+    .cryptoIcon {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .cryptoIcon > span {
+      opacity: 0;
+    }
+    
+    .cryptoIcon:hover:not(.disabled) > span {
+      opacity: 1;
+    }
+    
+    .cryptoIcon img {
+      width: 50px;
+    }
+    
+    .selected:not(.disabled) > img {
+      border: 4px solid blue !important;
+      border-radius: 50%;
+    }
+    
+    .disabled {
+      opacity: 0.6;
+    }
+    
+  }
+
+  .approveButton {
+    margin: auto;
+    margin-top: 20px;
+
+  }
+}

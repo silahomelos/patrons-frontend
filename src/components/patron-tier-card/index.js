@@ -1,14 +1,28 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { getExchangeRateETH } from '@selectors/global.selectors'
+import {
+  openBuynowModal,
+  openConnectMetamaskModal,
+  openCryptoOptionsModal,
+  openPlaceBidModal,
+  openPurchaseSuccessModal,
+  openSwitchNetworkModal,
+} from '@actions/modals.actions'
+
+import { getExchangeRateETH, getChainId } from '@selectors/global.selectors'
+import { getAccount } from '@selectors/user.selectors'
 
 import GrayButton from '@components/buttons/gray-button'
 import PriceCard from '@components/price-card'
+
+import { POLYGON_CHAINID } from '@constants/global.constants'
+
 import styles from './styles.module.scss'
 
 const PatronTierCard = props => {
   const {
+    collectionId,
     realmName,
     tierName,
     price,
@@ -16,6 +30,9 @@ const PatronTierCard = props => {
   } = props
 
   const exchangeRate = useSelector(getExchangeRateETH)
+  const chainId = useSelector(getChainId)
+  const account = useSelector(getAccount)
+  const dispatch = useDispatch()
 
   const getPrice = () => {
     return (
@@ -26,6 +43,35 @@ const PatronTierCard = props => {
         </span>
       </>
     )
+  }
+
+  const onClickPatronRealmButton = () => {
+    console.log('click patron realm button: ', account)
+    if (account) {
+      console.log('chainId: ', chainId)
+      if (chainId == POLYGON_CHAINID) {
+        dispatch(openCryptoOptionsModal())
+        // if (!isAuction) {
+        //   dispatch(
+        //     openBuynowModal({
+        //       id: data.id,
+        //       priceEth: price,
+        //     }),
+        //   )
+        // } else {
+        //   dispatch(
+        //     openPlaceBidModal({
+        //       id: data.id,
+        //       priceEth: price,
+        //     }),
+        //   );
+        // }
+      } else {
+        dispatch(openSwitchNetworkModal())
+      }
+    } else {
+      dispatch(openConnectMetamaskModal())
+    }
   }
 
   return (
@@ -45,6 +91,7 @@ const PatronTierCard = props => {
       <div className={styles.buttonWrapper}>
         <GrayButton
           text={'Patron Realm'}
+          onClick={onClickPatronRealmButton}
         />
       </div>
       <div className={styles.priceWrapper}>

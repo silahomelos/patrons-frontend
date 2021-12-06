@@ -11,6 +11,7 @@ import SwitchNetworkModal from './switch-network'
 import PurchaseSuccess from './purchase-success'
 import ModalBespoke from './modal-bespoke'
 import ModalCurrentWearers from './modal-current-wearers'
+import ModalCryptoOptions from './modal-crypto-options'
 
 const Modals = () => {
   const modals = useSelector((state) => state.modals.toJS())
@@ -27,6 +28,7 @@ const Modals = () => {
     isPurchaseSuccess,
     isShowModalBespoke,
     isShowModalCurrentWearers,
+    isShowModalCryptoOptions
   } = modals
 
   return (
@@ -43,6 +45,7 @@ const Modals = () => {
       {isPurchaseSuccess && <PurchaseSuccess />}
       {isShowModalBespoke && <ModalBespoke />}
       {isShowModalCurrentWearers && <ModalCurrentWearers />}
+      {isShowModalCryptoOptions && <ModalCryptoOptions />}
     </>
   )
 }

@@ -30,13 +30,6 @@
     "mumbai": "https://mumbai-explorer.matic.today/",
     "matic": "https://explorer-mainnet.maticvigil.com/"
   },
-  "REWARD_CONTRACT_ADDRESSES": {
-    "mainnet": "0xC155DDd8aA737aA53bBCea9EA62CAC0A3EEc942f",
-    "rinkeby": "0xb0DED58EF09929b0A0F2b10f48D42883df97466E",
-    "goerli": "0xb0DED58EF09929b0A0F2b10f48D42883df97466E",
-    "mumbai": "0xb0DED58EF09929b0A0F2b10f48D42883df97466E",
-    "matic": "0xb0DED58EF09929b0A0F2b10f48D42883df97466E"
-  },
   "DIGITAL_MARKETPLACE_ADDRESSES": {
     "mainnet": "0xCC48554581c17c2837C13B1685E0e784fADC1c3b",
     "rinkeby": "0xAcA4eaf530085B062dB530634DA637e266a823C9",
@@ -110,6 +103,12 @@
     "goerli": "0xba62bcfcaafc6622853cca2be6ac7d845bc0f2dc",
     "mumbai": "0x3813e82e6f7098b9583FC0F33a962D02018B6803",
     "matic": "0xc2132D05D31c914a87C6611C10748AEb04B58e8F"
+  },
+  "WETH_ADDRESS": {
+    "matic": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619"
+  },
+  "PATRONS_MARKETPLACE_ADDRESS": {
+    "matic": "0x83ecc20e47f8f7a40ebc04ef2f81c6a1de325cdc"
   },
   "EXCHANGE_API": "https://api.coingecko.com/api/v3",
   "IMGIX_URL": "digitalax.imgix.net",

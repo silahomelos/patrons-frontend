@@ -6,30 +6,39 @@ import { formatEther } from '@ethersproject/units'
 
 import { getAccount } from '@selectors/user.selectors'
 import { getChainId } from '@selectors/global.selectors'
+import { getSelectedCrypto } from '@selectors/crypto.selectors'
 
-import { getMonaTokenContract, getUSDTContract } from '@services/contract.service'
+import { getMonaTokenContract, getWEthContract } from '@services/contract.service'
 
 import config from '@utils/config'
+import { POLYGON_CHAINID } from '@constants/global.constants'
 
 import { useIsMainnet } from './useIsMainnet'
 import usePollar from './usePollar'
 
-export function useTokenAllowance(isMona = true) {
+export function useTokenAllowance() {
   const [allowance, setAllowance] = useState('0')
   const account = useSelector(getAccount)
   const isMainnet = useIsMainnet()
   const chainId = useSelector(getChainId)
+  const selectedCrypto = useSelector(getSelectedCrypto)
 
-  const approveMonaRef = useRef(isMona)
-  approveMonaRef.current = isMona
+  const selectedCryptoRef = useRef(selectedCrypto)
+  selectedCryptoRef.current = selectedCrypto
 
   const fetchAllowance = useCallback(async () => {
-    if (account && chainId) {
-      const contract = approveMonaRef.current
+    // Only Polygon is acceptable
+    // Currently we support only Mona and wEth tokens
+    if (account && chainId && chainId == POLYGON_CHAINID) {
+      const contract = 
+      selectedCryptoRef.current == 'mona'
         ? await getMonaTokenContract(config.MONA_TOKEN_ADDRESSES[isMainnet ? 'matic' : 'mumbai'])
-        : await getUSDTContract(chainId)
+        : 
+        selectedCryptoRef.current == 'weth'
+            ? await getWEthContract(chainId)
+            : null
 
-      setAllowance(
+      contract && setAllowance(
         formatEther(
           await contract.methods.allowance(account, config.QUICKSWAP_ROUTER).call({ from: account })
         )
@@ -42,35 +51,46 @@ export function useTokenAllowance(isMona = true) {
   return allowance
 }
 
-export default function useERC20Approve(amount, isMona) {
+export default function useERC20Approve(amount) {
   const account = useSelector(getAccount)
   const chainId = useSelector(getChainId)
+  const selectedCrypto = useSelector(getSelectedCrypto)
 
   const [approved, setApproved] = useState(false)
 
-  const allowance = useTokenAllowance(isMona)
+  const allowance = useTokenAllowance()
 
   useEffect(() => {
-    if (parseFloat(allowance) > parseFloat(amount)) {
+    if (selectedCrypto && parseFloat(allowance) > parseFloat(amount)) {
       setApproved(true)
     } else {
       setApproved(false)
     }
-  }, [amount, allowance, isMona])
+  }, [amount, allowance, selectedCrypto])
 
   const isMainnet = useIsMainnet()
-  const isMonaRef = useRef(isMona)
-  isMonaRef.current = isMona
 
-  const approveCallback = useCallback(async () => {
+  const selectedCryptoRef = useRef(selectedCrypto)
+  selectedCryptoRef.current = selectedCrypto
+
+  const approveFunc = async () => {
     if (account && chainId) {
-      const contract = isMonaRef.current
+      const contract = 
+      selectedCryptoRef.current == 'mona'
         ? await getMonaTokenContract(config.MONA_TOKEN_ADDRESSES[isMainnet ? 'matic' : 'mumbai'])
-        : await getUSDTContract(chainId)
+        : 
+        selectedCryptoRef.current == 'weth'
+          ? await getWEthContract(chainId)
+          : null
 
-      contract.methods.approve(config.QUICKSWAP_ROUTER, MaxUint256).send({ from: account })
+      contract && contract.methods.approve(config.PATRONS_MARKETPLACE_ADDRESS['matic'], MaxUint256).send({ from: account })
     }
-  }, [account])
+  }
 
-  return { approved, approveCallback }
+  const purchaseOffer = async () => {
+    
+  }
+
+  console.log('selectedCrypto: ', selectedCrypto)
+  return { approved, approveFunc, purchaseOffer }
 }
