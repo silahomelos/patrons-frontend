@@ -1,4 +1,6 @@
 # Patrons Frontend
+Patrons Frontend allows people to become patron by buying patron realm NFTS.
+Built based on next.js
 
 ### Installation
 
@@ -17,3 +19,5 @@ yarn dev # and open http://localhost:3000 in your browser
 yarn build
 yarn start
 ```
+
+
