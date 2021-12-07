@@ -24,6 +24,8 @@ import {
   GARMENT_BY_COLLECTION_ID,
   DIGITALAX_MATERIAL_V2S,
   PATRON_COLLECTION_GROUPS,
+  PATRONS_MARKETPLACE_OFFERS,
+  PAYABLE_TOKEN_REQUEST,
   // For Profile Page
   DIGITALAX_GARMENTS_BY_OWNER,
   DIGITALAX_GARMENTS,
@@ -115,6 +117,13 @@ export  const getDigitalaxMaterialV2s = async (chainId, first=1000, lastID='') =
 
 export  const getPatronCollectionGroups = async (chainId, first=1000, lastID='') =>
   apiRequest(chainId, PATRON_COLLECTION_GROUPS, { first, lastID  })
+
+export  const getPatronMarketplaceOffers = async (chainId, first=1000, lastID='') =>
+  apiRequest(chainId, PATRONS_MARKETPLACE_OFFERS, { first, lastID  })
+
+export const getPayableTokenReport = async (chainId, id) => {
+  return apiRequest(chainId, PAYABLE_TOKEN_REQUEST, { id })
+}
 
 // For Profile Page
 export  const getDigitalaxGarmentsByOwner = async (chainId, owner, first=1000, lastID='') =>

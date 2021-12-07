@@ -468,6 +468,40 @@ export const PATRON_COLLECTION_GROUPS = gql`
     }
   }
 `
+
+export const PATRONS_MARKETPLACE_OFFERS = gql`
+  query patronMarketplaceOffers($first: Int!, $lastID: ID!) {
+    patronMarketplaceOffers(first: $first, where: { id_gt: $lastID }) {
+      id,
+      garmentCollection {
+        id,
+        garments {
+          id
+          designer
+          name
+          description
+          owner
+          tokenUri
+        }
+        designer {
+          id
+          name
+        }
+      }
+      primarySalePrice
+    }
+  }
+`
+
+export const PAYABLE_TOKEN_REQUEST = gql`
+  query payableTokenReport($id: ID) {
+    payableTokenReport(id: $id) {
+      id
+      payload
+      timestamp
+    }
+  }
+`
 // For Profile Page
 
 // DIGITALAX GARMENTS (eth, polygon)

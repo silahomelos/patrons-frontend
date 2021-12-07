@@ -2,13 +2,13 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
-  openBuynowModal,
   openConnectMetamaskModal,
   openCryptoOptionsModal,
-  openPlaceBidModal,
   openPurchaseSuccessModal,
   openSwitchNetworkModal,
 } from '@actions/modals.actions'
+
+import cryptoActions from '@actions/crypto.actions'
 
 import { getExchangeRateETH, getChainId } from '@selectors/global.selectors'
 import { getAccount } from '@selectors/user.selectors'
@@ -18,6 +18,8 @@ import PriceCard from '@components/price-card'
 
 import { POLYGON_CHAINID } from '@constants/global.constants'
 
+import { getPayableTokenReport } from '@services/api/apiService'
+
 import styles from './styles.module.scss'
 
 const PatronTierCard = props => {
@@ -26,6 +28,7 @@ const PatronTierCard = props => {
     realmName,
     tierName,
     price,
+    primarySalePrice,
     description
   } = props
 
@@ -35,9 +38,11 @@ const PatronTierCard = props => {
   const dispatch = useDispatch()
 
   const getPrice = () => {
+    const ethVal = parseFloat(price).toFixed(4)
+    console.log('ethVal:', typeof ethVal)
     return (
       <>
-        {parseFloat(price).toFixed(2)} $ETH
+        { ethVal } $ETH
         <span>
           {` `}(${(parseFloat(price) * exchangeRate).toFixed(2)})
         </span>
@@ -49,23 +54,13 @@ const PatronTierCard = props => {
     console.log('click patron realm button: ', account)
     if (account) {
       console.log('chainId: ', chainId)
+      console.log('collectionId: ', collectionId)
+
+      dispatch(cryptoActions.setSelectedCollectionId(collectionId))
+      dispatch(cryptoActions.setPrice(primarySalePrice))
+
       if (chainId == POLYGON_CHAINID) {
         dispatch(openCryptoOptionsModal())
-        // if (!isAuction) {
-        //   dispatch(
-        //     openBuynowModal({
-        //       id: data.id,
-        //       priceEth: price,
-        //     }),
-        //   )
-        // } else {
-        //   dispatch(
-        //     openPlaceBidModal({
-        //       id: data.id,
-        //       priceEth: price,
-        //     }),
-        //   );
-        // }
       } else {
         dispatch(openSwitchNetworkModal())
       }

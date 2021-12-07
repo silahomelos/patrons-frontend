@@ -3,14 +3,17 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 
 import PatronTierCard from '@components/patron-tier-card'
+
 import digitalaxApi from '@services/api/digitalaxApi.service'
 import {
   getDigitalaxMaterialV2s,
-  getPatronCollectionGroups
+  getPayableTokenReport,
+  getPatronMarketplaceOffers
 } from '@services/api/apiService'
 import {
   getGDNTokenAddress
 } from '@services/gdn.service'
+import { getWEthAddressByChainId } from '@services/network.service'
 
 import useMaticPosClient from '@hooks/useMaticPosClient'
 
@@ -19,6 +22,7 @@ import { getAllResultsFromQueryWithoutOwner } from '@helpers/thegraph.helpers'
 import {
   POLYGON_CHAINID
 } from '@constants/global.constants'
+
 import realms from 'src/data/realms.json'
 import styles from './styles.module.scss'
 
@@ -35,14 +39,12 @@ const RealmPage = () => {
   const router = useRouter()
   const { id } = router.query
   const currentRealm = realms.find(realm => realm.name.toLowerCase() === id.toLowerCase())
-  console.log('realms: ', realms)
-  console.log('id: ', id)
-  console.log('currentRealm: ', currentRealm)
-
+  
   const [currentDeisngerInfo, setCurrentDesignerInfo] = useState(null)
   const [fgoCount, setFgoCount] = useState(0)
   const [gdnBalance, setGDNBalance] = useState(0)
-  const [tierCollections, setTierCollections] = useState([])
+  const [wEthPrice, setWEthPrice] = useState(1)
+  const [tierOffers, setTierOffers] = useState([])
   const [posClientParent, posClientChild] = useMaticPosClient()
 
   async function loadDesignerInfo() {   
@@ -106,28 +108,36 @@ const RealmPage = () => {
       }
     }
     setFgoCount(materials.length)
-
-    // Get all materials from theGraph
-    const patronCollectionGroups = await getAllResultsFromQueryWithoutOwner(
-      getPatronCollectionGroups, 
-      'patronCollectionGroups', 
+   
+    const patronMarketplaceOffers = await getAllResultsFromQueryWithoutOwner(
+      getPatronMarketplaceOffers, 
+      'patronMarketplaceOffers', 
       POLYGON_CHAINID
     )
 
-    const currentGroup = patronCollectionGroups.find(group => 
-      group.collections && group.collections.length > 0 &&
-      group.collections[0].garments && group.collections[0].garments.length > 0 &&
-      group.collections[0].garments[0].name.toLowerCase().includes(currentDesigner.designerId.toLowerCase())
+    const currentOffers = patronMarketplaceOffers.filter(offer =>
+      offer.garmentCollection.garments && offer.garmentCollection.garments.length > 0 &&
+      offer.garmentCollection.garments[0].name.toLowerCase().includes(currentDesigner.designerId.toLowerCase())
     )
 
-    if (currentGroup) {
-      setTierCollections(currentGroup.collections)
+    if (currentOffers) {
+      setTierOffers(currentOffers)
     }
 
-    console.log('currentGroup: ', currentGroup)
+    console.log('currentOffers: ', currentOffers)
+  }
+
+  const fetchWEthPrice = async () => {
+    const { payableTokenReport } = await getPayableTokenReport(
+      POLYGON_CHAINID, getWEthAddressByChainId(POLYGON_CHAINID)
+    )
+
+    setWEthPrice(payableTokenReport.payload / 1e18)
+    console.log('payableTokenReport.payload: ', payableTokenReport.payload / 1e18)
   }
 
   useEffect(() => {
+    fetchWEthPrice()
     loadDesignerInfo()
   }, [])
 
@@ -224,15 +234,16 @@ const RealmPage = () => {
       
       <div className={styles.patronCardsList}>
         {
-          tierCollections.map(collection => {
-            const garment = collection.garments[0]
+          tierOffers.map(offer => {
+            const garment = offer.garmentCollection.garments[0]
             return (
               <PatronTierCard
                 key={garment.id}
-                collectionId={collection.id}
+                collectionId={offer.garmentCollection.id}
                 realmName={currentDeisngerInfo.designerId}
                 tierName={getTierName(garment.name, currentDeisngerInfo.designerId)}
-                price={garment.primarySalePrice}
+                price={offer.primarySalePrice * wEthPrice / 1e18}
+                primarySalePrice={offer.primarySalePrice}
                 description={getDescriptionList(garment.description)}
               />      
             )

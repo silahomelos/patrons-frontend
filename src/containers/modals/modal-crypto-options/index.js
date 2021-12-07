@@ -5,7 +5,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import cryptoActions from '@actions/crypto.actions'
 import { closeCryptoOptionsModal } from '@actions/modals.actions'
 
-import { getSelectedCrypto } from '@selectors/crypto.selectors'
+import { 
+  getSelectedCrypto,
+  getSelectedCollectionId,
+  getSelectedRealmPrice
+} from '@selectors/crypto.selectors'
 
 import useERC20Approve from '@hooks/useERC20Approve'
 
@@ -21,7 +25,7 @@ import { MaxUint256 } from '@ethersproject/constants'
 const ModalCryptoOptions = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
-  const { approved, approveFunc } = useERC20Approve(MaxUint256)
+  const { approved, approveFunc, purchaseOffer } = useERC20Approve(MaxUint256)
 
   const selectedCrypto = useSelector(getSelectedCrypto)
 
@@ -55,8 +59,31 @@ const ModalCryptoOptions = () => {
         throw err
       }
     } else {
-      // dispatch(setBuyNowStatus(1))
-      setLoading(true)
+      const { promise, unsubscribe } = await purchaseOffer()
+
+      await promise
+      .then(async (hash) => {
+        console.log('this is after calling buy offer')
+        // dispatch(setBuyNowStatus(2))
+        unsubscribe()
+        setLoading(true)
+      })
+      .catch(async (err) => {
+        console.log(err)
+        unsubscribe()
+        setLoading(true)
+
+        // if (err.message.includes('50 blocks')) {
+        // } else {
+        //   // dispatch(setBuyNowStatus(3))
+        //   if (err.code !== 4001) {
+        //     // await removeCart()
+        //   }
+        //   // await removeOrder()
+        // }
+      })
+
+      
     }
   }
 

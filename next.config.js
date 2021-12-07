@@ -26,8 +26,6 @@ const {
   WETH_ADDRESS,
   PATRONS_MARKETPLACE_ADDRESS,
   QUICKSWAP_ROUTER,
-  CHILD_TUNNEL_V2_ADDRESS,
-  ROOT_TUNNEL_V2_ADDRESS,
   AUCTION_CONTRACT_ADDRESS,
 } = require('config');
 const withImages = require('next-images');
@@ -64,8 +62,6 @@ module.exports = withImages({
     WETH_ADDRESS,
     PATRONS_MARKETPLACE_ADDRESS,
     QUICKSWAP_ROUTER,
-    CHILD_TUNNEL_V2_ADDRESS,
-    ROOT_TUNNEL_V2_ADDRESS,
     AUCTION_CONTRACT_ADDRESS,
   },
   trailingSlash: true,

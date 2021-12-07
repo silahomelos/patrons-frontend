@@ -44,20 +44,6 @@
     "mumbai": "0x194202479730987db2b1a9d61083333d7336b3fb",
     "matic": ""
   },
-  "CHILD_TUNNEL_V2_ADDRESS": {
-    "mumbai": "0x845f67c37AebC442647092A5697992fDd49FeeD9",
-    "matic": "0x751FE122eBcC4868138Dfdab9ec44f4d4167cB5a",
-    "mainnet": "",
-    "rinkeby": "",
-    "goerli": ""
-  },
-  "ROOT_TUNNEL_V2_ADDRESS": {
-    "mainnet": "0x8C9b09015273AB12D6A09bC61249FED3061d4199",
-    "goerli": "0xB7c06e7EE83E42d0201591a7af60ED14d5d79875",
-    "mumbai": "",
-    "matic": "",
-    "rinkeby": ""
-  },
   "MONA_TOKEN_ADDRESSES": {
     "mainnet": "0x275f5ad03be0fa221b4c6649b8aee09a42d9412a",
     "rinkeby": "0x13379fe0e6992180ed0ac5174a02479896f9c510",
@@ -108,7 +94,7 @@
     "matic": "0x7ceb23fd6bc0add59e62ac25578270cff1b9f619"
   },
   "PATRONS_MARKETPLACE_ADDRESS": {
-    "matic": "0x83ecc20e47f8f7a40ebc04ef2f81c6a1de325cdc"
+    "matic": "0xd05f05c24a7540d86935e5b5b6b44742f033ae24"
   },
   "EXCHANGE_API": "https://api.coingecko.com/api/v3",
   "IMGIX_URL": "digitalax.imgix.net",

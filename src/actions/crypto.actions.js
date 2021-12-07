@@ -13,6 +13,18 @@ class CryptoActions extends BaseActions {
       dispatch(this.setValue('selectedCrypto', crypto))
     }
   }
+  
+  setSelectedCollectionId(collectionId) {
+    return async (dispatch) => {
+      dispatch(this.setValue('selectedCollectionId', collectionId))
+    }
+  }
+  
+  setPrice(price) {
+    return async (dispatch) => {
+      dispatch(this.setValue('selectedRealmPrice', price))
+    }
+  }
 }
 
 export default new CryptoActions(cryptoReducer)

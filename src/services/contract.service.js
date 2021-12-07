@@ -1,8 +1,7 @@
 import ERC721ABIv0 from '@constants/erc721_abi_V0.json'
 import ERC721ABIv1 from '@constants/erc721_abi_V1.json'
 import ERC721ABIv2 from '@constants/erc721_abi_V2.json'
-import childTunnelAbi from '@constants/child_tunnel_abi.json'
-import rootTunnelV2Abi from '@constants/root_tunnel_abi_v2.json'
+import PATRON_MARKETPLACE_ABI from '@constants/patron_marketplace_abi.json'
 import { providers as EthersProviders } from 'ethers'
 import { create as createUniswapPair } from '@helpers/uniswap.helpers'
 import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json'
@@ -10,18 +9,15 @@ import Web3 from 'web3'
 import config from '@utils/config'
 import {
   getDigiMaterialV2AddressByChainId,
-  getDigiRootTunnelAddressByChainId,
   getDTXAddressByChainId,
   getDTXV1AddressByChainId,
   getUSDTAddressByChainId,
   getWEthAddressByChainId,
+  getPatronMarketplaceAddressByChainId,
   getUpgraderAddressByChainId,
-  getChildTunnelAddressV2ByChainId,
-  getRootTunnelAddressV2ByChainId
 } from './network.service'
 
 import DigiMaterialV2ABI from '../constants/digi_material_v2_abi.json'
-import DigiRootTunnelABI from '../constants/digi_root_tunnel_abi.json'
 import ERC20ABI from '../constants/erc20_abi.json'
 import UpgraderABI from '../constants/upgrader_abi.json'
 
@@ -280,14 +276,6 @@ export const getDigiMaterialV2Contract = (isMainnet) => {
   return contract
 }
 
-export const getDitiRootTunnelContract = (isMainnet) => {
-  const address = getDigiRootTunnelAddressByChainId(isMainnet ? '0x1' : '0x5')
-  if (window.web3) {
-    const contract = new window.web3.eth.Contract(DigiRootTunnelABI, address)
-    return contract
-  }
-}
-
 export const getDTXMaticV1Contract = async (isMainnet) => {
   // const provider = new Web3.providers.HttpProvider(
   //   isMainnet ? config.WEB3_URLS.MATIC : config.WEB3_URLS.MUMBAI,
@@ -322,6 +310,15 @@ export const getWEthContract = async (chainId) => {
   const web3 = new Web3(window.ethereum)
   const address = await getWEthAddressByChainId(chainId)
   const contract = await new web3.eth.Contract(ERC20ABI, address)
+
+  return contract
+}
+
+export const getPatronMarketplaceContract = async (chainId) => {
+  const web3 = new Web3(window.ethereum)
+  const address = await getPatronMarketplaceAddressByChainId(chainId)
+  console.log('address: ', address)
+  const contract = await new web3.eth.Contract(PATRON_MARKETPLACE_ABI, address)
 
   return contract
 }
@@ -854,16 +851,3 @@ export const getTokenPriceMatic = async () =>
     }
   })
 
-export const getChildTunnelContract = (chainId) => {
-  const address = getChildTunnelAddressV2ByChainId(chainId)
-  if (!window.web3?.eth) return null
-  const contract = new window.web3.eth.Contract(childTunnelAbi, address)
-  return contract
-}
-
-export const getRootTunnelV2Contract = (chainId) => {
-  const address = getRootTunnelAddressV2ByChainId(chainId)
-  if (!window.web3?.eth) return null
-  const contract = new window.web3.eth.Contract(rootTunnelV2Abi, address)
-  return contract
-}

@@ -4,7 +4,9 @@ import { List, Map } from 'immutable'
 import TransformModules from '../utils/transform-modules'
 
 const DEFAULT_FIELDS = Map({
-  selectedCrypto: ''
+  selectedCrypto: '',
+  selectedCollectionId: '',
+  selectedRealmPrice: 0,
 })
 
 export default createModule({

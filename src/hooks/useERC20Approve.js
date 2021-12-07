@@ -1,14 +1,21 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 
-import { MaxUint256 } from '@ethersproject/constants'
 import { formatEther } from '@ethersproject/units'
 
 import { getAccount } from '@selectors/user.selectors'
 import { getChainId } from '@selectors/global.selectors'
-import { getSelectedCrypto } from '@selectors/crypto.selectors'
+import {
+  getSelectedCrypto,
+  getSelectedCollectionId,
+  getSelectedRealmPrice
+} from '@selectors/crypto.selectors'
 
-import { getMonaTokenContract, getWEthContract } from '@services/contract.service'
+import {
+  getMonaTokenContract,
+  getWEthContract,
+  getPatronMarketplaceContract
+} from '@services/contract.service'
 
 import config from '@utils/config'
 import { POLYGON_CHAINID } from '@constants/global.constants'
@@ -30,6 +37,7 @@ export function useTokenAllowance() {
     // Only Polygon is acceptable
     // Currently we support only Mona and wEth tokens
     if (account && chainId && chainId == POLYGON_CHAINID) {
+      // get ERC20 Token address
       const contract = 
       selectedCryptoRef.current == 'mona'
         ? await getMonaTokenContract(config.MONA_TOKEN_ADDRESSES[isMainnet ? 'matic' : 'mumbai'])
@@ -40,12 +48,13 @@ export function useTokenAllowance() {
 
       contract && setAllowance(
         formatEther(
-          await contract.methods.allowance(account, config.QUICKSWAP_ROUTER).call({ from: account })
+          await contract.methods.allowance(account, config.PATRONS_MARKETPLACE_ADDRESS['matic']).call({ from: account })
         )
       )
     }
   }, [account, chainId])
 
+  fetchAllowance()
   usePollar(fetchAllowance)
 
   return allowance
@@ -55,13 +64,18 @@ export default function useERC20Approve(amount) {
   const account = useSelector(getAccount)
   const chainId = useSelector(getChainId)
   const selectedCrypto = useSelector(getSelectedCrypto)
+  const selectedCollectionId = useSelector(getSelectedCollectionId)
+  const selectedRealmPrice = useSelector(getSelectedRealmPrice)
 
   const [approved, setApproved] = useState(false)
 
   const allowance = useTokenAllowance()
 
   useEffect(() => {
-    if (selectedCrypto && parseFloat(allowance) > parseFloat(amount)) {
+    console.log('allowance: ', parseFloat(allowance) - parseFloat(amount))
+    console.log('amount: ', parseFloat(amount))
+
+    if (selectedCrypto && parseFloat(allowance) >= 10000000000) {
       setApproved(true)
     } else {
       setApproved(false)
@@ -83,23 +97,25 @@ export default function useERC20Approve(amount) {
           ? await getWEthContract(chainId)
           : null
 
-      contract && contract.methods.approve(config.PATRONS_MARKETPLACE_ADDRESS['matic'], MaxUint256).send({ from: account })
+      contract && contract.methods.approve(config.PATRONS_MARKETPLACE_ADDRESS['matic'], amount).send({ from: account })
     }
   }
 
   const purchaseOffer = async () => {
+    if (selectedCrypto != 'mona' && selectedCrypto != 'weth') return
     // get Patron Marketplace Contract
-    // const contract = await getDripMarketplaceContract()
-    
+    const contract = await getPatronMarketplaceContract(POLYGON_CHAINID)
     try {
-      console.log('this is before calling batchBuyoffer')
-      console.log({ collectionIds })
+      console.log('this is before calling batchBuyoffer: ', selectedRealmPrice)
+      // console.log({ collectionIds })
       const listener = contract.methods
         .batchBuyOffer(
-          collectionIds,
-          tokens[crypto].address,
-          orderNumber,
-          shippingPrice
+          [selectedCollectionId],
+          selectedCrypto == 'mona' ?
+            config.MONA_TOKEN_ADDRESSES[isMainnet ? 'matic' : 'mumbai'] :
+            config.WETH_ADDRESS[isMainnet ? 'matic' : 'mumbai'],
+          0,
+          0
         )
         .send({
           from: account,
@@ -125,5 +141,6 @@ export default function useERC20Approve(amount) {
   }
 
   console.log('selectedCrypto: ', selectedCrypto)
+  console.log('approved: ', approved)
   return { approved, approveFunc, purchaseOffer }
 }

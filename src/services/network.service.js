@@ -63,6 +63,19 @@ export const getWSUrlByChainId = (chainId) => {
   return url.replace('http', 'ws')
 }
 
+const ERC20TokenAddresses = {
+  mona: config.MONA_TOKEN_ADDRESSES,
+  usdt: config.USDT_ADDRESS,
+  weth: config.WETH_ADDRESS
+}
+
+export const getERC20ContractAddressByChainId = (tokenId, chainId) => {
+  const network = getEnabledNetworkByChainId(chainId)
+
+  if (!Object.keys(ERC20TokenAddresses).find(key => key == tokenId)) return null
+  return ERC20TokenAddresses[tokenId][network?.alias]
+}
+
 export const getMonaContractAddressByChainId = (chainId) => {
   const network = getEnabledNetworkByChainId(chainId)
 
@@ -79,6 +92,12 @@ export const getWEthAddressByChainId = (chainId) => {
   const network = getEnabledNetworkByChainId(chainId)
 
   return config.WETH_ADDRESS[network?.alias]
+}
+
+export const getPatronMarketplaceAddressByChainId = (chainId) => {
+  const network = getEnabledNetworkByChainId(chainId)
+  console.log('config.PATRONS_MARKETPLACE_ADDRESS: ', config.PATRONS_MARKETPLACE_ADDRESS[network?.alias])
+  return config.PATRONS_MARKETPLACE_ADDRESS[network?.alias]
 }
 
 export const getDTXAddressByChainId = (chainId) => {
@@ -99,26 +118,9 @@ export const getDigiMaterialV2AddressByChainId = (chainId) => {
   return config.DIGI_MATERIALS_V2[network?.alias]
 }
 
-export const getDigiRootTunnelAddressByChainId = (chainId) => {
-  const network = getEnabledNetworkByChainId(chainId)
-
-  return config.ROOT_TUNNEL_ADDRESS[network?.alias]
-}
-
 export const getUpgraderAddressByChainId = (chainId) => {
   const network = getEnabledNetworkByChainId(chainId)
 
   return config.UPGRADER_ADDRESSES[network?.alias]
 }
 
-export const getRootTunnelAddressV2ByChainId = (chainId) => {
-  const network = getEnabledNetworkByChainId(chainId)
-
-  return config.ROOT_TUNNEL_V2_ADDRESS[network?.alias]
-}
-
-export const getChildTunnelAddressV2ByChainId = (chainId) => {
-  const network = getEnabledNetworkByChainId(chainId)
-
-  return config.CHILD_TUNNEL_V2_ADDRESS[network.alias]
-}
