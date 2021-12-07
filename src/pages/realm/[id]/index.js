@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import Image from 'next/image'
 
 import PatronTierCard from '@components/patron-tier-card'
+import PixelLoader from '@components/pixel-loader'
 
 import digitalaxApi from '@services/api/digitalaxApi.service'
 import {
@@ -40,6 +41,7 @@ const RealmPage = () => {
   const { id } = router.query
   const currentRealm = realms.find(realm => realm.name.toLowerCase() === id.toLowerCase())
   
+  const [loading, setLoading] = useState(false)
   const [currentDeisngerInfo, setCurrentDesignerInfo] = useState(null)
   const [fgoCount, setFgoCount] = useState(0)
   const [gdnBalance, setGDNBalance] = useState(0)
@@ -47,7 +49,9 @@ const RealmPage = () => {
   const [tierOffers, setTierOffers] = useState([])
   const [posClientParent, posClientChild] = useMaticPosClient()
 
-  async function loadDesignerInfo() {   
+  async function loadDesignerInfo() {
+    setLoading(true)
+
     let currentDesigner = null
 
     // get current Designer Information from FaunaDB
@@ -125,6 +129,7 @@ const RealmPage = () => {
     }
 
     console.log('currentOffers: ', currentOffers)
+    setLoading(false)
   }
 
   const fetchWEthPrice = async () => {
@@ -165,6 +170,14 @@ const RealmPage = () => {
 
 
   console.log('currentDeisngerInfo: ', currentDeisngerInfo)
+
+  if (loading) {
+    return (
+      <div className={styles.realmPageWrapper}>
+        <PixelLoader title={'loading...'} />
+      </div>
+    )
+  }
 
   return (
     <div className={styles.realmPageWrapper}>

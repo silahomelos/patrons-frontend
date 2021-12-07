@@ -15,6 +15,10 @@
   &:focus {
     outline: none;
   }
+
+  &.disabled {
+    color: gray !important;
+  }
 }
 
 .transparent {
@@ -63,3 +67,5 @@
     color: $darkGray3;
   }
 }
+
+

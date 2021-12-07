@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 
 import cryptoActions from '@actions/crypto.actions'
-import { closeCryptoOptionsModal } from '@actions/modals.actions'
+import {
+  closeCryptoOptionsModal,
+  openPurchaseSuccessModal
+} from '@actions/modals.actions'
 
 import { 
-  getSelectedCrypto,
-  getSelectedCollectionId,
-  getSelectedRealmPrice
+  getSelectedCrypto
 } from '@selectors/crypto.selectors'
 
 import useERC20Approve from '@hooks/useERC20Approve'
 
 import Button from '@components/buttons/button'
 import Modal from '@components/modal'
-// import Notification from '@components/notification'
-
 
 import styles from './styles.module.scss'
 import { MaxUint256 } from '@ethersproject/constants'
@@ -59,31 +59,26 @@ const ModalCryptoOptions = () => {
         throw err
       }
     } else {
+      setLoading(true)
+
       const { promise, unsubscribe } = await purchaseOffer()
 
       await promise
       .then(async (hash) => {
         console.log('this is after calling buy offer')
-        // dispatch(setBuyNowStatus(2))
         unsubscribe()
-        setLoading(true)
+        setLoading(false)
+        dispatch(closeCryptoOptionsModal())
+        dispatch(openPurchaseSuccessModal())
       })
       .catch(async (err) => {
         console.log(err)
         unsubscribe()
-        setLoading(true)
+        setLoading(false)
 
-        // if (err.message.includes('50 blocks')) {
-        // } else {
-        //   // dispatch(setBuyNowStatus(3))
-        //   if (err.code !== 4001) {
-        //     // await removeCart()
-        //   }
-        //   // await removeOrder()
-        // }
+        dispatch(closeCryptoOptionsModal())
+        toast(err.message)
       })
-
-      
     }
   }
 

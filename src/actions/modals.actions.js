@@ -54,9 +54,6 @@ export const closeRaiseModal = () => (dispatch) => dispatch(closeModal('isShowMo
 export const openSignupModal = (params) => (dispatch) => dispatch(openModal('isShowModalSignup', 'hideScroll', params))
 export const closeSignupModal = () => (dispatch) => dispatch(closeModal('isShowModalSignup', 'addScroll'))
 
-export const openESPAReadyModal = (params) => (dispatch) => dispatch(openModal('isShowModalESPAReady', 'hideScroll', params))
-export const closeESPAReadyModal = () => (dispatch) => dispatch(closeModal('isShowModalESPAReady', 'addScroll'))
-
 export const openConnectMaticModal = (params) => (dispatch) => dispatch(openModal('isShowModalConnectMatic', 'hideScroll', params))
 export const closeConnectMaticModal = () => (dispatch) => dispatch(closeModal('isShowModalConnectMatic', 'addScroll'))
 

@@ -1,28 +1,28 @@
-import React from 'react';
-import { createPortal } from 'react-dom';
-import { useDispatch } from 'react-redux';
-import Button from '@components/buttons/button';
-import Modal from '@components/modal';
-import styles from './styles.module.scss';
-import { closePurchaseSuccessModal } from '@actions/modals.actions';
+import React from 'react'
+import { createPortal } from 'react-dom'
+import { useDispatch } from 'react-redux'
+import Button from '@components/buttons/button'
+import Modal from '@components/modal'
+import styles from './styles.module.scss'
+import { closePurchaseSuccessModal } from '@actions/modals.actions'
 
 const PurchaseSuccess = ({ className }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const handleClose = () => {
-    dispatch(closePurchaseSuccessModal());
-  };
+    dispatch(closePurchaseSuccessModal())
+  }
 
   const handleClick = (mode) => {
-    dispatch(closePurchaseSuccessModal());
-  };
+    dispatch(closePurchaseSuccessModal())
+  }
 
   return (
     <>
       {createPortal(
         <Modal
           onClose={() => handleClose()}
-          title={'You Just Got Web3 Fashioned'}
+          title={'You Just Became A Patron Of The Realm!'}
           titleStyle={styles.textCenter}
           className={className}
         >
@@ -31,9 +31,9 @@ const PurchaseSuccess = ({ className }) => {
               <span>
                 Congratulations! Welcome to the Revolution.
               </span>
-              <p>
+              {/* <p>
                 You can stake your fashion for $MONA yield <a href="https://staking.digitalax.xyz/" target="_blank">here!</a>
-              </p>
+              </p> */}
             </p>
             <div className={styles.selectWrapper}>
               <Button
@@ -49,7 +49,7 @@ const PurchaseSuccess = ({ className }) => {
         document.body,
       )}
     </>
-  );
-};
+  )
+}
 
-export default PurchaseSuccess;
+export default PurchaseSuccess
