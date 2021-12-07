@@ -1,11 +1,17 @@
+import Web3 from 'web3'
+import { providers as EthersProviders } from 'ethers'
+
+import { create as createUniswapPair } from '@helpers/uniswap.helpers'
+import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json'
+
 import ERC721ABIv0 from '@constants/erc721_abi_V0.json'
 import ERC721ABIv1 from '@constants/erc721_abi_V1.json'
 import ERC721ABIv2 from '@constants/erc721_abi_V2.json'
 import PATRON_MARKETPLACE_ABI from '@constants/patron_marketplace_abi.json'
-import { providers as EthersProviders } from 'ethers'
-import { create as createUniswapPair } from '@helpers/uniswap.helpers'
-import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json'
-import Web3 from 'web3'
+import DigiMaterialV2ABI from '@constants/digi_material_v2_abi.json'
+import ERC20ABI from '@constants/erc20_abi.json'
+import UpgraderABI from '@constants/upgrader_abi.json'
+
 import config from '@utils/config'
 import {
   getDigiMaterialV2AddressByChainId,
@@ -16,10 +22,6 @@ import {
   getPatronMarketplaceAddressByChainId,
   getUpgraderAddressByChainId,
 } from './network.service'
-
-import DigiMaterialV2ABI from '../constants/digi_material_v2_abi.json'
-import ERC20ABI from '../constants/erc20_abi.json'
-import UpgraderABI from '../constants/upgrader_abi.json'
 
 export const getMonaTokenContract = async (ContractAddress) => {
   const jsonInterface = [

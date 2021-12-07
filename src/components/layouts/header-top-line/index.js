@@ -114,7 +114,7 @@ const HeaderTopLine = ({ className, isShowStaking, buttonText, linkText }) => {
               PHYSICAL WEB3 FASHION
             </a>
           </Link>
-          <Link href="/marketplace">
+          <Link href="https://fashion.digitalax.xyz/marketplace" target='_blank'>
             <a className={styles.link}>DIGITAL WEB3 FASHION</a>
           </Link>
           <Link href="https://designers.digitalax.xyz/global/">
@@ -125,8 +125,8 @@ const HeaderTopLine = ({ className, isShowStaking, buttonText, linkText }) => {
           <Link href="https://staking.digitalax.xyz/">
             <a className={styles.link}>STAKE FASHION NFT</a>
           </Link>
-          <Link href="/bridge">
-            <a className={styles.link}>BRIDGE MONA</a>
+          <Link href="https://fashion.digitalax.xyz/bridge">
+            <a className={styles.link} target="_blank">BRIDGE MONA</a>
           </Link>
         </div>
         {network?.alias !== 'matic' ? (

@@ -1,8 +1,8 @@
-import { gql } from 'graphql-request';
+import { gql } from 'graphql-request'
 import {
   HISTORY_BID_PLACED_EVENT,
   HISTORY_BID_WITHDRAWN_EVENT,
-} from '@constants/history.constants';
+} from '@constants/history.constants'
 
 export const getLiveAuctionsV2 = gql`
   {
@@ -41,7 +41,7 @@ export const getLiveAuctionsV2 = gql`
       }
     }
   }
-`;
+`
 
 export const getAuctionsByIdsV2 = gql`
   query getAuctionsByIds($ids: [ID!]) {
@@ -58,7 +58,7 @@ export const getAuctionsByIdsV2 = gql`
       lastBidTime
     }
   }
-`;
+`
 
 export const getGarmentsByIdsV2 = gql`
   query getGarmentsByIds($ids: [ID!]) {
@@ -75,7 +75,7 @@ export const getGarmentsByIdsV2 = gql`
       }
     }
   }
-`;
+`
 
 export const getDesignersByIdsV2 = gql`
   query getDesignersByIds($ids: [ID!]) {
@@ -98,7 +98,7 @@ export const getDesignersByIdsV2 = gql`
       }
     }
   }
-`;
+`
 
 export const getGarmentsByDesignerIdV2 = gql`
   query getGarmentsByDesignerId($ids: [Bytes!]) {
@@ -115,7 +115,7 @@ export const getGarmentsByDesignerIdV2 = gql`
       }
     }
   }
-`;
+`
 
 export const getAuctionsHistoryByIdsV2 = gql`
   query getAuctionsHistoryByIds($ids: [ID!]) {
@@ -141,7 +141,7 @@ export const getAuctionsHistoryByIdsV2 = gql`
       }
     }
   }
-`;
+`
 
 export const getAuctionsHistoryByTimestampGtV2 = gql`
   query getAuctionsHistoryByTimestampGt($timestamp: BigInt!) {
@@ -155,7 +155,7 @@ export const getAuctionsHistoryByTimestampGtV2 = gql`
       value
     }
   }
-`;
+`
 
 export const getAuctionContractsV2 = gql`
   {
@@ -168,7 +168,7 @@ export const getAuctionContractsV2 = gql`
       totalSales
     }
   }
-`;
+`
 
 export const getResultedAuctionsByEndTimeGtV2 = gql`
   query getAuctionsHistoryByTimestampGt($endTime: BigInt!) {
@@ -188,7 +188,7 @@ export const getResultedAuctionsByEndTimeGtV2 = gql`
       lastBidTime
     }
   }
-`;
+`
 
 export const getDigitalaxCollectorV2 = gql`
   query digitalaxCollector($id: ID!) {
@@ -206,7 +206,7 @@ export const getDigitalaxCollectorV2 = gql`
       }
     }
   }
-`;
+`
 
 export const getDigitalaxGarmentsCollectionsV2 = gql`
   query getdigitalaxGarmentsCollections {
@@ -231,7 +231,7 @@ export const getDigitalaxGarmentsCollectionsV2 = gql`
       }
     }
   }
-`;
+`
 
 export const getCollectorsByIdV2 = gql`
   query getCollectorsById($id: ID!) {
@@ -253,7 +253,7 @@ export const getCollectorsByIdV2 = gql`
       }
     }
   }
-`;
+`
 
 export const getDigitalaxMarketplaceV2PurchaseHistory = gql`
   query digitalaxMarketplaceV2PurchaseHistories($buyer: ID!, $garmentId: Int!) {
@@ -277,7 +277,7 @@ export const getDigitalaxMarketplaceV2PurchaseHistory = gql`
       rarity
     }
   }
-`;
+`
 
 export const getDigitalaxGarmentNFTV2GlobalStat = gql`
   query digitalaxGarmentNFTV2GlobalStats {
@@ -286,4 +286,4 @@ export const getDigitalaxGarmentNFTV2GlobalStat = gql`
       monaPerEth
     }
   }
-`;
+`
