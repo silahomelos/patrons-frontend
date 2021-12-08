@@ -1,4 +1,5 @@
 export const SOCIAL_SUPPORT_LIST = [
+  'gitbook',
   'twitter',
   'instagram',
   'tiktok',
