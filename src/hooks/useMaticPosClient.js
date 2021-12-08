@@ -16,15 +16,15 @@ export default function useMaticPosClient() {
   useEffect(() => {
     const web3 = new Web3(window.ethereum)
 
-    if (account) {
+    //if (account) {
       setPosClientParent(
         new MaticPOSClient({
           network: isMainnet ? 'mainnet' : 'testnet',
           version: isMainnet ? 'v1' : 'mumbai',
           parentProvider: web3,
           maticProvider: isMainnet ? config.WEB3_URLS.MATIC : config.WEB3_URLS.MUMBAI,
-          parentDefaultOptions: { from: account },
-          maticDefaultOptions: { from: account },
+          parentDefaultOptions: account ? { from: account } : {},
+          maticDefaultOptions: account ? { from: account } : {},
         }),
       )
 
@@ -34,11 +34,11 @@ export default function useMaticPosClient() {
           version: isMainnet ? 'v1' : 'mumbai',
           maticProvider: web3,
           parentProvider: isMainnet ? config.DEFAULT_WEB3_URL : config.WEB3_URLS.GOERLI,
-          parentDefaultOptions: { from: account },
-          maticDefaultOptions: { from: account },
+          parentDefaultOptions: account ? { from: account } : {},
+          maticDefaultOptions: account ? { from: account } : {},
         }),
       )
-    }
+    //}
   }, [account, isMainnet])
 
   return [posClientParent, posClientChild]
