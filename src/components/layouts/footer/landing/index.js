@@ -51,7 +51,7 @@ const LandingFooter = () => {
             </a>
             <a href="https://www.linkedin.com/company/digitalax-digital-fashion/" target="_blank">
               <img
-                src="/images/social-icons/linkedin_logo.png"
+                src="/images/social-icons/linkedin.png"
                 alt="linkedin-icon"
                 className={styles.linkedinIcon}
               />
@@ -93,21 +93,21 @@ const LandingFooter = () => {
             </a>
             <a href="https://digitalax.medium.com/" target="_blank">
               <img
-                src="/images/social-icons/medium-small.png"
+                src="/images/social-icons/medium.png"
                 alt="medium-icon"
                 className={styles.mediumIcon}
               />
             </a>
             <a href="https://t.me/digitalaxTG" target="_blank">
               <img
-                src="/images/social-icons/telegram-circle.png"
+                src="/images/social-icons/telegram.png"
                 alt="telegram-icon-1"
                 className={styles.mediumIcon}
               />
             </a>
             <a href="https://t.me/digitalaxannouncements" target="_blank">
               <img
-                src="/images/social-icons/telegram-circle.png"
+                src="/images/social-icons/telegram.png"
                 alt="telegram-icon-2"
                 className={styles.mediumIcon}
               />

@@ -1,0 +1,14 @@
+.realmSocialBarWrapper {
+  a {
+    margin-left: 10px;
+    margin-right: 10px;
+
+    img {
+      transition: 0.3s;
+      &:hover {
+        transition: 0.3s;
+        transform: scale(1.1);
+      }
+    }
+  }
+}

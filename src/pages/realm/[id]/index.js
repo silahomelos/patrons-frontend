@@ -4,6 +4,7 @@ import Image from 'next/image'
 
 import PatronTierCard from '@components/patron-tier-card'
 import PixelLoader from '@components/pixel-loader'
+import RealmSocialBar from '@components/realm-social-bar'
 
 import digitalaxApi from '@services/api/digitalaxApi.service'
 import {
@@ -23,6 +24,9 @@ import { getAllResultsFromQueryWithoutOwner } from '@helpers/thegraph.helpers'
 import {
   POLYGON_CHAINID
 } from '@constants/global.constants'
+import {
+  SOCIAL_SUPPORT_LIST
+} from '@constants/social.constants'
 
 import realms from 'src/data/realms.json'
 import styles from './styles.module.scss'
@@ -34,6 +38,21 @@ const getTierName = (strName, designerId) => {
 
 const getDescriptionList = strDescription => {
   return JSON.parse(strDescription.replaceAll(`'`, `"`))
+}
+
+const getAvailableSocialLinks = designerInfo => {
+
+  const socialLinks = []
+  designerInfo && SOCIAL_SUPPORT_LIST.forEach(socialName => {
+    if (designerInfo[socialName] && designerInfo[socialName] != '') {
+      socialLinks.push({
+        name: socialName,
+        link: designerInfo[socialName]
+      })
+    }
+  })
+
+  return socialLinks
 }
 
 const RealmPage = () => {
@@ -60,7 +79,6 @@ const RealmPage = () => {
     if (designers.length > 0) {
       currentDesigner = designers[0]
       setCurrentDesignerInfo(currentDesigner)
-
     }
 
     if (!currentDesigner) return
@@ -128,7 +146,7 @@ const RealmPage = () => {
       setTierOffers(currentOffers)
     }
 
-    console.log('currentOffers: ', currentOffers)
+    // console.log('currentOffers: ', currentOffers)
     setLoading(false)
   }
 
@@ -138,7 +156,6 @@ const RealmPage = () => {
     )
 
     setWEthPrice(payableTokenReport.payload / 1e18)
-    console.log('payableTokenReport.payload: ', payableTokenReport.payload / 1e18)
   }
 
   useEffect(() => {
@@ -169,7 +186,9 @@ const RealmPage = () => {
   }, [posClientParent, currentDeisngerInfo])
 
 
-  console.log('currentDeisngerInfo: ', currentDeisngerInfo)
+  // console.log('currentDeisngerInfo: ', currentDeisngerInfo)
+  const availableSocialLinks = getAvailableSocialLinks(currentDeisngerInfo)
+  // console.log('availableSocialLinks: ', availableSocialLinks)
 
   if (loading) {
     return (
@@ -239,6 +258,10 @@ const RealmPage = () => {
           {currentDeisngerInfo?.metaSourceContribution || 0}
           </div>
         </div>
+      </div>
+
+      <div className={styles.socialBar}>
+        <RealmSocialBar links={availableSocialLinks}/>
       </div>
 
       <div className={styles.subTitle}>
