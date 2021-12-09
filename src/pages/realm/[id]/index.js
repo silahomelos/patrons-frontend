@@ -264,6 +264,13 @@ const RealmPage = () => {
         <RealmSocialBar links={availableSocialLinks}/>
       </div>
 
+      {
+        currentRealm?.document &&
+        <div className={styles.viewDoc}>
+          View the documentation <a href={currentRealm?.document} target='_blank'>here</a> for more details on which each tier includes.
+        </div>
+      }
+
       <div className={styles.subTitle}>
         Patron NFT Tiers
       </div>

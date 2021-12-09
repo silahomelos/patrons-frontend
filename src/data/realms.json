@@ -3,24 +3,28 @@
     "name": "ALTERRAGE",
     "image": "/images/realm-avatars/realm_aleterage.png",
     "borderColor": "linear-gradient(136.5deg, #FF7A00 0%, #874100 48%, #AA7A00 102.4%)",
-    "designerId": "KALAU"
+    "designerId": "KALAU",
+    "document": "https://twitter.com/JamesLi58604570"
   },
   {
     "name": "Phoebe Heess",
     "image": "/images/realm-avatars/realm_phoebe.png",
     "borderColor": "linear-gradient(136.5deg, #FFFFFF 0%, #949494 48%, #2B230F 102.4%)",
-    "designerId": "Phoebe Heess"
+    "designerId": "Phoebe Heess",
+    "document": "https://twitter.com/JamesLi58604570"
   },
   {
     "name": "Alana",
     "image": "/images/realm-avatars/realm_alana.png",
     "borderColor": "linear-gradient(136.5deg, #EB00FF 0%, #4D0241 48%, #DA0069 102.4%)",
-    "designerId": "alanatheweb3girl"
+    "designerId": "alanatheweb3girl",
+    "document": "https://twitter.com/JamesLi58604570"
   },
   {
     "name": "T3CHN0M0RPH",
     "image": "/images/realm-avatars/realm_T3CHN0M0RPH.png",
     "borderColor": "linear-gradient(136.5deg, #0500FF 0%, #322820 48%, #3C3AB7 102.4%)",
-    "designerId": "KALAU"
+    "designerId": "KALAU",
+    "document": "https://twitter.com/JamesLi58604570"
   }
 ]
