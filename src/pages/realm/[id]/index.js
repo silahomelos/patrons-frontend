@@ -37,26 +37,11 @@ const getTierName = (strName, designerId) => {
   return strName.split(designerId + ' ')[1]
 }
 
-var tagsToReplace = {
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;'
-};
-
-function replaceTag(tag) {
-  return tagsToReplace[tag] || tag;
-}
-
-function safe_tags_replace(str) {
-  return str.replace(/[&<>]/g, replaceTag);
-}
-
 const getDescriptionList = strDescription => {
-  // return 
   // console.log('encode: ', safe_tags_replace(`["XX $PTH ERC-20.... <a href='https://Twitter.com' />", "XX $W3F Staking ...", "XX Utility Event..."]`))
-  console.log('encode: ', JSON.parse(`["XX $PTH ERC-20.... <a href='https://Twitter.com' />", "XX $W3F Staking ...", "XX Utility Event..."]`))
-  return JSON.parse(`["XX $PTH ERC-20.... <a href='https://Twitter.com' >test</a>", "XX $W3F Staking ...", "XX Utility Event..."]`)
-  // return JSON.parse(strDescription.replaceAll(`'`, `"`))
+  // console.log('encode: ', JSON.parse(`["XX $PTH ERC-20.... <a href='https://Twitter.com' />", "XX $W3F Staking ...", "XX Utility Event..."]`))
+  // return JSON.parse(`["XX $PTH ERC-20.... <a href='https://Twitter.com' >test</a>", "XX $W3F Staking ...", "XX Utility Event..."]`)
+  return JSON.parse(strDescription)
 }
 
 const getAvailableSocialLinks = designerInfo => {
