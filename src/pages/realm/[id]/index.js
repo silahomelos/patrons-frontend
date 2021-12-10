@@ -30,14 +30,33 @@ import {
 
 import realms from 'src/data/realms.json'
 import styles from './styles.module.scss'
+import { Twitter } from '@constants/icons-constants'
 
 const getTierName = (strName, designerId) => {
   console.log(strName.split(designerId + ' '))
   return strName.split(designerId + ' ')[1]
 }
 
+var tagsToReplace = {
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;'
+};
+
+function replaceTag(tag) {
+  return tagsToReplace[tag] || tag;
+}
+
+function safe_tags_replace(str) {
+  return str.replace(/[&<>]/g, replaceTag);
+}
+
 const getDescriptionList = strDescription => {
-  return JSON.parse(strDescription.replaceAll(`'`, `"`))
+  // return 
+  // console.log('encode: ', safe_tags_replace(`["XX $PTH ERC-20.... <a href='https://Twitter.com' />", "XX $W3F Staking ...", "XX Utility Event..."]`))
+  console.log('encode: ', JSON.parse(`["XX $PTH ERC-20.... <a href='https://Twitter.com' />", "XX $W3F Staking ...", "XX Utility Event..."]`))
+  return JSON.parse(`["XX $PTH ERC-20.... <a href='https://Twitter.com' >test</a>", "XX $W3F Staking ...", "XX Utility Event..."]`)
+  // return JSON.parse(strDescription.replaceAll(`'`, `"`))
 }
 
 const getAvailableSocialLinks = designerInfo => {
@@ -146,7 +165,7 @@ const RealmPage = () => {
       setTierOffers(currentOffers)
     }
 
-    // console.log('currentOffers: ', currentOffers)
+    console.log('currentOffers: ', currentOffers)
     setLoading(false)
   }
 

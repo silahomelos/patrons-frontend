@@ -115,6 +115,11 @@
         line-height: 110%;
         word-wrap: break-word;
         word-break: break-all;
+
+        a {
+          color: white;
+          text-decoration: underline;
+        }
       }
     }
 

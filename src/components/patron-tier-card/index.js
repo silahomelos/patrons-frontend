@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
@@ -104,8 +104,7 @@ const PatronTierCard = props => {
           {
             description && description.map((descItem, index) => {
               return (
-                <li key={index}>
-                  { descItem }
+                <li key={index} dangerouslySetInnerHTML={{__html: descItem }}>
                 </li>
               )
             })
