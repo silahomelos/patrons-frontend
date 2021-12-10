@@ -30,7 +30,6 @@ import {
 
 import realms from 'src/data/realms.json'
 import styles from './styles.module.scss'
-import { Twitter } from '@constants/icons-constants'
 
 const getTierName = (strName, designerId) => {
   console.log(strName.split(designerId + ' '))
@@ -41,7 +40,14 @@ const getDescriptionList = strDescription => {
   // console.log('encode: ', safe_tags_replace(`["XX $PTH ERC-20.... <a href='https://Twitter.com' />", "XX $W3F Staking ...", "XX Utility Event..."]`))
   // console.log('encode: ', JSON.parse(`["XX $PTH ERC-20.... <a href='https://Twitter.com' />", "XX $W3F Staking ...", "XX Utility Event..."]`))
   // return JSON.parse(`["XX $PTH ERC-20.... <a href='https://Twitter.com' >test</a>", "XX $W3F Staking ...", "XX Utility Event..."]`)
-  return JSON.parse(strDescription)
+  let result = ''
+  try {
+    result = JSON.parse(strDescription)
+  } catch {
+    result = JSON.parse(strDescription.replaceAll(`'`, `"`))
+  }
+  
+  return result
 }
 
 const getAvailableSocialLinks = designerInfo => {
