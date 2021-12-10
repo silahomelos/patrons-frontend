@@ -41,15 +41,17 @@ const getDescriptionList = strDescription => {
   // console.log('encode: ', JSON.parse(`["XX $PTH ERC-20.... <a href='https://Twitter.com' />", "XX $W3F Staking ...", "XX Utility Event..."]`))
   // return JSON.parse(`["XX $PTH ERC-20.... <a href='https://Twitter.com' >test</a>", "XX $W3F Staking ...", "XX Utility Event..."]`)
   let result = ''
+  const desc = strDescription.replace(/[‘’]/g, '')
+  // console.log('desci: ', desc)
   try {
-    result = JSON.parse(strDescription)
+    result = JSON.parse(desc)
   } catch {
-    console.log('a: ', strDescription.replaceAll(`'`, `"`))
-    
+    // console.log('a: ', desc.replaceAll(`'`, `"`))
+
     try {
-      result = JSON.parse(strDescription.replaceAll(`'`, `"`))
+      result = JSON.parse(desc.replaceAll(`'`, `"`))
     } catch {
-      result = [strDescription]
+      result = [desc]
     }
     
   }
