@@ -44,7 +44,14 @@ const getDescriptionList = strDescription => {
   try {
     result = JSON.parse(strDescription)
   } catch {
-    result = JSON.parse(strDescription.replaceAll(`'`, `"`))
+    console.log('a: ', strDescription.replaceAll(`'`, `"`))
+    
+    try {
+      result = JSON.parse(strDescription.replaceAll(`'`, `"`))
+    } catch {
+      result = [strDescription]
+    }
+    
   }
   
   return result
@@ -147,9 +154,13 @@ const RealmPage = () => {
       POLYGON_CHAINID
     )
 
+    console.log('patronMarketplaceOffers: ', patronMarketplaceOffers)
+
     const currentOffers = patronMarketplaceOffers.filter(offer =>
-      offer.garmentCollection.garments && offer.garmentCollection.garments.length > 0 &&
-      offer.garmentCollection.garments[0].name.toLowerCase().includes(currentDesigner.designerId.toLowerCase())
+      offer.garmentCollection.designer && offer.garmentCollection.designer.name &&
+      offer.garmentCollection.designer.name.toLowerCase() == currentDesigner.designerId.toLowerCase()
+      // offer.garmentCollection.garments && offer.garmentCollection.garments.length > 0 &&
+      // offer.garmentCollection.garments[0].name.toLowerCase().includes(currentDesigner.designerId.toLowerCase())
     )
 
     if (currentOffers) {
