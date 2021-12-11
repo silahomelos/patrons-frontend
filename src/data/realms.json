@@ -18,20 +18,20 @@
     "image": "/images/realm-avatars/realm_alana.png",
     "borderColor": "linear-gradient(136.5deg, #EB00FF 0%, #4D0241 48%, #DA0069 102.4%)",
     "designerId": "alanatheweb3girl",
-    "document": "https://alanatheweb3girl.gitbook.io/alanatheweb3girl/"
+    "document": "https://alanatheweb3girl.gitbook.io/alanatheweb3girl/patrons"
   },
   {
     "name": "T3CHN0M0RPH",
     "image": "/images/realm-avatars/realm_T3CHN0M0RPH.png",
     "borderColor": "linear-gradient(136.5deg, #0500FF 0%, #322820 48%, #3C3AB7 102.4%)",
     "designerId": "Stan Mclygin",
-    "document": "https://techn0m0rph.gitbook.io/technomorph/"
+    "document": "https://technomorph.gitbook.io/technomorph/web3-patrons"
   },
   {
     "name": "Keeping Distance",
     "image": "/images/realm-avatars/realm_kd.png",
     "borderColor": "linear-gradient(136.5deg, #00F0FF 0%, #0D00A5 48%, #E66B65 102.4%)",
     "designerId": "Keeping Distance",
-    "document": "https://keepingdistanceweb3.gitbook.io/keeping-distance/"
+    "document": "https://keepingdistanceweb3.gitbook.io/keeping-distance/realm-analytics/web3-patrons"
   }
 ]
