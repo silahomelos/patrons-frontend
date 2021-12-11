@@ -37,8 +37,15 @@ const getTierName = (strName, designerId) => {
 }
 
 const blockedCollections = [
+  '653',
+  '654',
+  '655',
+  '656',
+  '657',
+  '658',
   '673',
-  '675'
+  '675',
+  // '679',
 ]
 
 const getDescriptionList = strDescription => {
@@ -169,18 +176,38 @@ const RealmPage = () => {
     console.log('patronMarketplaceOffers: ', patronMarketplaceOffers)
 
     const currentOffers = patronMarketplaceOffers.filter(offer =>
-      !blockedCollections.find(blockedCollection => offer.garmentCollection.id == blockedCollection) &&
-      offer.garmentCollection.designer && offer.garmentCollection.designer.name &&
-      offer.garmentCollection.designer.name.toLowerCase() == currentDesigner.designerId.toLowerCase()
-      // offer.garmentCollection.garments && offer.garmentCollection.garments.length > 0 &&
-      // offer.garmentCollection.garments[0].name.toLowerCase().includes(currentDesigner.designerId.toLowerCase())
+      !blockedCollections.find(
+        blockedCollection => 
+          offer.garmentCollection.id == blockedCollection
+      ) &&
+      (
+        (
+          offer.garmentCollection.designer && offer.garmentCollection.designer.name &&
+          offer.garmentCollection.designer.name.toLowerCase() == currentDesigner.designerId.toLowerCase()
+        ) || 
+        (
+          (!offer.garmentCollection.designer || !offer.garmentCollection.designer.name || offer.garmentCollection.designer.name == '') &&
+          offer.garmentCollection.garments && offer.garmentCollection.garments.length > 0 &&
+          offer.garmentCollection.garments[0].name.toLowerCase().includes(currentDesigner.designerId.toLowerCase())
+        )
+      )
     )
 
     if (currentOffers) {
-      setTierOffers(currentOffers)
+      setTierOffers(currentOffers.sort((a, b) => {
+        const aTier = getTierName(a.garmentCollection.garments[0].name, currentDesigner.designerId).toLowerCase()
+        const bTier = getTierName(b.garmentCollection.garments[0].name, currentDesigner.designerId).toLowerCase()
+        if (aTier < bTier) {
+          return 1;
+        }
+        if (aTier > bTier) {
+          return -1;
+        }
+        return 0;  
+      }))
     }
 
-    console.log('currentOffers: ', currentOffers)
+    console.log('tierOffers: ', tierOffers)
     setLoading(false)
   }
 
@@ -311,7 +338,7 @@ const RealmPage = () => {
       
       <div className={styles.patronCardsList}>
         {
-          tierOffers.reverse().map(offer => {
+          tierOffers.map(offer => {
             const garment = offer.garmentCollection.garments[0]
             return (
               <PatronTierCard
