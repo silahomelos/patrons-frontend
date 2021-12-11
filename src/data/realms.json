@@ -4,27 +4,34 @@
     "image": "/images/realm-avatars/realm_aleterage.png",
     "borderColor": "linear-gradient(136.5deg, #FF7A00 0%, #874100 48%, #AA7A00 102.4%)",
     "designerId": "KALAU",
-    "document": "https://twitter.com/JamesLi58604570"
+    "document": ""
   },
   {
     "name": "Phoebe Heess",
     "image": "/images/realm-avatars/realm_phoebe.png",
     "borderColor": "linear-gradient(136.5deg, #FFFFFF 0%, #949494 48%, #2B230F 102.4%)",
     "designerId": "Phoebe Heess",
-    "document": "https://twitter.com/JamesLi58604570"
+    "document": "https://phoebe-heess.gitbook.io/phoebe-heess/web3-patrons"
   },
   {
     "name": "Alana",
     "image": "/images/realm-avatars/realm_alana.png",
     "borderColor": "linear-gradient(136.5deg, #EB00FF 0%, #4D0241 48%, #DA0069 102.4%)",
     "designerId": "alanatheweb3girl",
-    "document": "https://twitter.com/JamesLi58604570"
+    "document": "https://alanatheweb3girl.gitbook.io/alanatheweb3girl/"
   },
   {
     "name": "T3CHN0M0RPH",
     "image": "/images/realm-avatars/realm_T3CHN0M0RPH.png",
     "borderColor": "linear-gradient(136.5deg, #0500FF 0%, #322820 48%, #3C3AB7 102.4%)",
-    "designerId": "KALAU",
-    "document": "https://twitter.com/JamesLi58604570"
+    "designerId": "Stan Mclygin",
+    "document": "https://techn0m0rph.gitbook.io/technomorph/"
+  },
+  {
+    "name": "Keeping Distance",
+    "image": "/images/realm-avatars/realm_keepingdistance.png",
+    "borderColor": "linear-gradient(136.5deg, #00F0FF 0%, #0D00A5 48%, #E66B65 102.4%)",
+    "designerId": "Keeping Distance",
+    "document": "https://keepingdistanceweb3.gitbook.io/keeping-distance/"
   }
 ]
