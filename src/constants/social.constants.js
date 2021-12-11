@@ -7,5 +7,6 @@ export const SOCIAL_SUPPORT_LIST = [
   'discord',
   'medium',
   'youtube',
-  'linkedin'
+  'linkedin',
+  'website'
 ]

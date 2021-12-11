@@ -76,6 +76,11 @@ const getAvailableSocialLinks = designerInfo => {
     }
   })
 
+  designerInfo && socialLinks.push({
+    name: 'digitalax',
+    link: `https://designers.digitalax.xyz/designer/${designerInfo.designerId}`
+  })
+
   return socialLinks
 }
 
@@ -215,9 +220,9 @@ const RealmPage = () => {
   }, [posClientParent, currentDeisngerInfo])
 
 
-  // console.log('currentDeisngerInfo: ', currentDeisngerInfo)
+  console.log('currentDeisngerInfo: ', currentDeisngerInfo)
   const availableSocialLinks = getAvailableSocialLinks(currentDeisngerInfo)
-  // console.log('availableSocialLinks: ', availableSocialLinks)
+  console.log('availableSocialLinks: ', availableSocialLinks)
 
   if (loading) {
     return (
@@ -306,7 +311,7 @@ const RealmPage = () => {
       
       <div className={styles.patronCardsList}>
         {
-          tierOffers.map(offer => {
+          tierOffers.reverse().map(offer => {
             const garment = offer.garmentCollection.garments[0]
             return (
               <PatronTierCard
