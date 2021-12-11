@@ -33,7 +33,7 @@ const SwitchNetworkModal = () => {
           <div className={styles.footer}>
             <p className={styles.footerCaption}>
               <span>
-              You need to connect to Polygon Network to get champion a Realm!<br/>
+              You need to connect to Polygon Network to champion a Realm!<br/>
               Need to top up on tokens? You can get them from <a href="https://uniswap.org/" target="_blank">Uniswap</a>{' '}
               and bridge to Polygon with our custom <a href="https://skins.digitalax.xyz/bridge/" target="_blank">Multi-Token Bridge</a>. 
               Or, purchase directly from <a href="https://quickswap.exchange/" target="_blank">Quickswap</a>.
