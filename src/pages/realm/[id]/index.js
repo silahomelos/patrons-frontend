@@ -36,6 +36,11 @@ const getTierName = (strName, designerId) => {
   return strName.split(designerId + ' ')[1]
 }
 
+const blockedCollections = [
+  '673',
+  '675'
+]
+
 const getDescriptionList = strDescription => {
   // console.log('encode: ', safe_tags_replace(`["XX $PTH ERC-20.... <a href='https://Twitter.com' />", "XX $W3F Staking ...", "XX Utility Event..."]`))
   // console.log('encode: ', JSON.parse(`["XX $PTH ERC-20.... <a href='https://Twitter.com' />", "XX $W3F Staking ...", "XX Utility Event..."]`))
@@ -159,6 +164,7 @@ const RealmPage = () => {
     console.log('patronMarketplaceOffers: ', patronMarketplaceOffers)
 
     const currentOffers = patronMarketplaceOffers.filter(offer =>
+      !blockedCollections.find(blockedCollection => offer.garmentCollection.id == blockedCollection) &&
       offer.garmentCollection.designer && offer.garmentCollection.designer.name &&
       offer.garmentCollection.designer.name.toLowerCase() == currentDesigner.designerId.toLowerCase()
       // offer.garmentCollection.garments && offer.garmentCollection.garments.length > 0 &&
