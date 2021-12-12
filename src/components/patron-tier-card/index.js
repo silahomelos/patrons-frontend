@@ -39,7 +39,7 @@ const PatronTierCard = props => {
   const selectedCrypto = useSelector(getSelectedCrypto)
 
   const getPrice = () => {
-    const ethVal = parseFloat(price).toFixed(4)
+    const ethVal = parseFloat(price).toFixed(2)
     console.log(`${collectionId}: ${ ethVal } $${selectedCrypto}`)
     return (
       <>
