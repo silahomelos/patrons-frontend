@@ -189,7 +189,7 @@ const RealmPage = () => {
           offer.garmentCollection.designer.name.toLowerCase() == currentDesigner.designerId.toLowerCase()
         ) || 
         (
-          (!offer.garmentCollection.designer || !offer.garmentCollection.designer.name || offer.garmentCollection.designer.name == '') &&
+          // (!offer.garmentCollection.designer || !offer.garmentCollection.designer.name || offer.garmentCollection.designer.name == '') &&
           offer.garmentCollection.garments && offer.garmentCollection.garments.length > 0 &&
           offer.garmentCollection.garments[0].name.toLowerCase().includes(currentDesigner.designerId.toLowerCase())
         )
