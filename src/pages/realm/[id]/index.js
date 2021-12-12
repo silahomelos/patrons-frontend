@@ -61,7 +61,23 @@ const blockedCollections = [
   '678',
   '679',
   '680',
-  '681'
+  '681',
+  '683',
+  '684',
+  '685',
+  '686',
+  '687',
+  '688',
+  '689',
+  '690',
+  '691',
+  '692',
+  '693',
+  '694',
+  '694',
+  
+  
+  
 ]
 
 const getDescriptionList = strDescription => {
@@ -201,7 +217,7 @@ const RealmPage = () => {
       POLYGON_CHAINID
     )
 
-    // console.log('patronMarketplaceOffers: ', patronMarketplaceOffers)
+    console.log('patronMarketplaceOffers: ', patronMarketplaceOffers)
 
     const currentOffers = patronMarketplaceOffers.filter(offer =>
       !blockedCollections.find(
@@ -247,7 +263,6 @@ const RealmPage = () => {
       }))
     }
 
-    // console.log('tierOffers: ', tierOffers)
     setLoading(false)
   }
 
@@ -302,6 +317,7 @@ const RealmPage = () => {
   // console.log('cryptoPrice: ', cryptoPrice)
   const availableSocialLinks = getAvailableSocialLinks(currentDeisngerInfo)
   // console.log('tierOffers: ', tierOffers.map(item => item.primarySalePrice / 1e18))
+  console.log('tierOffers: ', tierOffers)
 
   if (loading) {
     return (
@@ -397,7 +413,7 @@ const RealmPage = () => {
                 key={garment.id}
                 collectionId={offer.garmentCollection.id}
                 realmName={currentDeisngerInfo.designerId}
-                tierName={getTierName(garment.name, currentDeisngerInfo.designerId)}
+                tierName={getTierName(garment.name, currentDeisngerInfo.designerId, currentRealm.oldDesignerId)}
                 price={offer.primarySalePrice * cryptoPrice / 1e18}
                 primarySalePrice={offer.primarySalePrice}
                 description={getDescriptionList(garment.description)}

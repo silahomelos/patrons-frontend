@@ -40,10 +40,10 @@ const PatronTierCard = props => {
 
   const getPrice = () => {
     const ethVal = parseFloat(price).toFixed(4)
-    console.log('exchangeRate:', exchangeRate)
+    // console.log('exchangeRate:', exchangeRate)
     return (
       <>
-        { ethVal } ${selectedCrypto}
+        {collectionId}: { ethVal } ${selectedCrypto}
         <span>
           {` `}(${(parseFloat(primarySalePrice) / 1e18).toFixed(2)})
         </span>
