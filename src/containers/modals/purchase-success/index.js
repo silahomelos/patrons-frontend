@@ -37,7 +37,7 @@ const PurchaseSuccess = ({ className }) => {
             </p>
             <div className={styles.selectWrapper}>
               <Button
-                background="pink"
+                background="black"
                 onClick={() => handleClick()}
                 className={styles.button}
               >
