@@ -21,6 +21,12 @@ import { POLYGON_CHAINID } from '@constants/global.constants'
 
 import styles from './styles.module.scss'
 
+const insertTarget = desc => {
+  // console.log('desc: ', desc.replaceAll(/(<a[^>]*)(>)/ig, '$1 target=_blank$2'))
+  return desc.replaceAll(/(<a[^>]*)(>)/ig, '$1 target=_blank$2')
+  // return Regex.Replace(desc, '(<a[^>]*>)(</a>)', 'target=_blank', RegexOptions.IgnoreCase)
+}
+
 const PatronTierCard = props => {
   const {
     collectionId,
@@ -43,7 +49,7 @@ const PatronTierCard = props => {
     console.log(`${collectionId}: ${ ethVal } $${selectedCrypto}`)
     return (
       <>
-        { ethVal } ${selectedCrypto}
+        { ethVal } ${selectedCrypto == 'weth' ? 'eth' : selectedCrypto}
         <span>
           {` `}(${Number((parseFloat(primarySalePrice) / 1e18).toFixed(2))})
         </span>
@@ -54,8 +60,8 @@ const PatronTierCard = props => {
   const onClickPatronRealmButton = () => {
     console.log('click patron realm button: ', account)
     if (account) {
-      console.log('chainId: ', chainId)
-      console.log('collectionId: ', collectionId)
+      // console.log('chainId: ', chainId)
+      // console.log('collectionId: ', collectionId)
 
       dispatch(cryptoActions.setSelectedCollectionId(collectionId))
       dispatch(cryptoActions.setPrice(primarySalePrice))
@@ -105,7 +111,7 @@ const PatronTierCard = props => {
           {
             description && description.map((descItem, index) => {
               return (
-                <li key={index} dangerouslySetInnerHTML={{__html: descItem }}>
+                <li key={index} dangerouslySetInnerHTML={{__html: insertTarget(descItem) }}>
                 </li>
               )
             })
