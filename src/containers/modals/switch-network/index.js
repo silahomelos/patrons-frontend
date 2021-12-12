@@ -33,10 +33,10 @@ const SwitchNetworkModal = () => {
           <div className={styles.footer}>
             <p className={styles.footerCaption}>
               <span>
-                YOU NEED TO CONNECT TO POLYGON NETWORK TO PATRON THIS REALM! NEED TO TOP UP? <br/>
-                YOU CAN GET TOKENS FROM <a href='https://uniswap.org/' target='_blank'>UNISWAP AND BRIDGE</a> {' '}
-                TO POLYGON WITH OUR CUSTOM <a href='https://skins.digitalax.xyz/bridge/' target='_blank'>MULTI-TOKEN BRIDGE</a>, 
-                OR, PURCHASE DIRECTLY FROM <a href='https://quickswap.exchange/' target='_blank'>QUICKSWAP</a>.
+              You need to connect to Polygon Network to champion a Realm!<br/>
+              Need to top up on tokens? You can get them from <a href="https://uniswap.org/" target="_blank">Uniswap</a>{' '}
+              and bridge to Polygon with our custom <a href="https://skins.digitalax.xyz/bridge/" target="_blank">Multi-Token Bridge</a>. 
+              Or, purchase directly from <a href="https://quickswap.exchange/" target="_blank">Quickswap</a>.
               </span>
             </p>
             <div className={styles.selectWrapper}>

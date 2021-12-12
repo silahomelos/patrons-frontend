@@ -54,7 +54,7 @@
 }
 
 .pink {
-  background: #ff2095;
+  background: #575556;
   color: white;
   border: 0;
 
@@ -63,7 +63,7 @@
   }
 
   &[disabled] {
-    background-color: rgba(#ff2095, 0.9);
+    background-color: rgba(#575556, 0.9);
     color: $darkGray3;
   }
 }

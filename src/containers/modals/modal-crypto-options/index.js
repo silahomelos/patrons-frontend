@@ -89,7 +89,6 @@ const ModalCryptoOptions = () => {
       {createPortal(
         <Modal onClose={() => handleClose()} className={styles.cryptoOptions}>
           <div className={styles.modalItem}>
-            <h1 className={styles.title}>Crypto</h1>
             <p className={styles.description}> Choose A Token To Patron The Realm. </p>
             <div className={styles.cryptoList}>
               <div

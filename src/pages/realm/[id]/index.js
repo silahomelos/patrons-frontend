@@ -45,6 +45,9 @@ const blockedCollections = [
   '658',
   '673',
   '675',
+  '676',
+  '677',
+  '678'
   // '679',
 ]
 
@@ -328,7 +331,7 @@ const RealmPage = () => {
       {
         currentRealm?.document &&
         <div className={styles.viewDoc}>
-          View the documentation <a href={currentRealm?.document} target='_blank'>here</a> for more details on which each tier includes.
+          View the documentation <a href={currentRealm?.document} target='_blank'>here</a> for more details on what each tier includes.
         </div>
       }
 
