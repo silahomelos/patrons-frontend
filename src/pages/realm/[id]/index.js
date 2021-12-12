@@ -31,9 +31,14 @@ import {
 import realms from 'src/data/realms.json'
 import styles from './styles.module.scss'
 
-const getTierName = (strName, designerId) => {
-  console.log(strName.split(designerId + ' '))
-  return strName.split(designerId + ' ')[1]
+const getTierName = (strName, designerId, oldDesignerId) => {
+  
+  let names = strName.split(designerId + ' ')
+  if (names.length < 2) {
+    names = strName.split(oldDesignerId + ' ')
+  }
+
+  return names[1]
 }
 
 const blockedCollections = [
@@ -186,20 +191,32 @@ const RealmPage = () => {
       (
         (
           offer.garmentCollection.designer && offer.garmentCollection.designer.name &&
-          offer.garmentCollection.designer.name.toLowerCase() == currentDesigner.designerId.toLowerCase()
+          (
+            offer.garmentCollection.designer.name.toLowerCase() == currentDesigner.designerId.toLowerCase() ||
+            (
+              currentRealm.oldDesignerId &&
+              offer.garmentCollection.designer.name.toLowerCase() == currentRealm.oldDesignerId.toLowerCase()
+            )
+          )
         ) || 
         (
           // (!offer.garmentCollection.designer || !offer.garmentCollection.designer.name || offer.garmentCollection.designer.name == '') &&
           offer.garmentCollection.garments && offer.garmentCollection.garments.length > 0 &&
-          offer.garmentCollection.garments[0].name.toLowerCase().includes(currentDesigner.designerId.toLowerCase())
+          ( 
+            offer.garmentCollection.garments[0].name.toLowerCase().includes(currentDesigner.designerId.toLowerCase()) ||
+            (
+              currentRealm.oldDesignerId &&
+              offer.garmentCollection.garments[0].name.toLowerCase().includes(currentRealm.oldDesignerId.toLowerCase())
+            )
+          )
         )
       )
     )
 
     if (currentOffers) {
       setTierOffers(currentOffers.sort((a, b) => {
-        const aTier = getTierName(a.garmentCollection.garments[0].name, currentDesigner.designerId).toLowerCase()
-        const bTier = getTierName(b.garmentCollection.garments[0].name, currentDesigner.designerId).toLowerCase()
+        const aTier = getTierName(a.garmentCollection.garments[0].name, currentDesigner.designerId, currentRealm.oldDesignerId).toLowerCase()
+        const bTier = getTierName(b.garmentCollection.garments[0].name, currentDesigner.designerId, currentRealm.oldDesignerId).toLowerCase()
         if (aTier < bTier) {
           return 1;
         }
