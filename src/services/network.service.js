@@ -73,7 +73,7 @@ export const getERC20ContractAddressByChainId = (tokenId, chainId) => {
   const network = getEnabledNetworkByChainId(chainId)
 
   if (!Object.keys(ERC20TokenAddresses).find(key => key == tokenId)) return null
-  return ERC20TokenAddresses[tokenId][network?.alias]
+  return ERC20TokenAddresses[tokenId][network?.alias].toLowerCase()
 }
 
 export const getMonaContractAddressByChainId = (chainId) => {

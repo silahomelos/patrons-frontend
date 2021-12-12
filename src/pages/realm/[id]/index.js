@@ -1,4 +1,5 @@
 import React, { memo, useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 
@@ -15,11 +16,16 @@ import {
 import {
   getGDNTokenAddress
 } from '@services/gdn.service'
-import { getWEthAddressByChainId } from '@services/network.service'
+import {
+  getERC20ContractAddressByChainId
+} from '@services/network.service'
 
 import useMaticPosClient from '@hooks/useMaticPosClient'
 
 import { getAllResultsFromQueryWithoutOwner } from '@helpers/thegraph.helpers'
+
+import { getSelectedCrypto } from '@selectors/crypto.selectors'
+import cryptoActions from '@actions/crypto.actions'
 
 import {
   POLYGON_CHAINID
@@ -52,8 +58,10 @@ const blockedCollections = [
   '675',
   '676',
   '677',
-  '678'
-  // '679',
+  '678',
+  '679',
+  '680',
+  '681'
 ]
 
 const getDescriptionList = strDescription => {
@@ -108,9 +116,21 @@ const RealmPage = () => {
   const [currentDeisngerInfo, setCurrentDesignerInfo] = useState(null)
   const [fgoCount, setFgoCount] = useState(0)
   const [gdnBalance, setGDNBalance] = useState(0)
-  const [wEthPrice, setWEthPrice] = useState(1)
+  const [cryptoPrice, setCryptoPrice] = useState(1)
   const [tierOffers, setTierOffers] = useState([])
   const [posClientParent, posClientChild] = useMaticPosClient()
+
+  const dispatch = useDispatch()
+  const selectedCrypto = useSelector(getSelectedCrypto)
+
+  // console.log('selectedCrypto: ', selectedCrypto)
+
+  
+  useEffect(() => {
+    if (window.localStorage.getItem('CRYPTO_OPTION')) {
+      dispatch(cryptoActions.setCrypto(window.localStorage.getItem('CRYPTO_OPTION') || ''))
+    }
+  }, [])
 
   async function loadDesignerInfo() {
     setLoading(true)
@@ -144,7 +164,7 @@ const RealmPage = () => {
       'digitalaxMaterialV2S', 
       POLYGON_CHAINID
     )
-    console.log('materials: ', digitalaxMaterialV2S)
+    // console.log('materials: ', digitalaxMaterialV2S)
     const materials = []
     if (digitalaxMaterialV2S) {
       for (const item of digitalaxMaterialV2S) {
@@ -181,7 +201,7 @@ const RealmPage = () => {
       POLYGON_CHAINID
     )
 
-    console.log('patronMarketplaceOffers: ', patronMarketplaceOffers)
+    // console.log('patronMarketplaceOffers: ', patronMarketplaceOffers)
 
     const currentOffers = patronMarketplaceOffers.filter(offer =>
       !blockedCollections.find(
@@ -227,22 +247,34 @@ const RealmPage = () => {
       }))
     }
 
-    console.log('tierOffers: ', tierOffers)
+    // console.log('tierOffers: ', tierOffers)
     setLoading(false)
   }
 
-  const fetchWEthPrice = async () => {
-    const { payableTokenReport } = await getPayableTokenReport(
-      POLYGON_CHAINID, getWEthAddressByChainId(POLYGON_CHAINID)
+  const fetchCryptoPrice = async crypto => {
+    const erc20ContractAddress = getERC20ContractAddressByChainId(crypto.toLowerCase(), POLYGON_CHAINID)
+
+    const result = await getPayableTokenReport(
+      POLYGON_CHAINID, erc20ContractAddress
     )
 
-    setWEthPrice(payableTokenReport.payload / 1e18)
+    if (!result) return
+    const { payableTokenReport } = result
+
+    if (!payableTokenReport) return
+
+    setCryptoPrice(payableTokenReport.payload / 1e18)
   }
 
   useEffect(() => {
-    fetchWEthPrice()
     loadDesignerInfo()
   }, [])
+
+  useEffect(() => {
+    if (selectedCrypto) { 
+      fetchCryptoPrice(selectedCrypto)
+    }
+  }, [selectedCrypto])
 
   const loadGDNBalance = async () => {
     try {
@@ -267,9 +299,9 @@ const RealmPage = () => {
   }, [posClientParent, currentDeisngerInfo])
 
 
-  console.log('currentDeisngerInfo: ', currentDeisngerInfo)
+  // console.log('cryptoPrice: ', cryptoPrice)
   const availableSocialLinks = getAvailableSocialLinks(currentDeisngerInfo)
-  console.log('availableSocialLinks: ', availableSocialLinks)
+  // console.log('tierOffers: ', tierOffers.map(item => item.primarySalePrice / 1e18))
 
   if (loading) {
     return (
@@ -366,7 +398,7 @@ const RealmPage = () => {
                 collectionId={offer.garmentCollection.id}
                 realmName={currentDeisngerInfo.designerId}
                 tierName={getTierName(garment.name, currentDeisngerInfo.designerId)}
-                price={offer.primarySalePrice * wEthPrice / 1e18}
+                price={offer.primarySalePrice * cryptoPrice / 1e18}
                 primarySalePrice={offer.primarySalePrice}
                 description={getDescriptionList(garment.description)}
               />      

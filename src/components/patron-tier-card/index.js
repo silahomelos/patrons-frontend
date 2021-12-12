@@ -11,14 +11,13 @@ import {
 import cryptoActions from '@actions/crypto.actions'
 
 import { getExchangeRateETH, getChainId } from '@selectors/global.selectors'
+import { getSelectedCrypto } from '@selectors/crypto.selectors'
 import { getAccount } from '@selectors/user.selectors'
 
 import GrayButton from '@components/buttons/gray-button'
 import PriceCard from '@components/price-card'
 
 import { POLYGON_CHAINID } from '@constants/global.constants'
-
-import { getPayableTokenReport } from '@services/api/apiService'
 
 import styles from './styles.module.scss'
 
@@ -35,16 +34,18 @@ const PatronTierCard = props => {
   const exchangeRate = useSelector(getExchangeRateETH)
   const chainId = useSelector(getChainId)
   const account = useSelector(getAccount)
+
   const dispatch = useDispatch()
+  const selectedCrypto = useSelector(getSelectedCrypto)
 
   const getPrice = () => {
     const ethVal = parseFloat(price).toFixed(4)
-    console.log('ethVal:', typeof ethVal)
+    console.log('exchangeRate:', exchangeRate)
     return (
       <>
-        { ethVal } $ETH
+        { ethVal } ${selectedCrypto}
         <span>
-          {` `}(${(parseFloat(price) * exchangeRate).toFixed(2)})
+          {` `}(${(parseFloat(primarySalePrice) / 1e18).toFixed(2)})
         </span>
       </>
     )
