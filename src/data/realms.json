@@ -17,7 +17,7 @@
   {
     "name": "TECHN0M0RPH",
     "image": "/images/realm-avatars/realm_techno.png",
-    "borderColor": "linear-gradient(136.5deg, #0500FF 0%, #322820 48%, #3C3AB7 102.4%)",
+    "borderColor": "linear-gradient(136.5deg, #5C7676 0%, #322820 48%, #88725C 102.4%)",
     "designerId": "TECHN0M0RPH",
     "document": "https://technomorph.gitbook.io/technomorph/web3-patrons"
   },
@@ -31,7 +31,7 @@
   {
     "name": "Progression",
     "image": "/images/realm-avatars/realm_progression.png",
-    "borderColor": "linear-gradient(136.5deg, #554D56 0%, #2E1E2B 48%, #13010A 102.4%)",
+    "borderColor": "linear-gradient(136.5deg, #1D1D1C 0%, #4B4A48 48%, #13010A 102.4%)",
     "designerId": "Progression",
     "document": "https://progression-realm.gitbook.io/welcome-to-progression/"
   },
