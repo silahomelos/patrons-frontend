@@ -1,12 +1,5 @@
 [
   {
-    "name": "ALTERRAGE",
-    "image": "/images/realm-avatars/realm_aleterage.png",
-    "borderColor": "linear-gradient(136.5deg, #FF7A00 0%, #874100 48%, #AA7A00 102.4%)",
-    "designerId": "ALTERRAGE",
-    "document": ""
-  },
-  {
     "name": "Phoebe Heess",
     "image": "/images/realm-avatars/realm_phoebe.png",
     "borderColor": "linear-gradient(136.5deg, #FFFFFF 0%, #949494 48%, #2B230F 102.4%)",
@@ -34,5 +27,19 @@
     "borderColor": "linear-gradient(136.5deg, #00F0FF 0%, #0D00A5 48%, #E66B65 102.4%)",
     "designerId": "Keeping Distance",
     "document": "https://keepingdistanceweb3.gitbook.io/keeping-distance/realm-analytics/web3-patrons"
+  },
+  {
+    "name": "Progression",
+    "image": "/images/realm-avatars/realm_progression.png",
+    "borderColor": "linear-gradient(136.5deg, #554D56 0%, #2E1E2B 48%, #13010A 102.4%)",
+    "designerId": "Progression",
+    "document": "https://progression-realm.gitbook.io/welcome-to-progression/"
+  },
+  {
+    "name": "Plug Life",
+    "image": "/images/realm-avatars/realm_plug.png",
+    "borderColor": "linear-gradient(136.5deg, #56E3FF 0%, #E4556C 48%, #9FE38E 102.4%)",
+    "designerId": "Plug Life",
+    "document": "https://pluglife.gitbook.io/plug-life/"
   }
 ]
