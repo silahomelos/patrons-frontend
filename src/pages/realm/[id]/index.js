@@ -188,7 +188,7 @@ const RealmPage = () => {
     )
     // console.log('materials: ', digitalaxMaterialV2S)
     const materials = []
-    if (digitalaxMaterialV2S) {
+    if (digitalaxMaterialV2S) { 
       for (const item of digitalaxMaterialV2S) {
         if (item.attributes.length <= 0) continue
         try {
@@ -223,7 +223,7 @@ const RealmPage = () => {
       POLYGON_CHAINID
     )
 
-    console.log('patronMarketplaceOffers: ', patronMarketplaceOffers)
+    // console.log('patronMarketplaceOffers: ', patronMarketplaceOffers)
 
     const currentOffers = patronMarketplaceOffers.filter(offer =>
       !blockedCollections.find(
@@ -323,7 +323,7 @@ const RealmPage = () => {
   // console.log('cryptoPrice: ', cryptoPrice)
   const availableSocialLinks = getAvailableSocialLinks(currentDeisngerInfo)
   // console.log('tierOffers: ', tierOffers.map(item => item.primarySalePrice / 1e18))
-  console.log('tierOffers: ', tierOffers)
+  // console.log('tierOffers: ', tierOffers)
 
   if (loading) {
     return (
