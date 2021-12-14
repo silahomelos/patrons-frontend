@@ -48,5 +48,12 @@
     "borderColor": "linear-gradient(136.5deg, #FF7A00 0%, #874100 48%, #AA7A00 102.4%)",
     "designerId": "ALETERRAGE",
     "document": "https://alterrage.gitbook.io/alterrage/"
+  },
+  {
+    "name": "RAW Apparel",
+    "image": "/images/realm-avatars/realm_raw.png",
+    "borderColor": "linear-gradient(136.5deg, #5D9C41 0%, #008705 48%, #35392B 102.4%)",
+    "designerId": "RAW Apparel",
+    "document": "https://raw-apparel.gitbook.io/internal-wiki/"
   }
 ]
