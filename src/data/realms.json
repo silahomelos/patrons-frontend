@@ -41,5 +41,12 @@
     "borderColor": "linear-gradient(136.5deg, #56E3FF 0%, #E4556C 48%, #9FE38E 102.4%)",
     "designerId": "Plug Life",
     "document": "https://pluglife.gitbook.io/plug-life/"
+  },
+  {
+    "name": "ALETERRAGE",
+    "image": "/images/realm-avatars/realm_alter.png",
+    "borderColor": "linear-gradient(136.5deg, #FF7A00 0%, #874100 48%, #AA7A00 102.4%)",
+    "designerId": "ALETERRAGE",
+    "document": "https://alterrage.gitbook.io/alterrage/"
   }
 ]
