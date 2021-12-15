@@ -110,6 +110,7 @@ const PatronTierCard = props => {
         <ul>
           {
             description && description.map((descItem, index) => {
+              console.log('descItem: ', insertTarget(descItem))
               return (
                 <li key={index} dangerouslySetInnerHTML={{__html: insertTarget(descItem) }}>
                 </li>
