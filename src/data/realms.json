@@ -4,7 +4,8 @@
     "image": "/images/realm-avatars/realm_phoebe.png",
     "borderColor": "linear-gradient(136.5deg, #FFFFFF 0%, #949494 48%, #2B230F 102.4%)",
     "designerId": "Phoebe Heess",
-    "document": "https://phoebe-heess.gitbook.io/phoebe-heess/web3-patrons"
+    "document": "https://phoebe-heess.gitbook.io/phoebe-heess/web3-patrons",
+    "tags": ["phygital", "digitalax", "test"]
   },
   {
     "name": "Alana",
@@ -12,48 +13,55 @@
     "borderColor": "linear-gradient(136.5deg, #EB00FF 0%, #4D0241 48%, #DA0069 102.4%)",
     "designerId": "Alana the Web3 Girl",
     "oldDesignerId": "Alana",
-    "document": "https://alanatheweb3girl.gitbook.io/alanatheweb3girl/patrons"
+    "document": "https://alanatheweb3girl.gitbook.io/alanatheweb3girl/patrons",
+    "tags": ["phygital", "digitalax", "Web3", "Model"]
   },
   {
     "name": "TECHN0M0RPH",
     "image": "/images/realm-avatars/realm_techno.png",
     "borderColor": "linear-gradient(136.5deg, #5C7676 0%, #322820 48%, #88725C 102.4%)",
     "designerId": "TECHN0M0RPH",
-    "document": "https://technomorph.gitbook.io/technomorph/web3-patrons"
+    "document": "https://technomorph.gitbook.io/technomorph/web3-patrons",
+    "tags": ["phygital", "digitalax", "Web3", "test2", "james", "test", "hey", "hello"]
   },
   {
     "name": "Keeping Distance",
     "image": "/images/realm-avatars/realm_kd.png",
     "borderColor": "linear-gradient(136.5deg, #00F0FF 0%, #0D00A5 48%, #E66B65 102.4%)",
     "designerId": "Keeping Distance",
-    "document": "https://keepingdistanceweb3.gitbook.io/keeping-distance/realm-analytics/web3-patrons"
+    "document": "https://keepingdistanceweb3.gitbook.io/keeping-distance/realm-analytics/web3-patrons",
+    "tags": ["phygital", "digitalax", "Web3", "test2"]
   },
   {
     "name": "Progression",
     "image": "/images/realm-avatars/realm_progression.png",
     "borderColor": "linear-gradient(136.5deg, #1D1D1C 0%, #4B4A48 48%, #13010A 102.4%)",
     "designerId": "Progression",
-    "document": "https://progression-realm.gitbook.io/welcome-to-progression/"
+    "document": "https://progression-realm.gitbook.io/welcome-to-progression/",
+    "tags": ["phygital", "digitalax", "Web3", "test2"]
   },
   {
     "name": "Plug Life",
     "image": "/images/realm-avatars/realm_plug.png",
     "borderColor": "linear-gradient(136.5deg, #56E3FF 0%, #E4556C 48%, #9FE38E 102.4%)",
     "designerId": "Plug Life",
-    "document": "https://pluglife.gitbook.io/plug-life/"
+    "document": "https://pluglife.gitbook.io/plug-life/",
+    "tags": ["phygital", "digitalax", "Web3", "test2"]
   },
   {
     "name": "ALTERRAGE",
     "image": "/images/realm-avatars/realm_alter.png",
     "borderColor": "linear-gradient(136.5deg, #FF7A00 0%, #874100 48%, #AA7A00 102.4%)",
     "designerId": "ALTERRAGE",
-    "document": "https://alterrage.gitbook.io/alterrage/"
+    "document": "https://alterrage.gitbook.io/alterrage/",
+    "tags": ["phygital", "digitalax", "Web3", "test2"]
   },
   {
     "name": "RAW Apparel",
     "image": "/images/realm-avatars/realm_raw.png",
     "borderColor": "linear-gradient(136.5deg, #5D9C41 0%, #008705 48%, #35392B 102.4%)",
     "designerId": "RAW Apparel",
-    "document": "https://raw-apparel.gitbook.io/internal-wiki/"
+    "document": "https://raw-apparel.gitbook.io/internal-wiki/",
+    "tags": ["phygital", "digitalax", "Web3", "test2"]
   }
 ]
