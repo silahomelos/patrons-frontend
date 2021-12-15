@@ -39,9 +39,13 @@ import styles from './styles.module.scss'
 
 const getTierName = (strName, designerId, oldDesignerId) => {
   
-  let names = strName.split(designerId + ' ')
+  let names = strName.toLowerCase().split(designerId.toLowerCase() + ' ')
   if (names.length < 2) {
-    names = strName.split(oldDesignerId + ' ')
+    names = strName.toLowerCase().split(oldDesignerId.toLowerCase() + ' ')
+  }
+
+  if (names[1].length > 1) {
+    return names[1][0].toUpperCase() + names[1].slice(1)
   }
 
   return names[1]
@@ -132,6 +136,8 @@ const getAvailableSocialLinks = designerInfo => {
 const RealmPage = () => {
   const router = useRouter()
   const { id } = router.query
+  console.log('id: ', id)
+  console.log('realms: ', realms)
   const currentRealm = realms.find(realm => realm.name.toLowerCase() === id.toLowerCase())
   
   const [loading, setLoading] = useState(false)
@@ -223,7 +229,7 @@ const RealmPage = () => {
       POLYGON_CHAINID
     )
 
-    // console.log('patronMarketplaceOffers: ', patronMarketplaceOffers)
+    console.log('patronMarketplaceOffers: ', patronMarketplaceOffers)
 
     const currentOffers = patronMarketplaceOffers.filter(offer =>
       !blockedCollections.find(
@@ -323,7 +329,7 @@ const RealmPage = () => {
   // console.log('cryptoPrice: ', cryptoPrice)
   const availableSocialLinks = getAvailableSocialLinks(currentDeisngerInfo)
   // console.log('tierOffers: ', tierOffers.map(item => item.primarySalePrice / 1e18))
-  // console.log('tierOffers: ', tierOffers)
+  console.log('tierOffers: ', tierOffers)
 
   if (loading) {
     return (
