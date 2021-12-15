@@ -7,6 +7,7 @@ import styles from './styles.module.scss'
 const RealmCard = ({
   realmName,
   image,
+  tags,
   borderColor,
   linkName
 }) => {
@@ -15,6 +16,19 @@ const RealmCard = ({
     <div className={styles.realmInfoCardwrapper}>
       <div className={styles.title}>
         { realmName } Realm
+      </div>
+      <div className={styles.tagsWrapper}>
+      { 
+        tags && tags.map(item => {
+          return (
+            <div className={styles.tag} key={item}>
+              {
+                item
+              }
+            </div>
+          )
+        })
+      }
       </div>
       <div className={styles.imageWrapper} style={{
         background: `${borderColor}`

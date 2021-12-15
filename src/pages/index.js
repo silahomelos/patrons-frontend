@@ -1,14 +1,20 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Router } from 'next/router'
 import Head from 'next/head'
 
 import Container from '@components/container'
 import RealmCard from '@components/realm-card'
+import Filters from '@components/filters'
+
+import { filterRealms } from '@utils/helpers'
 
 import realms from 'src/data/realms.json'
 import styles from './styles.module.scss'
 
 const LandingPage = () => {
+  const [filter, setFilter] = useState('')
+  const [categories, setCategories] = useState([])
+  
   useEffect(() => {
     import('react-facebook-pixel')
       .then((x) => x.default)
@@ -67,19 +73,24 @@ const LandingPage = () => {
         </p>
       </section>
 
+      <section className={styles.filterWrapper}>
+        <Filters filter={filter} setFilter={setFilter} setCategories={setCategories} />
+      </section>
+
       <Container>
         <section className={styles.realmsWrapper}>
           {
-            realms.map(realm => {
+            filterRealms(realms, filter, categories).map(realm => {
               return (
-                <>
+                <div key={realm.name}>
                   <RealmCard
                     realmName={realm.name}
+                    tags={realm.tags}
                     image={realm.image}
                     borderColor={realm.borderColor}
                     linkName={realm.name}
                   />
-                </>
+                </div>
               )
             })
           }

@@ -17,12 +17,33 @@
     font-weight: 800;
     font-size: 36px;
     line-height: 44px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     width: fit-content;
     color: #FFFFFF;
 
     @include lg-width {
       width: 100%;
+    }
+  }
+
+  .tagsWrapper {
+    width: 35vw;
+    max-width: 580px;
+    min-width: 300px;
+    
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1px 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+
+    .tag {
+      border: 0.3px solid #FFFFFF;
+      padding: 5px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      font-family: Gilroy;
     }
   }
 

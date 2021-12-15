@@ -52,6 +52,22 @@
     }
   }
 
+  .filterWrapper {
+    width: 100%;
+    padding-right: 20px;
+    padding-left: 20px;
+
+    @include sm-width {
+      padding-right: 50px;
+      padding-left: 50px;
+    }
+
+    @include md-width {
+      padding-right: 100px;
+      padding-left: 100px;
+    }
+  }
+
   .realmsWrapper {
     display: grid;
     grid-template-columns: 1fr;
