@@ -189,4 +189,3 @@ export const getGuildWhitelistedNFTStakersByGarments = async (garmentIDs, first=
 export const getGuildWhitelistedNFTStakersByStaker = async (staker, first=1000, lastID='') =>
   apiRequest(GUILD_WHITELISTED_NFT_STAKERS_BY_STAKER, { staker, first, lastID })
 
-

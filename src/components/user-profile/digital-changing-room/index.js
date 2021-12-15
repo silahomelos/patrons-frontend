@@ -23,11 +23,15 @@ import {
   getDigitalaxLookNFTsByOwner,
   getDigitalaxGarmentV2CollectionsByGarmentIDs,
   getDigitalaxLookGoldenTicketsByOwner,
-  getGuildWhitelistedNFTStakersByStaker
+  getGuildWhitelistedNFTStakersByStaker,
+  getPatronMarketplaceOffers
 } from '@services/api/apiService'
 
 import { generateLookImage, getRarityId } from '@utils/helpers'
-import { getAllResultsFromQuery } from '@helpers/thegraph.helpers'
+import {
+  getAllResultsFromQuery,
+  getAllResultsFromQueryWithoutOwner
+ } from '@helpers/thegraph.helpers'
 
 import config from '@utils/config'
 
@@ -43,7 +47,8 @@ import {
   GENESIS_MONA_NFT,
   LOOK_FASHION_LOOT,
   PODE,
-  GDN_MEMBERSHIP_NFT
+  GDN_MEMBERSHIP_NFT,
+  PATRON_REALM_NFT
 } from '@constants/nft_categories'
 
 import {
@@ -59,7 +64,8 @@ const categories = [
   GENESIS_MONA_NFT,
   LOOK_FASHION_LOOT,
   PODE,
-  GDN_MEMBERSHIP_NFT
+  GDN_MEMBERSHIP_NFT,
+  PATRON_REALM_NFT
 ]
 
 const DigitalChangingRoom = props => {
@@ -103,6 +109,18 @@ const DigitalChangingRoom = props => {
         POLYGON_CHAINID,
         owner
       )
+
+      const patronMarketplaceOffers = await getAllResultsFromQueryWithoutOwner(
+        getPatronMarketplaceOffers, 
+        'patronMarketplaceOffers', 
+        POLYGON_CHAINID
+      )
+
+      const patronCollectionIDs = patronMarketplaceOffers && patronMarketplaceOffers.length
+        ? patronMarketplaceOffers.map(offer => parseInt(offer.id))
+        : []
+
+      // console.log('patronCollectionIDs: ', patronCollectionIDs)
 
       const digitalaxStakedNFTsPolygon = 
         digitalaxNFTStakersPolygon && digitalaxNFTStakersPolygon.length > 0 
@@ -163,6 +181,20 @@ const DigitalChangingRoom = props => {
       const digitalaxNFTV2sPolygonNonDrip = [].concat.apply([], 
         availableCollections.filter(
           item => DRIP_COLLECTION_IDS.indexOf(parseInt(item.id)) < 0
+          && patronCollectionIDs.indexOf(parseInt(item.id)) < 0
+        ).map(item => {
+          return item.garments.map(garment => {
+            return {
+              ...garment,
+              collectionId: item.id
+            }
+          })
+        })
+      )
+
+      const patronNFTS = [].concat.apply([], 
+        availableCollections.filter(
+          item => patronCollectionIDs.indexOf(parseInt(item.id))
         ).map(item => {
           return item.garments.map(garment => {
             return {
@@ -180,6 +212,7 @@ const DigitalChangingRoom = props => {
       ].filter(
         garment => digitalaxNFTV2sPolygonDrip.findIndex(item => item.id == garment.id) < 0
         && digitalaxNFTV2sPolygonNonDrip.findIndex(item => item.id == garment.id) < 0
+        && patronNFTS.findIndex(item => item.id == garment.id) < 0
       )
 
       // console.log('digitalaxNFTV2sPolygonDrip: ', digitalaxNFTV2sPolygonDrip)
@@ -360,6 +393,8 @@ const DigitalChangingRoom = props => {
       ]
 
       fetchedNFTs[GDN_MEMBERSHIP_NFT] = [...gdnMembershipNFTsPolygon.map(item => { return {...item, type: 'gdnMembershipNFTsPolygon'} })]
+
+      fetchedNFTs[PATRON_REALM_NFT] = [...patronNFTS.map(item => { return {...item, type: 'patronRealmNFTsPolygon'} })]
 
       setOwnedNFTs(fetchedNFTs)
     }

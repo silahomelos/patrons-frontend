@@ -853,3 +853,4 @@ export const GUILD_WHITELISTED_NFT_STAKERS_BY_STAKER = gql`
     }
   }
 `
+
