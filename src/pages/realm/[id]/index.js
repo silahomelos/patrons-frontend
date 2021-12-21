@@ -88,6 +88,7 @@ const blockedCollections = [
   '704',
   '705',
   '706',
+  '735',
 ]
 
 const getDescriptionList = strDescription => {
