@@ -71,5 +71,13 @@
     "designerId": "STABIYA",
     "document": "https://stabiys-1.gitbook.io/untitled/",
     "tags": ["digital", "samizdat", "interoperability"]
+  },
+  {
+    "name": "Random Variable",
+    "image": "/images/realm-avatars/realm_random.png",
+    "borderColor": "linear-gradient(136.5deg, #31BA29 0%, #305F27 48%, #262626 102.4%)",
+    "designerId": "Random Variable",
+    "document": "https://randoiable.gitbook.io/random-variable/",
+    "tags": ["phygital", "industrial", "circularity"]
   }
 ]
