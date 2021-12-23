@@ -133,7 +133,7 @@ const getAvailableSocialLinks = designerInfo => {
 
   designerInfo && socialLinks.push({
     name: 'digitalax',
-    link: `https://designers.digitalax.xyz/designer/${designerInfo.designerId}`
+    link: `https://designers.digitalax.xyz/designers/${designerInfo.designerId}`
   })
 
   return socialLinks
