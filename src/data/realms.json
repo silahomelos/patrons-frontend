@@ -79,5 +79,13 @@
     "designerId": "Random Variable",
     "document": "https://randoiable.gitbook.io/random-variable/",
     "tags": ["phygital", "industrial", "circularity"]
+  },
+  {
+    "name": "F₃Manifesto",
+    "image": "/images/realm-avatars/realm_manifesto.png",
+    "borderColor": "linear-gradient(136.5deg, #FFEF62 0%, #4E4AFF 102.4%)",
+    "designerId": "F₃Manifesto",
+    "document": "https://digitalax.gitbook.io/f-manifesto/",
+    "tags": ["phygital", "IP freedom", "web2 antithesis"]
   }
 ]
