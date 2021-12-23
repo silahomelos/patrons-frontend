@@ -1,4 +1,4 @@
-@import '.../../../assets/scss/helpers/grid.scss';
+@import '.../../../../assets/scss/helpers/grid.scss';
 
 .wrapper {
   background-color: black;
@@ -28,7 +28,7 @@
       font-family: Orbitron;
       font-style: normal;
       font-weight: 900;
-      font-size: 28px;
+      font-size: 30px;
       line-height: 125%;
 
       color: #FFFFFF;
@@ -52,37 +52,33 @@
     }
   }
 
-  .contentWrapper {
-    padding-left: 10%;
-    padding-right: 10%;
-    padding-bottom: 100px;
+  .filterWrapper {
+    width: 100%;
+    padding-right: 20px;
+    padding-left: 20px;
 
-    .description {
-      font-family: Gilroy;
-      font-size: 14px;
-      line-height: 110%;
-      text-align: center;
-      
-      color: #FFFFFF;
-
-      @include sm-width {
-        font-size: 2vw;
-      }
+    @include sm-width {
+      padding-right: 50px;
+      padding-left: 50px;
     }
 
-    .buttons {
-      margin: auto;
-      width: 300px;
-      display: flex;
-      flex-direction: column;
-      color: #FFFFFF;
-      margin-top: 40px;
+    @include md-width {
+      padding-right: 100px;
+      padding-left: 100px;
+    }
+  }
 
-      .button {
-        margin-top: 40px;
-        border: 1px solid white;
-        line-height: 150%;
-      }
+  .realmsWrapper {
+    display: grid;
+    grid-template-columns: 1fr;
+    background-color: transparent;
+    column-gap: 5rem;
+    row-gap: 10rem;
+    padding: 7rem 2rem;
+    justify-items: center;
+
+    @include lg-width {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 }

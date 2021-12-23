@@ -1,20 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Router } from 'next/router'
 import Head from 'next/head'
-
-import Container from '@components/container'
-import RealmCard from '@components/realm-card'
-import Filters from '@components/filters'
-
-import { filterRealms } from '@utils/helpers'
-
-import realms from 'src/data/realms.json'
 import styles from './styles.module.scss'
+import Button from '@components/buttons/button'
 
 const LandingPage = () => {
-  const [filter, setFilter] = useState('')
-  const [categories, setCategories] = useState([])
-  
   useEffect(() => {
     import('react-facebook-pixel')
       .then((x) => x.default)
@@ -45,7 +35,7 @@ const LandingPage = () => {
           name="description"
           content="Take your digital fashion skins to the next level: directly into indie games & mods, where players from amateur to pro can start to earn a livelihood through play, without sacrificing our love of the game. ESPA is the first casual esports platform, with direct integration with DIGITALAX NFT skins on Matic Network. "
         />
-        <meta property="og:title" content="Digitalax - Web3 Fashion Economy" />
+        <meta property="og:title" content="Digitalax - Patron Web3 Fashion Realms" />
         <meta
           property="og:description"
           content="Take your digital fashion skins to the next level: directly into indie games & mods, where players from amateur to pro can start to earn a livelihood through play, without sacrificing our love of the game. ESPA is the first casual esports platform, with direct integration with DIGITALAX NFT skins on Matic Network. "
@@ -53,7 +43,7 @@ const LandingPage = () => {
         <meta property="og:url" content="https://marketplace.digitalax.xyz" />
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@ESPA4play" />
-        <meta name="twitter:title" content="Skins Landing page" />
+        <meta name="twitter:title" content="Patrons Landing page" />
         <meta
           name="twitter:description"
           content="Take your digital fashion skins to the next level: directly into indie games & mods, where players from amateur to pro can start to earn a livelihood through play, without sacrificing our love of the game. ESPA is the first casual esports platform, with direct integration with DIGITALAX NFT skins on Matic Network. "
@@ -66,36 +56,40 @@ const LandingPage = () => {
       </Head>
       <section className={styles.titleWrapper}>
         <div className={styles.title}>
-          Explore & Patron
+          Indie Web3 Fashion
         </div>
         <p>
-          Indie Web3 Fashion Realms
+          Patrons & Collector DAOs
         </p>
       </section>
 
-      <section className={styles.filterWrapper}>
-        <Filters filter={filter} setFilter={setFilter} setCategories={setCategories} />
+      <section className={styles.contentWrapper}>
+        <div className={styles.description}>
+          A federated model of countless DAOs learning from and mutually assisting each other through hypergrowth network effects is far better than any one DAO to rule them all, let alone one DAO to collect mostly the old symbols of corporate luxury, wealth, and power. 
+          <br /><br />
+          The formation of dedicated Web3 Fashion Collector DAOs and Patrons cultivates the indie designer network and an entire economy of tools, services, guidance, and capital savvy.
+        </div>
+        <div className={styles.buttons}>
+          <Button
+            background='black'
+            className={styles.button}
+            onClick={() => {
+              window.open('/daos', '_self')
+            }}
+          >
+            join indie web3 fashion collector daos
+          </Button>
+          <Button
+            background='black'
+            className={styles.button}
+            onClick={() => {
+              window.open('/realms', '_self')
+            }}
+          >
+            Patron indie web3 fashion labels
+          </Button>
+        </div>
       </section>
-
-      <Container>
-        <section className={styles.realmsWrapper}>
-          {
-            filterRealms(realms, filter, categories).map(realm => {
-              return (
-                <div key={realm.name}>
-                  <RealmCard
-                    realmName={realm.name}
-                    tags={realm.tags}
-                    image={realm.image}
-                    borderColor={realm.borderColor}
-                    linkName={realm.name}
-                  />
-                </div>
-              )
-            })
-          }
-        </section>
-      </Container>
     </div>
   )
 }
