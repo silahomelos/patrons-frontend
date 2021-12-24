@@ -24,7 +24,12 @@ const DaosPage = () => {
       </section>
 
       <section className={styles.filterWrapper}>
-        <Filters filter={filter} setFilter={setFilter} setCategories={setCategories} />
+        <Filters
+          filter={filter}
+          setFilter={setFilter}
+          setCategories={setCategories}
+          isDAO={true}
+        />
       </section>
 
       <Container>
