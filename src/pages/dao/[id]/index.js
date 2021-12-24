@@ -203,9 +203,20 @@ const DaoPage = () => {
         }
       </div>
 
+      <div className={styles.description}>
+        {currentDao?.description}
+      </div>
+
       <div className={styles.subTitle}>
         DAO NFT Tiers
       </div>
+
+      {
+        currentDao?.document &&
+        <div className={styles.viewDoc}>
+          View the documentation <a href={currentDao?.document} target='_blank'>here</a> for more details on what each tier includes.
+        </div>
+      }
       
       <div className={styles.patronCardsList}>
         {

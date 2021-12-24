@@ -38,27 +38,25 @@
     }
   }
 
-  .designerPhotoWrapper {
-    width: 35vw;
-    max-width: 580px;
-    min-width: 300px;
-    overflow: hidden;
-    border-radius: 7.6%;
+  // .designerPhotoWrapper {
+  //   width: 35vw;
+  //   max-width: 580px;
+  //   min-width: 300px;
+  //   overflow: hidden;
+  //   border-radius: 7.6%;
 
-    .imageContent {
-      width: 100%;
-    }    
-  }
+  //   .imageContent {
+  //     width: 100%;
+  //   }    
+  // }
 
   .description {
     font-family: Gilroy;
     font-size: 12px;
     line-height: 114%;
     width: 80%;
-    margin-top: 40px;
-    border-top: 2px solid #FFFFFF;
+    // border-bottom: 2px solid #FFFFFF;
     padding: 20px;
-    padding-top: 50px;
     white-space: pre-wrap;
     
     text-align: center;
@@ -98,49 +96,49 @@
     border-bottom: 2px solid #FFFFFF;
   }
 
-  .keyInsights {
-    margin-top: 40px;
-    margin-bottom: 50px;
-    display: flex;
-    flex-direction: column;
-    width: 90%;
+  // .keyInsights {
+  //   margin-top: 40px;
+  //   margin-bottom: 50px;
+  //   display: flex;
+  //   flex-direction: column;
+  //   width: 90%;
 
-    @include sm-width {
-      flex-direction: row;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
+  //   @include sm-width {
+  //     flex-direction: row;
+  //     justify-content: center;
+  //     flex-wrap: wrap;
+  //   }
     
-    .item {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
+  //   .item {
+  //     display: flex;
+  //     flex-direction: row;
+  //     justify-content: space-between;
 
-      @include sm-width {
-        margin-right: 20px;
-        justify-content: flex-start
-      }
+  //     @include sm-width {
+  //       margin-right: 20px;
+  //       justify-content: flex-start
+  //     }
 
-      font-family: Gilroy;
-      font-style: normal;
-      font-size: 20px;
-      line-height: 34px;
-      text-align: center;
+  //     font-family: Gilroy;
+  //     font-style: normal;
+  //     font-size: 20px;
+  //     line-height: 34px;
+  //     text-align: center;
 
-      @include sm-width {
-        font-size: 28px;
-      }
+  //     @include sm-width {
+  //       font-size: 28px;
+  //     }
 
-      .itemName {
-        font-weight: 800;
-        margin-right: 5px;
-      }
-    }
-  }
+  //     .itemName {
+  //       font-weight: 800;
+  //       margin-right: 5px;
+  //     }
+  //   }
+  // }
 
-  .socialBar {
+  // .socialBar {
 
-  }
+  // }
 
   .viewDoc {
     margin-top: 40px;
