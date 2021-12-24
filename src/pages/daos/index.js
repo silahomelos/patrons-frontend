@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import Container from '@components/container'
-import RealmCard from '@components/realm-card'
+import DAOCard from '@components/dao-card'
 import Filters from '@components/filters'
 
-import { filterRealms } from '@utils/helpers'
+import { filterDaos } from '@utils/helpers'
 
-import realms from 'src/data/realms.json'
+import daos from 'src/data/daos.json'
 import styles from './styles.module.scss'
 
 const DaosPage = () => {
@@ -28,17 +28,17 @@ const DaosPage = () => {
       </section>
 
       <Container>
-        <section className={styles.realmsWrapper}>
+        <section className={styles.daosWrapper}>
           {
-            filterRealms(realms, filter, categories).map(realm => {
+            filterDaos(daos, filter, categories).map(daoInfo => {
               return (
-                <div key={realm.name}>
-                  <RealmCard
-                    realmName={realm.name}
-                    tags={realm.tags}
-                    image={realm.image}
-                    borderColor={realm.borderColor}
-                    linkName={realm.name}
+                <div key={daoInfo.name}>
+                  <DAOCard
+                    daoName={daoInfo.name}
+                    tags={daoInfo.tags}
+                    image={daoInfo.image}
+                    borderColor={daoInfo.borderColor}
+                    linkName={daoInfo.name}
                   />
                 </div>
               )

@@ -1,0 +1,10 @@
+[
+  {
+    "name": "W3RC",
+    "image": "/images/realm-avatars/realm_phoebe.png",
+    "borderColor": "linear-gradient(136.5deg, #FFFFFF 0%, #949494 48%, #2B230F 102.4%)",
+    "designerId": "Phoebe Heess",
+    "document": "https://phoebe-heess.gitbook.io",
+    "tags": ["sportswear", "monochrome", "interoperability"]
+  }
+]

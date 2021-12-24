@@ -47,6 +47,28 @@ export const filterRealms = (realms, filter, categories) => {
   return filteredRealms
 }
 
+export const filterDaos = (daos, filter, categories) => {
+  let filteredDaos = [...daos]
+  if (categories && categories.length) {
+    const categoryValues = categories.map(item => item.value.toLowerCase())
+    filteredDaos = daos.filter(
+      daoInfo => daoInfo.tags?.map(tag => tag.toLowerCase()).filter(tag => categoryValues.indexOf(tag) >= 0).length > 0
+    )
+  }
+
+  if (filter.length) {
+    const lowerCaseFilter = filter.toLowerCase()
+    filteredDaos = filteredDaos.filter(
+      (daoInfo) =>
+      daoInfo.name.toLowerCase().includes(lowerCaseFilter) ||
+      daoInfo.designerId.toLowerCase().includes(lowerCaseFilter) ||
+      daoInfo.oldDesignerId?.toLowerCase().includes(lowerCaseFilter.toLowerCase())
+    )
+  }
+  
+  return filteredDaos
+}
+
 export const generateLookImage = (item) => {
   const { id, name, background, color, texture, pattern, shape, flare, form, line, element } = item
 
