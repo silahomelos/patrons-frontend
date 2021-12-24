@@ -2,11 +2,15 @@ import React, { useState } from 'react'
 import Select from 'react-select'
 import styles from './styles.module.scss'
 import realms from 'src/data/realms.json'
+import daos from 'src/data/daos.json'
 
-const realmTags = realms.map(realm => realm.tags.map(tag => tag.toLowerCase()))
-const uniqueTags = realmTags.reduce((a, b) => [...new Set([...a,...b])]).sort()
+const Filters = ({ filter, setFilter, setCategories, isDAO }) => {
+  const tags = isDAO
+    ? daos.map(realm => realm.tags.map(tag => tag.toLowerCase()))
+    : realms.map(dao => dao.tags.map(tag => tag.toLowerCase())) 
 
-const Filters = ({ filter, setFilter, setCategories }) => {
+  const uniqueTags = tags.reduce((a, b) => [...new Set([...a,...b])]).sort()
+
   const [currentSelectedOptions, setCurrentSelectedOptions] = useState([])
 
   const filterItems = uniqueTags.map(tag => ({
