@@ -3,24 +3,16 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 
-// import PatronTierCard from '@components/patron-tier-card'
 import DaoTierCard from '@components/dao-tier-card'
 import PixelLoader from '@components/pixel-loader'
 
-import digitalaxApi from '@services/api/digitalaxApi.service'
 import {
-  getDigitalaxMaterialV2s,
   getPayableTokenReport,
   getPatronMarketplaceOffers
 } from '@services/api/apiService'
 import {
-  getGDNTokenAddress
-} from '@services/gdn.service'
-import {
   getERC20ContractAddressByChainId
 } from '@services/network.service'
-
-import useMaticPosClient from '@hooks/useMaticPosClient'
 
 import { getAllResultsFromQueryWithoutOwner } from '@helpers/thegraph.helpers'
 
@@ -30,9 +22,6 @@ import cryptoActions from '@actions/crypto.actions'
 import {
   POLYGON_CHAINID
 } from '@constants/global.constants'
-import {
-  SOCIAL_SUPPORT_LIST
-} from '@constants/social.constants'
 
 import daos from 'src/data/daos.json'
 import styles from './styles.module.scss'
@@ -95,48 +84,19 @@ const blockedCollections = [
 ]
 
 const getDescriptionList = strDescription => {
-  // console.log('encode: ', safe_tags_replace(`["XX $PTH ERC-20.... <a href='https://Twitter.com' />", "XX $W3F Staking ...", "XX Utility Event..."]`))
-  // console.log('encode: ', JSON.parse(`["XX $PTH ERC-20.... <a href='https://Twitter.com' />", "XX $W3F Staking ...", "XX Utility Event..."]`))
-  // return JSON.parse(`["XX $PTH ERC-20.... <a href='https://Twitter.com' >test</a>", "XX $W3F Staking ...", "XX Utility Event..."]`)
   let result = ''
   const desc = strDescription.replace(/[‘’]/g, '')
-  // console.log('desci: ', desc)
-  try {
+    try {
     result = JSON.parse(desc)
   } catch {
-    // console.log('a: ', desc.replaceAll(`'`, `"`))
-
     try {
       result = JSON.parse(desc.replaceAll(`'`, `"`))
     } catch {
       result = [desc]
-    }
-    
+    }  
   }
 
-  // console.log('result: ', result)
-  
   return result
-}
-
-const getAvailableSocialLinks = designerInfo => {
-
-  const socialLinks = []
-  designerInfo && SOCIAL_SUPPORT_LIST.forEach(socialName => {
-    if (designerInfo[socialName] && designerInfo[socialName] != '') {
-      socialLinks.push({
-        name: socialName,
-        link: designerInfo[socialName]
-      })
-    }
-  })
-
-  designerInfo && socialLinks.push({
-    name: 'digitalax',
-    link: `https://designers.digitalax.xyz/designers/${designerInfo.designerId}`
-  })
-
-  return socialLinks
 }
 
 const DaoPage = () => {
@@ -145,19 +105,12 @@ const DaoPage = () => {
   const currentDao = daos.find(daoInfo => daoInfo.name.toLowerCase() === id.toLowerCase())
   
   const [loading, setLoading] = useState(false)
-  const [currentDeisngerInfo, setCurrentDesignerInfo] = useState(null)
-  const [fgoCount, setFgoCount] = useState(0)
-  const [gdnBalance, setGDNBalance] = useState(0)
   const [cryptoPrice, setCryptoPrice] = useState(1)
   const [tierOffers, setTierOffers] = useState([])
-  const [posClientParent, posClientChild] = useMaticPosClient()
 
   const dispatch = useDispatch()
   const selectedCrypto = useSelector(getSelectedCrypto)
 
-  // console.log('selectedCrypto: ', selectedCrypto)
-
-  
   useEffect(() => {
     if (window.localStorage.getItem('CRYPTO_OPTION')) {
       dispatch(cryptoActions.setCrypto(window.localStorage.getItem('CRYPTO_OPTION') || ''))
@@ -229,34 +182,6 @@ const DaoPage = () => {
       fetchCryptoPrice(selectedCrypto)
     }
   }, [selectedCrypto])
-
-  const loadGDNBalance = async () => {
-    try {
-      const maticBalance = await posClientParent.balanceOfERC20(
-        currentDeisngerInfo.wallet,
-        getGDNTokenAddress(),
-        {
-          parent: false
-        }
-      )
-      setGDNBalance(maticBalance / 1e18)
-    } catch (e) {
-      console.log(e)
-    }
-  }
-  
-  useEffect(() => {
-    if (posClientParent && currentDeisngerInfo) {
-      loadGDNBalance()
-    }
-    
-  }, [posClientParent, currentDeisngerInfo])
-
-
-  // console.log('cryptoPrice: ', cryptoPrice)
-  // const availableSocialLinks = getAvailableSocialLinks(currentDeisngerInfo)
-  // console.log('tierOffers: ', tierOffers.map(item => item.primarySalePrice / 1e18))
-  // console.log('tierOffers: ', tierOffers)
 
   if (loading) {
     return (

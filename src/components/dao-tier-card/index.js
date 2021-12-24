@@ -10,7 +10,7 @@ import {
 
 import cryptoActions from '@actions/crypto.actions'
 
-import { getExchangeRateETH, getChainId } from '@selectors/global.selectors'
+import { getChainId } from '@selectors/global.selectors'
 import { getSelectedCrypto } from '@selectors/crypto.selectors'
 import { getAccount } from '@selectors/user.selectors'
 
@@ -56,12 +56,8 @@ const DaoTierCard = props => {
     )
   }
 
-  const onClickPatronRealmButton = () => {
-    console.log('click patron realm button: ', account)
+  const onClickJoinDAOButton = () => {
     if (account) {
-      // console.log('chainId: ', chainId)
-      // console.log('collectionId: ', collectionId)
-
       dispatch(cryptoActions.setSelectedCollectionId(collectionId))
       dispatch(cryptoActions.setPrice(primarySalePrice))
 
@@ -92,7 +88,7 @@ const DaoTierCard = props => {
       <div className={styles.buttonWrapper}>
         <GrayButton
           text={'Join DAO'}
-          onClick={onClickPatronRealmButton}
+          onClick={onClickJoinDAOButton}
         />
       </div>
       <div className={styles.priceWrapper}>
