@@ -87,5 +87,13 @@
     "designerId": "F₃Manifesto",
     "document": "https://digitalax.gitbook.io/f-manifesto/",
     "tags": ["digifizzy", "IP freedom", "web2 antithesis"]
+  },
+  {
+    "name": "Oli3D Fashion Design Studio",
+    "image": "/images/realm-avatars/realm_oli.png",
+    "borderColor": "linear-gradient(136.5deg, #29B1BA 0%, #9A9A9A 102.4%)",
+    "designerId": "Oli3D Fashion Design Studio",
+    "document": "https://oli3d.gitbook.io/oli3d-fashion-design-studio/",
+    "tags": ["digital", "interoperability", "sustainability"]
   }
 ]
