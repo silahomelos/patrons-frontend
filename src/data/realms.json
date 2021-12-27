@@ -95,5 +95,13 @@
     "designerId": "Oli3D Fashion Design Studio",
     "document": "https://oli3d.gitbook.io/oli3d-fashion-design-studio/",
     "tags": ["digital", "interoperability", "sustainability"]
+  },
+  {
+    "name": "AVA3D",
+    "image": "/images/realm-avatars/realm_ava.png",
+    "borderColor": "linear-gradient(136.5deg, #0D349A 0%, #AE8073 48%, #C6AF86 102.4%)",
+    "designerId": "AVA3D",
+    "document": "https://ava-designers.gitbook.io/ava3ddesigners/",
+    "tags": ["phygital", "cultural", "sustainability"]
   }
 ]
