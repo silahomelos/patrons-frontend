@@ -6,7 +6,8 @@
     "description": "The W3RC is a DAO with 13 Council seats, instantiated for Web3 Renaissance Patrons, who serve as overarching beacons for the designers, buyers, fabricators, collectors and all who are pioneering the web3 fashion movement.\n\n The Web3 Renaissance Council (W3RC) extends throughout the commons of the market, dedicated to the underlying rapid scale up of infrastructure growth as demand for web3 fashion spikes.",
     "document": "https://digitalax.gitbook.io/web3-renaissance-council-w3rc/",
     "tags": ["metaverse", "web3 fashion", "infrastructure"]
-  },{
+  },
+  {
     "name": "Copright Cartel: 0",
     "image": "/images/realm-avatars/realm_cc0.png",
     "borderColor": "linear-gradient(136.5deg, #1EE4FF 0%, #738BAE 48%, #4527BD 102.4%)",
