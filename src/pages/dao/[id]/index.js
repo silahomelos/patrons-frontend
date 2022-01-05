@@ -143,14 +143,17 @@ const DaoPage = () => {
       )
     )
 
+    console.log('currentOffers: ', currentOffers)
+
     if (currentOffers) {
       setTierOffers(currentOffers.sort((a, b) => {
-        const aTier = getTierName(a.garmentCollection.garments[0].name, currentDao.name, '').toLowerCase()
-        const bTier = getTierName(b.garmentCollection.garments[0].name, currentDao.name, '').toLowerCase()
-        if (aTier < bTier) {
+        const aTier = a.primarySalePrice/1e18//getTierName(a.garmentCollection.garments[0].name, currentDao.name, '').toLowerCase()
+        const bTier = b.primarySalePrice/1e18//getTierName(b.garmentCollection.garments[0].name, currentDao.name, '').toLowerCase()
+
+        if (aTier > bTier) {
           return 1;
         }
-        if (aTier > bTier) {
+        if (aTier < bTier) {
           return -1;
         }
         return 0;  
