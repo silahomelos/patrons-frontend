@@ -128,7 +128,7 @@ const DaoPage = () => {
       POLYGON_CHAINID
     )
 
-    console.log('patronMarketplaceOffers: ', patronMarketplaceOffers)
+    // console.log('patronMarketplaceOffers: ', patronMarketplaceOffers)
 
     const currentOffers = patronMarketplaceOffers.filter(offer =>
       !blockedCollections.find(
@@ -143,12 +143,12 @@ const DaoPage = () => {
       )
     )
 
-    console.log('currentOffers: ', currentOffers)
+    // console.log('currentOffers: ', currentOffers)
 
     if (currentOffers) {
       setTierOffers(currentOffers.sort((a, b) => {
-        const aTier = a.primarySalePrice/1e18//getTierName(a.garmentCollection.garments[0].name, currentDao.name, '').toLowerCase()
-        const bTier = b.primarySalePrice/1e18//getTierName(b.garmentCollection.garments[0].name, currentDao.name, '').toLowerCase()
+        const aTier = a.primarySalePrice / 1e18 //getTierName(a.garmentCollection.garments[0].name, currentDao.name, '').toLowerCase()
+        const bTier = b.primarySalePrice / 1e18 //getTierName(b.garmentCollection.garments[0].name, currentDao.name, '').toLowerCase()
 
         if (aTier > bTier) {
           return 1;
