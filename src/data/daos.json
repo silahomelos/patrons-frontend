@@ -14,6 +14,14 @@
     "description": "The Copyright Cartel: 0 (CC:0) DAO is a dedicated Web3 Creative Commons DAO, focusing specifically on indie fashion and other creative derivative markets for cultivating well capitalised open source.\n\n This DAO exists to accelerate the entire creative world to the long overdue, very near future when control over creative works no longer ruin so many lives. Ultimately, this is due to the abuses Copyright Cartels and the fake promise that a certificate on paper of permission from them will mean any more than pennies for original creators.\n\n Ultimately, information wants to be free, and web3 allows for new models of monetisation when creative people can do whatever the hell that they want with each others ideas.\n\n Finally backing our ideals with real profit.",
     "document": "https://docs.cc0dao.xyz/",
     "tags": ["CC0", "web3 fashion", "IP freedom"]
+  },
+  {
+    "name": "Realm Runway Sponsors",
+    "image": "/images/realm-avatars/realm_rrs.png",
+    "borderColor": "linear-gradient(136.5deg, #BD8228 0%, #DF548E 48%, #C1751C 102.4%)",
+    "description": "A DAO refashioning the approach novel events take towards sponsor relations, with a dedicated focused on Realm Runway Events.\n \n You can think of these Realm Runways as time gated experiential offshoots and global satellites that can be spun up by any GDN designer (kind of like TedX events with one coming to a city near you soon), and thus, the RRS DAO will be critical to coordinating, governing, underwriting and supporting these activities.",
+    "document": "https://digitalax.gitbook.io/realm-runway-sponsors-rrs/",
+    "tags": ["media", "web3 fashion", "realm runways"]
   }
 ]
 
