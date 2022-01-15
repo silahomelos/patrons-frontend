@@ -103,5 +103,13 @@
     "designerId": "AVA3D",
     "document": "https://ava-designers.gitbook.io/ava3ddesigners/",
     "tags": ["phygital", "cultural", "sustainability"]
+  },
+  {
+    "name": "Midwest Misfit",
+    "image": "/images/realm-avatars/midwest_realm.png",
+    "borderColor": "linear-gradient(136.5deg, #FFE900 0%, #616161 48%, #1C150D 102.4%)",
+    "designerId": "Midwest Misfit",
+    "document": "https://midwest-misfit.gitbook.io/midwest-misfit/",
+    "tags": ["digi models", "digital fashion", "interoperability"]
   }
 ]
