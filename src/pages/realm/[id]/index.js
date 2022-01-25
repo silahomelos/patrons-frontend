@@ -268,17 +268,21 @@ const RealmPage = () => {
     )
 
     if (currentOffers) {
-      setTierOffers(currentOffers.sort((a, b) => {
-        const aTier = getTierName(a.garmentCollection.garments[0].name, currentDesigner.designerId, currentRealm.oldDesignerId).toLowerCase()
-        const bTier = getTierName(b.garmentCollection.garments[0].name, currentDesigner.designerId, currentRealm.oldDesignerId).toLowerCase()
-        if (aTier < bTier) {
-          return 1;
-        }
-        if (aTier > bTier) {
-          return -1;
-        }
-        return 0;  
-      }))
+      console.log('currentOffers: ', currentOffers)
+      setTierOffers(
+        currentOffers.filter(offer => offer.garmentCollection.garments && offer.garmentCollection.garments.length > 0)
+        .sort((a, b) => {
+          const aTier = getTierName(a.garmentCollection.garments[0].name, currentDesigner.designerId, currentRealm.oldDesignerId).toLowerCase()
+          const bTier = getTierName(b.garmentCollection.garments[0].name, currentDesigner.designerId, currentRealm.oldDesignerId).toLowerCase()
+          if (aTier < bTier) {
+            return 1;
+          }
+          if (aTier > bTier) {
+            return -1;
+          }
+          return 0;  
+        })
+      )
     }
 
     setLoading(false)

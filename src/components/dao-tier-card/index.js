@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   openConnectMetamaskModal,
   openCryptoOptionsModal,
-  openPurchaseSuccessModal,
-  openSwitchNetworkModal,
+  openSwitchNetworkModal
 } from '@actions/modals.actions'
 
 import cryptoActions from '@actions/crypto.actions'
