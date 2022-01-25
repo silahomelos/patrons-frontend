@@ -111,5 +111,13 @@
     "designerId": "Midwest Misfit",
     "document": "https://midwest-misfit.gitbook.io/midwest-misfit/",
     "tags": ["digi models", "digital fashion", "interoperability"]
+  },
+  {
+    "name": "ENKI Digital Fashion",
+    "image": "/images/realm-avatars/enki_realm.png",
+    "borderColor": "linear-gradient(136.5deg, #1072B5 0%, #616161 48%, #1C150D 102.4%)",
+    "designerId": "ENKI Digital Fashion",
+    "document": "https://enki-digital-fashion.gitbook.io/enki-digital-fashion/",
+    "tags": ["digital fashion", "interoperability", "circularity"]
   }
 ]
