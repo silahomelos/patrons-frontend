@@ -119,5 +119,13 @@
     "designerId": "ENKI Digital Fashion",
     "document": "https://enki-digital-fashion.gitbook.io/enki-digital-fashion/",
     "tags": ["digital fashion", "interoperability", "circularity"]
+  },
+  {
+    "name": "Fabeeo Breen",
+    "image": "/images/realm-avatars/fabeeo_realm.png",
+    "borderColor": "linear-gradient(136.5deg, #474749 0%, #7978A7 48%, #FFFFFF 102.4%)",
+    "designerId": "Fabeeo Breen",
+    "document": "https://fabeeobreen.gitbook.io/fabeeo-breen/",
+    "tags": ["digital fashion", "gaming", "interoperability"]
   }
 ]
